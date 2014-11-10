@@ -51,14 +51,16 @@ window.allFramesLoaded = true;
 new Poll().start("/pentaho/plugin/cns/api/queue/subscribe","/pentaho/plugin/cns/api/queue/update");
 
 
-2 - find 
+2 - find the script tag declaration declared slightly above step 1 ( ~ line 187 )
 
-<script type="text/javascript"> 
+&lt; script type="text/javascript" / &gt;
 
-declared slightly above step 1 ( ~ line 187 ) and above it place:
 
-<script type="text/javascript" src="/pentaho/api/repos/cns/resources/js/notify/notify-modified.js"></script>
-<script type="text/javascript" src="/pentaho/api/repos/cns/resources/js/cns.js"></script>
+and above it place these 2 script declarations:
+
+&lt; script type="text/javascript" src="/pentaho/api/repos/cns/resources/js/notify/notify-modified.js"  / &gt;
+&lt; script type="text/javascript" src="/pentaho/api/repos/cns/resources/js/cns.js" / &gt;
+
 
 
 And you should be all set
