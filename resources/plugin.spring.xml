@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ws="http://jax-ws.dev.java.net/spring/core" xmlns:wss="http://jax-ws.dev.java.net/spring/servlet" xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+                           http://jax-ws.dev.java.net/spring/core http://jax-ws.dev.java.net/spring/core.xsd
+                           http://jax-ws.dev.java.net/spring/servlet http://jax-ws.dev.java.net/spring/servlet.xsd
+                           http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+  <context:annotation-config />
+  
+  <!-- JAX-RS beans -->
+  <bean id="api" class="org.pentaho.platform.web.servlet.JAXRSPluginServlet"/>
+  <bean id="cnsApi" class="pt.webdetails.cns.api.NotificationApi" scope="prototype"/>
+  <bean id="cnsQueueApi" class="pt.webdetails.cns.api.NotificationQueueApi" scope="prototype"/>
+
+  <!-- notification event subscriber  -->
+  <bean id="notificationInitializer" class="pt.webdetails.cns.NotificationInitializer">
+    <constructor-arg ref="subscribers" />
+  </bean>
+  
+  <util:list id="subscribers" value-type="pt.webdetails.cns.service.INotificationEventHandler">
+    <bean class="pt.webdetails.cns.notifications.simple.SimpleNotificationEventHandler" />
+  </util:list>
+  
+</beans>
