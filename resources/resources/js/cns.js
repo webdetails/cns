@@ -2,7 +2,7 @@ var allow = true;
 var startUrl;
 var pollUrl;
 
-function Poll() {
+function CnsPoll() {
 
   this.start = function start(start, poll) {
 
@@ -28,7 +28,7 @@ function Poll() {
           allow = false;
           getUpdate();
         }
-      }, 3000); // 3 seconds
+      }, 5000); // 5 seconds
     });
     
     // callback handler that will be called on failure

@@ -14,4 +14,10 @@
 
     <content-generator />
     
+    <external-resources>
+    	<file context="mantle">api/repos/cns/resources/js/notify/notify-modified.js</file>
+    	<file context="mantle">api/repos/cns/resources/js/cns.js</file>
+    	<file context="mantle">api/repos/cns/resources/js/cns-startup.js</file>
+  	</external-resources>
+
 </plugin>

@@ -36,33 +36,3 @@ Copy the zip folder in ./dist folder and unzip it at
 pentaho-solutions/system/
 
 
-### Warning: the following is a temporary solution; further iterations of this plugin should have this fixed in some other proper manner.
-
-### Initialize the notification's longpolling mechanism
-
-Edit /tomcat/webapps/pentaho/mantle/Mantle.jsp and:
-
-1 - find 
-
-window.allFramesLoaded = true; 
-
-( ~ line 210 ) and immediately below it place:
-
-new Poll().start("/pentaho/plugin/cns/api/queue/subscribe","/pentaho/plugin/cns/api/queue/update");
-
-
-2 - find the script tag declaration declared slightly above step 1 ( ~ line 187 )
-
-&lt; script type="text/javascript" / &gt;
-
-
-and above it place these 2 script declarations:
-
-&lt; script type="text/javascript" src="/pentaho/api/repos/cns/resources/js/notify/notify-modified.js"  / &gt;
-&lt; script type="text/javascript" src="/pentaho/api/repos/cns/resources/js/cns.js" / &gt;
-
-
-
-And you should be all set
-
-
