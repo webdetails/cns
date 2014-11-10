@@ -56,7 +56,7 @@ public class NotificationApi {
   }
 
   // useful for junit mock
-  private NotificationService getService() {
+  protected NotificationService getService() {
     return NotificationService.getInstance();
   }
 

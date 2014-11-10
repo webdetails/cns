@@ -30,7 +30,7 @@ public class NotificationQueueApi {
   }
 
   // useful for junit mock
-  private NotificationService getService() {
+  protected NotificationService getService() {
     return NotificationService.getInstance();
   }
 
