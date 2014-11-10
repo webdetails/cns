@@ -20,11 +20,35 @@ import com.google.common.eventbus.AsyncEventBus;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pt.webdetails.cns.notifications.Notification;
+import pt.webdetails.cns.NotificationInitializer;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class NotificationService {
 
   public static final String EVENT_BUS_ID = "notificationEventBus";
+  private static NotificationService instance;
   private Logger logger = LoggerFactory.getLogger( NotificationService.class );
+  private Queue<Notification> notifications;
+
+  private NotificationService() {
+    notifications = new LinkedList<Notification>();
+
+    if( getAsyncEventBus() == null ){
+      new NotificationInitializer( null ).initializeAsyncEventBus();
+    }
+  }
+
+  public static NotificationService getInstance() {
+
+    if ( instance == null ) {
+      instance = new NotificationService();
+    }
+
+    return instance;
+  }
 
   public boolean notify( INotificationEvent e ) {
     if ( e == null ) {
@@ -41,6 +65,26 @@ public class NotificationService {
       logger.error( t.getLocalizedMessage(), t );
     }
     return false;
+  }
+
+  public void push( Notification notification ) {
+    if ( notification != null ) {
+      notifications.add( notification );
+    }
+  }
+
+  public Notification pop() {
+    while ( notifications.isEmpty() ) {
+
+      try {
+        logger.debug( "no notifications in queue; we'll check again in ~ 3 secs" );
+        Thread.sleep( 3000 ); // sleep for 3 secs
+      } catch ( InterruptedException e ) {
+        // do nothing
+      }
+    }
+
+    return notifications.remove();
   }
 
 

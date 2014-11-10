@@ -19,4 +19,11 @@ package pt.webdetails.cns.service;
 import java.io.Serializable;
 
 public interface INotificationEvent extends Serializable {
+
+  String getStyle();
+
+  String getAuthor();
+
+  String getMessage();
+
 }

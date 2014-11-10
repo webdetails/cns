@@ -7,8 +7,8 @@ import org.pentaho.di.core.logging.LogChannelInterface;
 import org.pentaho.di.trans.Trans;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pt.webdetails.cns.api.NotificationQueueApi;
 import pt.webdetails.cns.notifications.Notification;
+import pt.webdetails.cns.service.NotificationService;
 
 /**
  * @link http://wiki.pentaho.com/display/EAI/PDI+Extension+Point+Plugins
@@ -32,7 +32,7 @@ public class TransformationEnded implements ExtensionPointInterface {
     try {
       Notification notification = new Notification( "pentaho", "System", ( "[Finished] " + ( (Trans) o ).getName() ) );
 
-      NotificationQueueApi.push( notification );
+      NotificationService.getInstance().push( notification );
     } catch ( Exception e ) {
       logger.error( e.getLocalizedMessage(), e );
       logChannelInterface.logError( e.getLocalizedMessage(), e );

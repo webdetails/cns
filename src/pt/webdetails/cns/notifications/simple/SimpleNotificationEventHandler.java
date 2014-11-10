@@ -19,9 +19,8 @@ package pt.webdetails.cns.notifications.simple;
 import com.google.common.eventbus.Subscribe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pt.webdetails.cns.api.NotificationQueueApi;
-import pt.webdetails.cns.notifications.Notification;
 import pt.webdetails.cns.service.INotificationEventHandler;
+import pt.webdetails.cns.service.NotificationService;
 
 public class SimpleNotificationEventHandler implements INotificationEventHandler {
 
@@ -32,7 +31,7 @@ public class SimpleNotificationEventHandler implements INotificationEventHandler
 
     if ( event != null ) {
       try {
-        NotificationQueueApi.push( (Notification) event );
+        NotificationService.getInstance().push( event );
       } catch ( Exception e ) {
         logger.error( e.getLocalizedMessage(), e );
       }

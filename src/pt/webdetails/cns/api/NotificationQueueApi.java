@@ -5,24 +5,16 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.webdetails.cns.notifications.Notification;
+import pt.webdetails.cns.service.NotificationService;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import java.util.LinkedList;
-import java.util.Queue;
 
 @Path( "/cns/api/queue" )
 public class NotificationQueueApi {
 
-  private static Queue<Notification> notifications = new LinkedList<Notification>();
   private Logger logger = LoggerFactory.getLogger( NotificationQueueApi.class );
-
-  public static void push( Notification notification ) {
-    if ( notification != null ) {
-      notifications.add( notification );
-    }
-  }
 
   @GET
   @Path( "/subscribe" )
@@ -34,25 +26,12 @@ public class NotificationQueueApi {
   @Path( "/update" )
   @Produces( "application/json" )
   public String update() {
-
-    while ( notifications.isEmpty() ) {
-
-      try {
-        logger.debug( "no notifications in queue; we'll check again in ~ 3 secs" );
-        Thread.sleep( 3000 ); // sleep for 3 secs
-      } catch ( InterruptedException e ) {
-        // do nothing
-      }
-    }
-
-    return toJsonString( pop() );
+    return toJsonString( getService().pop() );
   }
 
-  private Notification pop() {
-    if ( !notifications.isEmpty() ) {
-      return notifications.remove();
-    }
-    return null;
+  // useful for junit mock
+  private NotificationService getService() {
+    return NotificationService.getInstance();
   }
 
   private String toJsonString( Notification notification ) {

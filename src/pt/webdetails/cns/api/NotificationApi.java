@@ -31,28 +31,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import java.util.Date;
 
-/*
-import javax.websocket.OnClose;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
-*/
-
-//@ServerEndpoint( "/cns/websocket/notify" )
 @Path( "/cns/api" )
 public class NotificationApi {
 
-  //private static Set<Session> peers = Collections.synchronizedSet( new HashSet<Session>() );
-  private NotificationService service = new NotificationService();
-
-  /*
-    public static void pushNotification( String author, String message, Date date ) throws IOException {
-      if ( message != null ) {
-        for ( Session peer : peers ) {
-          peer.getBasicRemote().sendText( message );
-        }
-      }
-    }
-  */
   @GET
   @Path( "/notify" )
   public Response doGetQueryNotify( @QueryParam( "style" ) @DefaultValue( "pentaho" ) String style,
@@ -62,7 +43,7 @@ public class NotificationApi {
 
   @GET
   @Path( "/notify/{style: [^?]+ }/{author: [^?]+ }/{message: [^?]+ }" )
-  public Response doGetPathNotify( @PathParam( "style" ) @DefaultValue( "pentaho" ) String style,
+  public Response doGetPathNotify( @PathParam( "style" ) @DefaultValue("pentaho") String style,
                                    @PathParam( "author" ) String author, @PathParam( "message" ) String message ) {
     return notify( style, author, message );
   }
@@ -74,26 +55,20 @@ public class NotificationApi {
     return notify( style, author, message );
   }
 
-  /*
-    @OnOpen
-    public void onOpen( Session peer ) {
-      peers.add( peer );
-    }
+  // useful for junit mock
+  private NotificationService getService() {
+    return NotificationService.getInstance();
+  }
 
-    @OnClose
-    public void onClose( Session peer ) {
-      peers.remove( peer );
-    }
-  */
   private Response notify( String style, String author, String message ) {
 
     if ( StringUtils.isEmpty( author ) || StringUtils.isEmpty( message ) ) {
       return Response.status( Status.NOT_ACCEPTABLE ).build();
     }
 
-    style = ( style != null && style.length() > 0 ) ? style : "pentaho";
+    style = StringUtils.defaultIfBlank( style , "pentaho" );
 
-    boolean successful = service.notify( new SimpleNotificationEvent( style, author, message, new Date() ) );
+    boolean successful = getService().notify( new SimpleNotificationEvent( style, author, message ) );
 
     return Response.status( successful ? Status.OK : Status.INTERNAL_SERVER_ERROR ).build();
   }

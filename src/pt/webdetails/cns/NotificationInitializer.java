@@ -48,11 +48,11 @@ public class NotificationInitializer {
     }
   }
 
-  protected AsyncEventBus getAsyncEventBus() {
+  public AsyncEventBus getAsyncEventBus() {
     return PentahoSystem.get( AsyncEventBus.class, NotificationService.EVENT_BUS_ID, null );
   }
 
-  protected void initializeAsyncEventBus(){
+  public void initializeAsyncEventBus(){
 
     AsyncEventBus asyncEventBus = new AsyncEventBus( Executors.newCachedThreadPool() );
 
