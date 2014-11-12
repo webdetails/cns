@@ -14,21 +14,13 @@
 *
 * Copyright (c) 2002-2014 Pentaho Corporation..  All rights reserved.
 */
-package pt.webdetails.cns.notifications.simple;
+package pt.webdetails.cns;
 
-import pt.webdetails.cns.notifications.Notification;
-import pt.webdetails.cns.service.INotificationEvent;
+public class Constants {
 
-import java.util.Date;
+  public static final int DEFAULT_MAX_LIST_SIZE = 200;
 
-public class SimpleNotificationEvent extends Notification implements INotificationEvent {
+  public static final String DEFAULT_NOTIFICATION_TYPE = "default";
 
-  public SimpleNotificationEvent( String style, String author, String message ) {
-    super( style, author, message, new Date() );
-  }
 
-  public SimpleNotificationEvent( String style, String author, String message, Date date ) {
-    super( style, author, message, date );
-  }
-  
 }

@@ -14,16 +14,13 @@
 *
 * Copyright (c) 2002-2014 Pentaho Corporation..  All rights reserved.
 */
-package pt.webdetails.cns.service;
+package pt.webdetails.cns.notifications.base;
 
-import java.io.Serializable;
+import pt.webdetails.cns.api.INotificationEvent;
+import pt.webdetails.cns.notifications.BasicEventObject;
 
-public interface INotificationEvent extends Serializable {
+public class DefaultNotificationEvent extends BasicEventObject implements INotificationEvent {
 
-  String getStyle();
-
-  String getAuthor();
-
-  String getMessage();
+  private static final long serialVersionUID = -3943378642322797621L;
 
 }

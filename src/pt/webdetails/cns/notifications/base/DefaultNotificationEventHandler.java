@@ -14,7 +14,28 @@
 *
 * Copyright (c) 2002-2014 Pentaho Corporation..  All rights reserved.
 */
-package pt.webdetails.cns.service;
+package pt.webdetails.cns.notifications.base;
 
-public interface INotificationEventHandler {
+import com.google.common.eventbus.Subscribe;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import pt.webdetails.cns.service.NotificationEngine;
+
+public class DefaultNotificationEventHandler extends AbstractNotificationPoolingEventHandler {
+
+  private Logger logger = LoggerFactory.getLogger( DefaultNotificationEventHandler.class );
+
+  @Subscribe
+  public void handleEvent( DefaultNotificationEvent event ) {
+    super.doEventHandling( event );
+
+    if ( event != null ) {
+
+      try {
+        NotificationEngine.getInstance().putInStorage( event );
+      } catch ( Exception e ) {
+        logger.error( e.getLocalizedMessage(), e );
+      }
+    }
+  }
 }

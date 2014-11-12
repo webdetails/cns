@@ -65,19 +65,19 @@ function CnsPoll() {
 
       if( notification && notification.message ) {
 
-        notification.style = notification.style || "pentaho";
+        notification.notificationType = notification.notificationType || "default";
 
-        if( !isStylingSet( notification.style ) ){ 
-          initStyling( notification.style ); 
+        if( !isStylingSet( notification.notificationType ) ){ 
+          initStyling( notification.notificationType ); 
         }
         
-        var msg = '' + notification.message;
-        if( 'mail' == notification.style ){
-          msg = '' + notification.author + ': ' + notification.message;
+        var msg = notification.message;
+        if( 'mail' == notification.notificationType ){
+          msg = 'From ' + notification.recipient + ': ' + notification.message;
         }
 
         $.notify( msg , { 
-                              style: notification.style , 
+                              style: notification.notificationType , 
                               autoHide: true, 
                               autoHideDelay: 8000, 
                               showAnimation: 'slideDown',
@@ -95,8 +95,8 @@ function CnsPoll() {
     // TODO put styles in a css file, and only call the classes here
 
     function initStyling( styling ){
-      if( 'pentaho' == styling ){
-        $.notify.addStyle('pentaho', {
+      if( 'default' == styling ){
+        $.notify.addStyle('default', {
             html: "<div><img style='vertical-align:middle; padding-right: 10px;' src='/pentaho/api/repos/cns/resources/img/pentaho24x24.png'</img><span data-notify-text/></div>",
             classes: {
             base: {

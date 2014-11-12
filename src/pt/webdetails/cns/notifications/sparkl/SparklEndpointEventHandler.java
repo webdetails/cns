@@ -14,28 +14,43 @@
 *
 * Copyright (c) 2002-2014 Pentaho Corporation..  All rights reserved.
 */
-package pt.webdetails.cns.notifications.simple;
+package pt.webdetails.cns.notifications.sparkl;
 
 import com.google.common.eventbus.Subscribe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pt.webdetails.cns.service.INotificationEventHandler;
-import pt.webdetails.cns.service.NotificationService;
+import pt.webdetails.cns.api.INotificationEvent;
+import pt.webdetails.cns.api.INotificationEventHandler;
+import pt.webdetails.cns.notifications.base.DefaultNotificationEvent;
+import pt.webdetails.cns.notifications.twitter.TwitterNotificationEvent;
 
-public class SimpleNotificationEventHandler implements INotificationEventHandler {
+public class SparklEndpointEventHandler implements INotificationEventHandler {
 
-  private Logger logger = LoggerFactory.getLogger( SimpleNotificationEventHandler.class );
+  private Logger logger = LoggerFactory.getLogger( SparklEndpointEventHandler.class );
+  private String sparklKtrEndpoint;
+
+  public SparklEndpointEventHandler( String sparklKtrEndpoint ) {
+    this.sparklKtrEndpoint = sparklKtrEndpoint;
+  }
 
   @Subscribe
-  public void handleSimpleNotificationEvent( SimpleNotificationEvent event ) {
-
+  public void handleDefaultEvent( DefaultNotificationEvent event ) {
     if ( event != null ) {
-      try {
-        NotificationService.getInstance().push( event );
-      } catch ( Exception e ) {
-        logger.error( e.getLocalizedMessage(), e );
-      }
+      sendToSparklKtrEndpoint( event );
     }
+  }
+
+  @Subscribe
+  public void handleTwitterEvent( TwitterNotificationEvent event ) {
+    if ( event != null ) {
+      sendToSparklKtrEndpoint( event );
+    }
+  }
+
+
+  private void sendToSparklKtrEndpoint( INotificationEvent event ) {
+
+    // do something
 
   }
 
