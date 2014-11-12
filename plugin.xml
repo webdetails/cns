@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin title="cns" loader="DEFAULT">
+<overlays>
+		<overlay id="startup.cns" resourcebundle="content/cns/resources/lang/messages">
+			<menubar id="toolsmenu">
+	        	<menuitem id="cns" label="${Launcher.cns}" command="mantleXulHandler.openUrl('${Launcher.cns}','${Launcher.cns_TOOLTIP}','plugin/cns/api/default')"/>
+	      	</menubar>
+	    </overlay>
+	</overlays>
+	<lifecycle-listener class="pt.webdetails.cpk.CpkLifecycleListener"/>
+	<static-paths>
+		<static-path url="/cns/static" localFolder="static"/>
+		<static-path url="/cns/resources" localFolder="resources"/>
+	</static-paths>
+	<content-types>
+		<content-type>
+			<title>Cns</title>
+			<description></description>
+			<company name="" url="" logo="@PLUGIN_COMPANY_LOGO@"></company>
+		</content-type>
+	</content-types>
+	<content-generator
+		id="cns"
+		title="Community Notificatin Plugin"
+		type="cns"
+		class="pt.webdetails.cpk.CpkContentGenerator"/>
+	<!-- Menu entry -->
+	<menu-items>
+		<!--<menu-item id="cns_main" anchor="tools-submenu" label="Cnp" command="content/cns/" type="MENU_ITEM" how="LAST_CHILD"/>-->
+	</menu-items>
+</plugin>
