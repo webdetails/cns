@@ -11,7 +11,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-@Path( "/cns/notificationApi/queue" )
+@Path( "/cns/api/queue" )
 public class NotificationQueueApi {
 
   private Logger logger = LoggerFactory.getLogger( NotificationQueueApi.class );

@@ -10,10 +10,9 @@
     <context:annotation-config/>
     <!-- REST resources -->
     <bean id="api" class="org.pentaho.platform.web.servlet.JAXRSPluginServlet"/>
-    <bean id="cns.api" class="pt.webdetails.cpk.CpkApi"/>
-
 		<bean id="cnsApi" class="pt.webdetails.cns.api.NotificationApi" scope="prototype"/>
 		<bean id="cnsQueueApi" class="pt.webdetails.cns.api.NotificationQueueApi" scope="prototype"/>
+    <bean id="cns.api" class="pt.webdetails.cpk.CpkApi"/>
 
 		<bean id="notificationRegistry" class="pt.webdetails.cns.NotificationRegistry">
 			<constructor-arg ref="notificationVolatileStorage" />
