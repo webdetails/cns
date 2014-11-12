@@ -156,9 +156,31 @@
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
+      <field>
+        <name>notificationType</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>recipient</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
     </fields>
     <data>
-      <line> <item>GET</item><item>https&#x3a;&#x2f;&#x2f;api.twitter.com&#x2f;1.1&#x2f;search&#x2f;tweets.json</item><item>twitter</item> </line>
+      <line> <item>GET</item><item>https&#x3a;&#x2f;&#x2f;api.twitter.com&#x2f;1.1&#x2f;search&#x2f;tweets.json</item><item>twitter</item><item>default</item><item>Administrator</item> </line>
     </data>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -364,7 +386,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <url>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;pentaho&#x2f;plugin&#x2f;cns&#x2f;api&#x2f;notify</url>
+    <url>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;pentaho&#x2f;plugin&#x2f;cns&#x2f;api&#x2f;notify&#x2f;all</url>
     <urlInField>N</urlInField>
     <urlField/>
     <encoding>UTF-8</encoding>
@@ -381,12 +403,12 @@
         <parameter>message</parameter>
       </arg>
       <arg>
-        <name>author</name>
-        <parameter>author</parameter>
+        <name>recipient</name>
+        <parameter>recipient</parameter>
       </arg>
       <arg>
-        <name>style</name>
-        <parameter>style</parameter>
+        <name>notificationType</name>
+        <parameter>notificationType</parameter>
       </arg>
     </lookup>
     <result>
@@ -780,6 +802,14 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>style</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>notificationType</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>recipient</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>

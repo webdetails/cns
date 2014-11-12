@@ -1,11 +1,11 @@
 package pt.webdetails.cns.api;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pt.webdetails.cns.notifications.Notification;
-import pt.webdetails.cns.service.NotificationService;
+import pt.webdetails.cns.service.Notification;
+import pt.webdetails.cns.service.NotificationEngine;
+import pt.webdetails.cns.utils.SessionUtils;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -19,38 +19,20 @@ public class NotificationQueueApi {
   @GET
   @Path( "/subscribe" )
   public String subscribe() {
-    return "OK";
+    boolean success = getEngine().subscribeToPoolingQueue( SessionUtils.getUserInSession() );
+    return success ? "OK" : "ERROR";
   }
 
   @GET
   @Path( "/update" )
   @Produces( "application/json" )
-  public String update() {
-    return toJsonString( getService().pop() );
+  public String update() throws JSONException {
+    Notification n = getEngine().popFromPollingQueue( SessionUtils.getUserInSession() );
+    return n != null ? n.toJsonString() : "{}";
   }
 
   // useful for junit mock
-  protected NotificationService getService() {
-    return NotificationService.getInstance();
-  }
-
-  private String toJsonString( Notification notification ) {
-    if ( notification != null ) {
-
-      try {
-
-        JSONObject jsonNotification = new JSONObject();
-        jsonNotification.put( "style", notification.getStyle() );
-        jsonNotification.put( "author", notification.getAuthor() );
-        jsonNotification.put( "message", notification.getMessage() );
-
-        return jsonNotification.toString( 2 );
-
-      } catch ( JSONException e ) {
-        logger.error( e.getLocalizedMessage(), e );
-      }
-    }
-
-    return "{}";
+  protected NotificationEngine getEngine() {
+    return NotificationEngine.getInstance();
   }
 }
