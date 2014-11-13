@@ -45,6 +45,6 @@ $(window).load(function(){
   var timeoutMangeOpenTab = setInterval(functionTimed, 100);
 
   var startCnsPoll = function(){
-    new CnsPoll().start("/pentaho/plugin/cns/api/queue/subscribe","/pentaho/plugin/cns/api/queue/update");
+    new CnsPoll().start("plugin/cns/api/queue/subscribe","plugin/cns/api/queue/update");
   };
 });

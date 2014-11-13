@@ -59,7 +59,7 @@ function CnsPoll() {
 
       if( !$.notify ){
           console.log("[Polling] $.notify undefined");
-          require(['/pentaho/api/repos/cns/resources/js/notify/notify-modified.js']);
+          require(['/pentaho/api/repos/cns/static/custom/js/notify/notify-modified.js']);
           return;
       }
 
@@ -97,7 +97,7 @@ function CnsPoll() {
     function initStyling( styling ){
       if( 'default' == styling ){
         $.notify.addStyle('default', {
-            html: "<div><img style='vertical-align:middle; padding-right: 10px;' src='/pentaho/api/repos/cns/resources/img/pentaho24x24.png'</img><span data-notify-text/></div>",
+            html: "<div><img style='vertical-align:middle; padding-right: 10px;' src='/pentaho/api/repos/cns/static/custom/img/pentaho24x24.png'</img><span data-notify-text/></div>",
             classes: {
             base: {
               "display": "inline-block",
@@ -113,7 +113,7 @@ function CnsPoll() {
         });
       } else if( 'twitter' == styling ) {
         $.notify.addStyle('twitter', {
-            html: "<div><img style='vertical-align:middle; padding-right: 10px;' src='/pentaho/api/repos/cns/resources/img/twitter24x24.png'</img><span data-notify-text/></div>",
+            html: "<div><img style='vertical-align:middle; padding-right: 10px;' src='/pentaho/api/repos/cns/static/custom/img/twitter24x24.png'</img><span data-notify-text/></div>",
             classes: {
             base: {
               "display": "inline-block",
@@ -129,7 +129,7 @@ function CnsPoll() {
         });
       } else if( 'pdi' == styling ) {
         $.notify.addStyle('pdi', {
-            html: "<div><img style='vertical-align:middle; padding-right: 10px;' src='/pentaho/api/repos/cns/resources/img/pdi24x24.png'</img><span data-notify-text/></div>",
+            html: "<div><img style='vertical-align:middle; padding-right: 10px;' src='/pentaho/api/repos/cns/static/custom/img/pdi24x24.png'</img><span data-notify-text/></div>",
             classes: {
             base: {
               "display": "inline-block",
@@ -145,7 +145,7 @@ function CnsPoll() {
         });
       } else if( 'mail' == styling ) {
         $.notify.addStyle('mail', {
-            html: "<div><img style='vertical-align:middle; padding-right: 10px;' src='/pentaho/api/repos/cns/resources/img/mail24x24.png'</img><span data-notify-text/></div>",
+            html: "<div><img style='vertical-align:middle; padding-right: 10px;' src='/pentaho/api/repos/cns/static/custom/img/mail24x24.png'</img><span data-notify-text/></div>",
             classes: {
             base: {
               "display": "inline-block",
