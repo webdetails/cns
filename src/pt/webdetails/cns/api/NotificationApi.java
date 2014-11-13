@@ -36,27 +36,27 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-@Path( "/cns/api/notification" )
+@Path( "/cns/api/notifications" )
 public class NotificationApi {
 
   private Logger logger = LoggerFactory.getLogger( NotificationApi.class );
 
   @GET
-  @Path( "/notifications/count" )
-  public int doGetQueryCount( @QueryParam( "unread" ) @DefaultValue( "false" ) String unread ) {
-    return getEngine().getTotalCount( SessionUtils.getUserInSession(), SessionUtils.getRolesForUserInSession(),
-      "true".equalsIgnoreCase( unread ) );
+  @Path( "/count" )
+  public String doGetQueryCount( @QueryParam( "unread" ) @DefaultValue( "false" ) String unread ) {
+    return String.valueOf( getEngine().getTotalCount( SessionUtils.getUserInSession(), SessionUtils.getRolesForUserInSession(),
+      "true".equalsIgnoreCase( unread ) ) );
   }
 
   @GET
-  @Path( "/notifications/count/{unread: [^?]* }" )
-  public int doGetPathCount( @PathParam( "unread" ) @DefaultValue( "false" ) String unread ) {
-    return getEngine().getTotalCount( SessionUtils.getUserInSession(), SessionUtils.getRolesForUserInSession(),
-      "true".equalsIgnoreCase( unread ) );
+  @Path( "/count/{unread: [^?]* }" )
+  public String doGetPathCount( @PathParam( "unread" ) @DefaultValue( "false" ) String unread ) {
+    return String.valueOf( getEngine().getTotalCount( SessionUtils.getUserInSession(), SessionUtils.getRolesForUserInSession(),
+      "true".equalsIgnoreCase( unread ) ) );
   }
 
   @GET
-  @Path( "/notifications/get" )
+  @Path( "/get" )
   @Produces( "application/json" )
   public String doGetQuery( @QueryParam( "id" ) String id ) throws JSONException {
     Notification n = getEngine().getNotificationById( id );
@@ -64,7 +64,7 @@ public class NotificationApi {
   }
 
   @GET
-  @Path( "/notifications/get/{id: [^?]+ }" )
+  @Path( "/get/{id: [^?]+ }" )
   @Produces( "application/json" )
   public String doGetPath( @PathParam( "id" ) String id ) throws JSONException {
     Notification n = getEngine().getNotificationById( id );
