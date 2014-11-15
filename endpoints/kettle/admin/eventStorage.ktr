@@ -96,7 +96,7 @@
         </parameter>
         <parameter>
             <name>eventid</name>
-            <default_value>1</default_value>
+            <default_value/>
             <description/>
         </parameter>
         <parameter>
@@ -246,76 +246,6 @@
   <hop> <from>Get Variables</from><to>Table output</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Table output</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>cns_db</connection>
-    <schema>PUBLIC</schema>
-    <table>NOTIFICATIONS</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-        <field>
-          <column_name>AUTHOR</column_name>
-          <stream_name>author</stream_name>
-        </field>
-        <field>
-          <column_name>EVENTTYPE</column_name>
-          <stream_name>eventtype</stream_name>
-        </field>
-        <field>
-          <column_name>RCPT</column_name>
-          <stream_name>rcpt</stream_name>
-        </field>
-        <field>
-          <column_name>TITLE</column_name>
-          <stream_name>title</stream_name>
-        </field>
-        <field>
-          <column_name>MESSAGE</column_name>
-          <stream_name>message</stream_name>
-        </field>
-        <field>
-          <column_name>LINK</column_name>
-          <stream_name>link</stream_name>
-        </field>
-        <field>
-          <column_name>STYLE</column_name>
-          <stream_name>style</stream_name>
-        </field>
-        <field>
-          <column_name>ID</column_name>
-          <stream_name>eventid</stream_name>
-        </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>360</xloc>
-      <yloc>196</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Get Variables</name>
     <type>GetVariable</type>
     <description/>
@@ -427,6 +357,76 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>147</xloc>
+      <yloc>196</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Table output</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>cns_db</connection>
+    <schema>PUBLIC</schema>
+    <table>NOTIFICATIONS</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>AUTHOR</column_name>
+          <stream_name>author</stream_name>
+        </field>
+        <field>
+          <column_name>EVENTTYPE</column_name>
+          <stream_name>eventtype</stream_name>
+        </field>
+        <field>
+          <column_name>RCPT</column_name>
+          <stream_name>rcpt</stream_name>
+        </field>
+        <field>
+          <column_name>TITLE</column_name>
+          <stream_name>title</stream_name>
+        </field>
+        <field>
+          <column_name>MESSAGE</column_name>
+          <stream_name>message</stream_name>
+        </field>
+        <field>
+          <column_name>LINK</column_name>
+          <stream_name>link</stream_name>
+        </field>
+        <field>
+          <column_name>STYLE</column_name>
+          <stream_name>style</stream_name>
+        </field>
+        <field>
+          <column_name>ID</column_name>
+          <stream_name>eventid</stream_name>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>360</xloc>
       <yloc>196</yloc>
       <draw>Y</draw>
       </GUI>

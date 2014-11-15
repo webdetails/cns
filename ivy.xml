@@ -61,6 +61,9 @@
     <dependency org="com.sun.jersey" name="jersey-servlet" rev="1.16" transitive="false"/>
     <dependency org="com.sun.jersey.contribs" name="jersey-spring" rev="1.16" transitive="false"/>
 
+    <dependency org="commons-httpclient" name="commons-httpclient" rev="3.0.1" transitive="false" changing="false" conf='default->default'/>
+    <dependency org="org.apache.httpcomponents" name="httpclient" rev="4.1.1"/>
+
     <!-- end CpkEndpointEventHandler's dependency needs --> 
 
 

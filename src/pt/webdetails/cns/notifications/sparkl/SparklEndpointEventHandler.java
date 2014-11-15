@@ -25,8 +25,9 @@ import pt.webdetails.cns.api.INotificationEventHandler;
 import pt.webdetails.cns.notifications.base.DefaultNotificationEvent;
 import pt.webdetails.cns.notifications.sparkl.kettle.baserver.web.utils.HttpConnectionHelper;
 import pt.webdetails.cns.notifications.twitter.TwitterNotificationEvent;
+import pt.webdetails.cns.utils.SessionUtils;
 
-import java.util.Date;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,7 +65,20 @@ public class SparklEndpointEventHandler implements INotificationEventHandler {
   protected void sendToKtrEndpoint( INotificationEvent event ) {
 
     if ( !StringUtils.isEmpty( ktrEndpoint ) && event != null ) {
-      HttpConnectionHelper.invokeEndpoint( "cns", ktrEndpoint, "GET", toKtrParamMap( event ) );
+
+
+      // HttpConnectionHelper.invokeEndpoint( "cns", ktrEndpoint, "GET", toKtrParamMap( event ) );
+
+      try {
+
+      // TODO this is temporary solution and should not be used going forwards (alpha build)
+
+      HttpConnectionHelper.callHttp( ktrEndpoint + "?" + toStringParamMap( event ),
+        SessionUtils.getUserInSession(), "password" );
+
+      } catch ( Exception e ) {
+        e.printStackTrace();
+      }
     }
   }
 
@@ -72,14 +86,8 @@ public class SparklEndpointEventHandler implements INotificationEventHandler {
   /**
    * DDL
    * <p/>
-   * id INT PRIMARY KEY AUTO_INCREMENT <p/>
-   * eventtype VARCHAR(64) NOT NULL <p/>
-   * author VARCHAR(1024) NOT NULL <p/>
-   * rcpt VARCHAR <p/>
-   * title VARCHAR(2048) <p/>
-   * message VARCHAR <p/>
-   * style VARCHAR(64) NOT NULL <p/>
-   * link VARCHAR <p/>
+   * id INT PRIMARY KEY AUTO_INCREMENT <p/> eventtype VARCHAR(64) NOT NULL <p/> author VARCHAR(1024) NOT NULL <p/> rcpt
+   * VARCHAR <p/> title VARCHAR(2048) <p/> message VARCHAR <p/> style VARCHAR(64) NOT NULL <p/> link VARCHAR <p/>
    */
 
   private Map<String, String> toKtrParamMap( INotificationEvent e ) {
@@ -112,5 +120,38 @@ public class SparklEndpointEventHandler implements INotificationEventHandler {
     }
 
     return map;
+  }
+
+
+  private String toStringParamMap( INotificationEvent e ) {
+
+    String param = "";
+
+    if ( e != null ) {
+
+      if ( e.getRecipientType() != null ) {
+        param += "parameventtype=" + URLEncoder.encode( e.getRecipientType().toString() ) + "&";
+      }
+      if ( !StringUtils.isEmpty( e.getSender() ) ) {
+        param += "paramauthor=" + URLEncoder.encode( e.getSender() ) + "&";
+      }
+      if ( !StringUtils.isEmpty( e.getRecipient() ) ) {
+        param += "paramrcpt=" + URLEncoder.encode( e.getRecipient() ) + "&";
+      }
+      if ( !StringUtils.isEmpty( e.getTitle() ) ) {
+        param += "paramtitle=" + URLEncoder.encode( e.getTitle() ) + "&";
+      }
+      if ( !StringUtils.isEmpty( e.getMessage() ) ) {
+        param += "parammessage=" + URLEncoder.encode( e.getMessage() ) + "&";
+      }
+      if ( !StringUtils.isEmpty( e.getLink() ) ) {
+        param += "paramlink=" + URLEncoder.encode( e.getLink() ) + "&";
+      }
+      if ( !StringUtils.isEmpty( e.getNotificationType() ) ) {
+        param += "paramstyle=" + URLEncoder.encode( e.getNotificationType() );
+      }
+    }
+
+    return param;
   }
 }
