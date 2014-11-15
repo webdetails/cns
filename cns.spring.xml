@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:context="http://www.springframework.org/schema/context"
+  	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  	   xmlns:ws="http://jax-ws.dev.java.net/spring/core" 
+  	   xmlns:wss="http://jax-ws.dev.java.net/spring/servlet" 
+  	   xmlns:util="http://www.springframework.org/schema/util"
+  	   xmlns:pen="http://www.pentaho.com/schema/pentaho-system"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+                           http://www.pentaho.com/schema/pentaho-system http://www.pentaho.com/schema/pentaho-system.xsd
+                           http://jax-ws.dev.java.net/spring/core http://jax-ws.dev.java.net/spring/core.xsd
+                           http://jax-ws.dev.java.net/spring/servlet http://jax-ws.dev.java.net/spring/servlet.xsd
+                           http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+    <context:annotation-config/>
+    
+    <!-- notification environment -->
+    <bean id="INotificationEnvironment" class="pt.webdetails.cns.DefaultNotificationEnvironment">
+		<pen:publish as-type="INTERFACES" />
+		<constructor-arg ref="cnsStorage" />
+		<constructor-arg ref="cnsPoll" />
+		<constructor-arg ref="cnsEventObjects" />
+		<constructor-arg ref="cnsEventHandlers" />
+	</bean>
+
+	<!-- <bean id="storage" class="pt.webdetails.cns.service.store.NoStorage" /> -->
+	<bean id="cnsStorage" class="pt.webdetails.cns.service.store.DefaultVolatileStorage" />
+
+	<bean id="cnsPoll" class="pt.webdetails.cns.service.store.DefaultQueueing" />
+
+	<util:map id="cnsEventObjects" key-type="java.lang.String" value-type="pt.webdetails.cns.api.INotificationEvent">
+		<entry key="default">
+			<bean class="pt.webdetails.cns.notifications.base.DefaultNotificationEvent"/>
+		</entry>
+		<entry key="mail">
+			<bean class="pt.webdetails.cns.notifications.base.DefaultNotificationEvent"/>
+		</entry>
+		<entry key="twitter">
+			<bean class="pt.webdetails.cns.notifications.twitter.TwitterNotificationEvent"/>
+		</entry>
+	</util:map>
+
+	<util:list id="cnsEventHandlers" value-type="pt.webdetails.cns.api.INotificationEventHandler">
+		<bean class="pt.webdetails.cns.notifications.base.DefaultNotificationEventHandler" />
+		<bean class="pt.webdetails.cns.notifications.twitter.TwitterNotificationEventHandler" />
+
+		<bean class="pt.webdetails.cns.notifications.sparkl.SparklEndpointEventHandler">
+			<constructor-arg value="/eventstorage" />
+		</bean>
+	</util:list>
+
+</beans>

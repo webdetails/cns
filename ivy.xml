@@ -19,35 +19,50 @@
 
   <dependencies defaultconf="default->default">
 
-    <dependency org="${pentaho.group}" name="pentaho-platform-api" rev="${dependency.pentaho.revision}" transitive="false"  changing="true" />
-    <dependency org="${pentaho.group}" name="pentaho-platform-core" rev="${dependency.pentaho.revision}" transitive="false" changing="true" />
+    <dependency org="com.google.guava" name="guava" rev="17.0" />
 
-    <dependency org="commons-collections" name="commons-collections" rev="3.2" transitive="false"/>
-    <dependency org="commons-logging" name="commons-logging" rev="1.1.1" />
-    <dependency org="commons-lang" name="commons-lang" rev="2.6"/>
+    <dependency org="org.json"  name="json"  rev="3.1" transitive="false"/>
+
     <dependency org="commons-io" name="commons-io" rev="1.4"/>
+    <dependency org="commons-lang" name="commons-lang" rev="2.6"/>
+    <dependency org="commons-logging" name="commons-logging" rev="1.1.1" />
+    <dependency org="commons-collections" name="commons-collections" rev="3.2" transitive="false"/>
 
     <dependency org="log4j" name="log4j" rev="1.2.16" transitive="false"  changing="false" />
     <dependency org="org.slf4j" name="slf4j-api" rev="1.7.3" transitive="false" changing="false" />
-    <dependency org="org.json"  name="json"  rev="3.1" transitive="false"/>
-    <dependency org="javax.servlet" name="servlet-api" rev="2.4"    transitive="false"/>
+
+    <dependency org="javax.servlet" name="servlet-api" rev="2.4" transitive="false"/>
     <dependency org="javax.ws.rs" name="javax.ws.rs-api" rev="2.0" transitive="false"/>
 
-    <dependency org="com.google.guava" name="guava" rev="17.0" />
+    <dependency org="${pentaho.group}" name="pentaho-platform-api" rev="${dependency.pentaho.revision}" transitive="false"  changing="true" />
+    <dependency org="${pentaho.group}" name="pentaho-platform-core" rev="${dependency.pentaho.revision}" transitive="false" changing="true" />
+    
+    <!-- sparkl -->
+        
+    <dependency org="org.codehaus.jackson" name="jackson-mapper-asl" rev="1.9.12" conf='default->default' />
+    <dependency org="com.fasterxml.jackson.core" name="jackson-core" rev="2.2.2" conf='default->default' />
+    <dependency org="com.fasterxml.jackson.core" name="jackson-databind" rev="2.2.2" conf='default->default' />
+    <dependency org="com.fasterxml.jackson.core" name="jackson-annotations" rev="2.2.2" conf='default->default'/>
+ 		<dependency org="pentaho" name="cpf-core" rev="${dependency.cpf.revision}" transitive="false" changing="true" conf='default->default'/>
+  	<dependency org="pentaho" name="${cpf.pentaho.artifact}" rev="${dependency.cpf.revision}" transitive="false" changing="true" conf='default->default'/>
+		<dependency org="pentaho" name="cpk-core" rev="${dependency.cpk.revision}" transitive="false" changing="true" conf='default->default'/>
+  	<dependency org="pentaho" name="${cpk.pentaho.artifact}" rev="${dependency.cpk.revision}" transitive="false" changing="true" conf='default->default'/>
 
- 		<dependency org="pentaho" name="cpf-core"
-		  rev="${dependency.cpf.revision}" transitive="false" changing="true" conf='default->default'/>
-  		<dependency org="pentaho" name="${cpf.pentaho.artifact}"
-		  rev="${dependency.cpf.revision}" transitive="false" changing="true" conf='default->default'/>
-		  <dependency org="pentaho" name="cpk-core"
-		  rev="${dependency.cpk.revision}" transitive="false" changing="true" conf='default->default'/>
-  		<dependency org="pentaho" name="${cpk.pentaho.artifact}"
-		  rev="${dependency.cpk.revision}" transitive="false" changing="true" conf='default->default'/>
-		<dependency org="org.codehaus.jackson" name="jackson-mapper-asl" rev="1.9.12" conf='default->default' />
-		<dependency org="com.fasterxml.jackson.core" name="jackson-core" rev="2.2.2" conf='default->default' />
-		<dependency org="com.fasterxml.jackson.core" name="jackson-databind" rev="2.2.2" conf='default->default' />
-		<dependency org="com.fasterxml.jackson.core" name="jackson-annotations" rev="2.2.2" conf='default->default'/>
-    <!--<dependency org="javax" name="javaee-api" rev="7.0"/>-->
+    <!-- end sparkl -->
+		
+    <!-- the following are *solely* CpkEndpointEventHandler's dependency needs -->
+    
+    <dependency org="commons-httpclient" name="commons-httpclient" rev="3.1"/>
+    <dependency org="pentaho-kettle" name="kettle-core" rev="${dependency.kettle.revision}" changing="true"/>
+    <dependency org="${pentaho.group}" name="pentaho-platform-extensions" rev="${dependency.pentaho.revision}" transitive="false" changing="true" />
+    <dependency org="org.springframework" name="spring-web" rev="2.5.6" transitive="false"/>
+    <dependency org="org.springframework" name="spring" rev="2.5.6" transitive="false"/>
+    <dependency org="org.springframework" name="spring-beans" rev="2.5.6" transitive="false"/>
+    <dependency org="com.sun.jersey" name="jersey-servlet" rev="1.16" transitive="false"/>
+    <dependency org="com.sun.jersey.contribs" name="jersey-spring" rev="1.16" transitive="false"/>
+
+    <!-- end CpkEndpointEventHandler's dependency needs --> 
+
 
   </dependencies>
 

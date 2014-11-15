@@ -12,16 +12,16 @@
   
   <!-- JAX-RS beans -->
   <bean id="api" class="org.pentaho.platform.web.servlet.JAXRSPluginServlet"/>
-  <bean id="cnsApi" class="pt.webdetails.cns.api.NotificationApi" scope="prototype"/>
-  <bean id="cnsQueueApi" class="pt.webdetails.cns.api.NotificationQueueApi" scope="prototype"/>
+  <bean id="cnsApi" class="pt.webdetails.cns.web.api.NotificationApi" scope="prototype"/>
+  <bean id="cnsQueueApi" class="pt.webdetails.cns.web.api.NotificationPollApi" scope="prototype"/>
 
-  <bean id="notificationRegistry" class="pt.webdetails.cns.NotificationRegistry">
+  <bean id="notificationRegistry" class="pt.webdetails.cns.DefaultNotificationEnvironment">
     <constructor-arg ref="notificationVolatileStorage" />
     <constructor-arg ref="eventObjects" />
     <constructor-arg ref="eventHandlers" />
   </bean>
 
-  <bean id="notificationVolatileStorage" class="pt.webdetails.cns.service.store.NotificationVolatileStorage" />
+  <bean id="notificationVolatileStorage" class="pt.webdetails.cns.service.store.DefaultVolatileStorage" />
   
   <util:map id="eventObjects" key-type="java.lang.String" value-type="pt.webdetails.cns.api.INotificationEvent">
     <entry key="default">

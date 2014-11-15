@@ -17,41 +17,100 @@
 package pt.webdetails.cns.notifications.sparkl;
 
 import com.google.common.eventbus.Subscribe;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.webdetails.cns.api.INotificationEvent;
 import pt.webdetails.cns.api.INotificationEventHandler;
 import pt.webdetails.cns.notifications.base.DefaultNotificationEvent;
+import pt.webdetails.cns.notifications.sparkl.kettle.baserver.web.utils.HttpConnectionHelper;
 import pt.webdetails.cns.notifications.twitter.TwitterNotificationEvent;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SparklEndpointEventHandler implements INotificationEventHandler {
 
   private Logger logger = LoggerFactory.getLogger( SparklEndpointEventHandler.class );
-  private String sparklKtrEndpoint;
+  private String ktrEndpoint;
 
-  public SparklEndpointEventHandler( String sparklKtrEndpoint ) {
-    this.sparklKtrEndpoint = sparklKtrEndpoint;
+  public SparklEndpointEventHandler( String ktrEndpoint ) {
+    this.ktrEndpoint = ktrEndpoint;
   }
 
   @Subscribe
   public void handleDefaultEvent( DefaultNotificationEvent event ) {
     if ( event != null ) {
-      sendToSparklKtrEndpoint( event );
+      sendToKtrEndpoint( event );
     }
   }
 
   @Subscribe
   public void handleTwitterEvent( TwitterNotificationEvent event ) {
     if ( event != null ) {
-      sendToSparklKtrEndpoint( event );
+      sendToKtrEndpoint( event );
+    }
+  }
+
+  public String getKtrEndpoint() {
+    return ktrEndpoint;
+  }
+
+  public void setKtrEndpoint( String ktrEndpoint ) {
+    this.ktrEndpoint = ktrEndpoint;
+  }
+
+  protected void sendToKtrEndpoint( INotificationEvent event ) {
+
+    if ( !StringUtils.isEmpty( ktrEndpoint ) && event != null ) {
+      HttpConnectionHelper.invokeEndpoint( "cns", ktrEndpoint, "GET", toKtrParamMap( event ) );
     }
   }
 
 
-  private void sendToSparklKtrEndpoint( INotificationEvent event ) {
+  /**
+   * DDL
+   * <p/>
+   * id INT PRIMARY KEY AUTO_INCREMENT <p/>
+   * eventtype VARCHAR(64) NOT NULL <p/>
+   * author VARCHAR(1024) NOT NULL <p/>
+   * rcpt VARCHAR <p/>
+   * title VARCHAR(2048) <p/>
+   * message VARCHAR <p/>
+   * style VARCHAR(64) NOT NULL <p/>
+   * link VARCHAR <p/>
+   */
 
-    // do something
+  private Map<String, String> toKtrParamMap( INotificationEvent e ) {
 
+    Map<String, String> map = new HashMap<String, String>();
+
+    if ( e != null ) {
+
+      if ( e.getRecipientType() != null ) {
+        map.put( "eventtype", e.getRecipientType().toString() );
+      }
+      if ( !StringUtils.isEmpty( e.getSender() ) ) {
+        map.put( "author", e.getSender() );
+      }
+      if ( !StringUtils.isEmpty( e.getRecipient() ) ) {
+        map.put( "rcpt", e.getRecipient() );
+      }
+      if ( !StringUtils.isEmpty( e.getTitle() ) ) {
+        map.put( "title", e.getTitle() );
+      }
+      if ( !StringUtils.isEmpty( e.getMessage() ) ) {
+        map.put( "message", e.getMessage() );
+      }
+      if ( !StringUtils.isEmpty( e.getLink() ) ) {
+        map.put( "link", e.getLink() );
+      }
+      if ( !StringUtils.isEmpty( e.getNotificationType() ) ) {
+        map.put( "style", e.getNotificationType() );
+      }
+    }
+
+    return map;
   }
-
 }

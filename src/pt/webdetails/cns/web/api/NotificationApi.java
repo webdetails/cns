@@ -14,16 +14,18 @@
 *
 * Copyright (c) 2002-2014 Pentaho Corporation..  All rights reserved.
 */
-package pt.webdetails.cns.api;
+package pt.webdetails.cns.web.api;
 
 import org.apache.commons.lang.StringUtils;
 import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.webdetails.cns.Constants;
+import pt.webdetails.cns.api.INotificationEvent;
 import pt.webdetails.cns.service.Notification;
 import pt.webdetails.cns.service.NotificationEngine;
 import pt.webdetails.cns.utils.SessionUtils;
+import pt.webdetails.cns.utils.Utils;
 
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
@@ -36,49 +38,52 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-@Path( "/cns/api/notifications" )
+@Path( "/cns/api/do" )
 public class NotificationApi {
 
   private Logger logger = LoggerFactory.getLogger( NotificationApi.class );
 
   @GET
   @Path( "/count" )
-  public String doGetQueryCount( @QueryParam( "unread" ) @DefaultValue( "false" ) String unread ) {
-    return String.valueOf( getEngine().getTotalCount( SessionUtils.getUserInSession(), SessionUtils.getRolesForUserInSession(),
-      "true".equalsIgnoreCase( unread ) ) );
+  public String doGetPathCount() {
+    return String
+      .valueOf( getEngine().getTotalCount( SessionUtils.getUserInSession(), SessionUtils.getRolesForUserInSession(),
+        false ) );
   }
 
   @GET
-  @Path( "/count/{unread: [^?]* }" )
-  public String doGetPathCount( @PathParam( "unread" ) @DefaultValue( "false" ) String unread ) {
-    return String.valueOf( getEngine().getTotalCount( SessionUtils.getUserInSession(), SessionUtils.getRolesForUserInSession(),
-      "true".equalsIgnoreCase( unread ) ) );
+  @Path( "/count/unread" )
+  public String doGetPathCountUnread() {
+    return String
+      .valueOf( getEngine().getTotalCount( SessionUtils.getUserInSession(), SessionUtils.getRolesForUserInSession(),
+        true ) );
   }
 
   @GET
   @Path( "/get" )
   @Produces( "application/json" )
-  public String doGetQuery( @QueryParam( "id" ) String id ) throws JSONException {
+  public String doGetQuery( @QueryParam( Constants.PARAM_ID ) String id ) throws JSONException {
     Notification n = getEngine().getNotificationById( id );
-    return n != null ? n.toJsonString() : "{}";
+    return Utils.toJsonObject( n ).toString( 2 );
   }
 
   @GET
   @Path( "/get/{id: [^?]+ }" )
   @Produces( "application/json" )
-  public String doGetPath( @PathParam( "id" ) String id ) throws JSONException {
+  public String doGetPath( @PathParam( Constants.PARAM_ID ) String id ) throws JSONException {
     Notification n = getEngine().getNotificationById( id );
-    return n != null ? n.toJsonString() : "{}";
+    return Utils.toJsonObject( n ).toString( 2 );
   }
 
   @GET
   @Path( "/notify/user" )
   public Response doGetQueryNotifyUser(
-    @QueryParam( "notificationType" ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE ) String notificationType,
-    @QueryParam( "recipient" ) String recipient,
-    @QueryParam( "title" ) String title,
-    @QueryParam( "message" ) String message,
-    @QueryParam( "link" ) String link ) {
+    @QueryParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
+    String notificationType,
+    @QueryParam( Constants.PARAM_RECIPIENT ) String recipient,
+    @QueryParam( Constants.PARAM_TITLE ) String title,
+    @QueryParam( Constants.PARAM_MESSAGE ) String message,
+    @QueryParam( Constants.PARAM_LINK ) String link ) {
     return notify( notificationType, INotificationEvent.RecipientType.USER, recipient, title, message,
       link );
   }
@@ -86,11 +91,12 @@ public class NotificationApi {
   @GET
   @Path( "/notify/group" )
   public Response doGetQueryNotifyGroup(
-    @QueryParam( "notificationType" ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE ) String notificationType,
-    @QueryParam( "recipient" ) String recipient,
-    @QueryParam( "title" ) String title,
-    @QueryParam( "message" ) String message,
-    @QueryParam( "link" ) String link ) {
+    @QueryParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
+    String notificationType,
+    @QueryParam( Constants.PARAM_RECIPIENT ) String recipient,
+    @QueryParam( Constants.PARAM_TITLE ) String title,
+    @QueryParam( Constants.PARAM_MESSAGE ) String message,
+    @QueryParam( Constants.PARAM_LINK ) String link ) {
     return notify( notificationType, INotificationEvent.RecipientType.ROLE, recipient, title, message,
       link );
   }
@@ -98,22 +104,24 @@ public class NotificationApi {
   @GET
   @Path( "/notify/all" )
   public Response doGetQueryNotifyAll(
-    @QueryParam( "notificationType" ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE ) String notificationType,
-    @QueryParam( "title" ) String title,
-    @QueryParam( "message" ) String message,
-    @QueryParam( "link" ) String link ) {
+    @QueryParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
+    String notificationType,
+    @QueryParam( Constants.PARAM_TITLE ) String title,
+    @QueryParam( Constants.PARAM_MESSAGE ) String message,
+    @QueryParam( Constants.PARAM_LINK ) String link ) {
     return notify( notificationType, INotificationEvent.RecipientType.ALL, null, title, message, link );
   }
 
   @GET
   @Path( "/notify" )
   public Response doGetQueryNotify(
-    @QueryParam( "notificationType" ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE ) String notificationType,
-    @QueryParam( "recipientType" ) String recipientType,
-    @QueryParam( "recipient" ) String recipient,
-    @QueryParam( "title" ) String title,
-    @QueryParam( "message" ) String message,
-    @QueryParam( "link" ) String link ) {
+    @QueryParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
+    String notificationType,
+    @QueryParam( Constants.PARAM_RECIPIENT_TYPE ) String recipientType,
+    @QueryParam( Constants.PARAM_RECIPIENT ) String recipient,
+    @QueryParam( Constants.PARAM_TITLE ) String title,
+    @QueryParam( Constants.PARAM_MESSAGE ) String message,
+    @QueryParam( Constants.PARAM_LINK ) String link ) {
 
     if ( !isValidRecipientType( recipientType ) ) {
       logger.error( "Invalid recipientType '" + recipientType + "'" );
@@ -127,10 +135,11 @@ public class NotificationApi {
   @GET
   @Path( "/notify/user/{notificationType: [^?]+ }/{recipient: [^?]+ }/{title: [^?]+ }/{message: [^?]+ }" )
   public Response doGetPathNotifyUser(
-    @PathParam( "notificationType" ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE ) String notificationType,
-    @PathParam( "recipient" ) String recipient,
-    @PathParam( "title" ) String title,
-    @PathParam( "message" ) String message ) {
+    @PathParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
+    String notificationType,
+    @PathParam( Constants.PARAM_RECIPIENT ) String recipient,
+    @PathParam( Constants.PARAM_TITLE ) String title,
+    @PathParam( Constants.PARAM_MESSAGE ) String message ) {
     return notify( notificationType, INotificationEvent.RecipientType.USER, recipient, title, message,
       null );
   }
@@ -138,10 +147,11 @@ public class NotificationApi {
   @GET
   @Path( "/notify/group/{notificationType: [^?]+ }/{recipient: [^?]+ }/{title: [^?]+ }/{message: [^?]+ }" )
   public Response doGetPathNotifyGroup(
-    @PathParam( "notificationType" ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE ) String notificationType,
-    @PathParam( "recipient" ) String recipient,
-    @PathParam( "title" ) String title,
-    @PathParam( "message" ) String message ) {
+    @PathParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
+    String notificationType,
+    @PathParam( Constants.PARAM_RECIPIENT ) String recipient,
+    @PathParam( Constants.PARAM_TITLE ) String title,
+    @PathParam( Constants.PARAM_MESSAGE ) String message ) {
     return notify( notificationType, INotificationEvent.RecipientType.ROLE, recipient, title, message,
       null );
   }
@@ -149,9 +159,10 @@ public class NotificationApi {
   @GET
   @Path( "/notify/all/{notificationType: [^?]+ }/{title: [^?]+ }/{message: [^?]+ }" )
   public Response doGetPathNotifyAll(
-    @PathParam( "notificationType" ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE ) String notificationType,
-    @PathParam( "title" ) String title,
-    @PathParam( "message" ) String message ) {
+    @PathParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
+    String notificationType,
+    @PathParam( Constants.PARAM_TITLE ) String title,
+    @PathParam( Constants.PARAM_MESSAGE ) String message ) {
     return notify( notificationType, INotificationEvent.RecipientType.ALL, null, title, message, null );
   }
 
@@ -159,11 +170,12 @@ public class NotificationApi {
   @Path(
     "/notify/{notificationType: [^?]+ }/{recipientType: [^?]+ }/{recipient: [^?]+ }/{title: [^?]+ }/{message: [^?]+ }" )
   public Response doGetPathNotify(
-    @PathParam( "notificationType" ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE ) String notificationType,
-    @PathParam( "recipientType" ) String recipientType,
-    @PathParam( "recipient" ) String recipient,
-    @PathParam( "title" ) String title,
-    @PathParam( "message" ) String message ) {
+    @PathParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
+    String notificationType,
+    @PathParam( Constants.PARAM_RECIPIENT_TYPE ) String recipientType,
+    @PathParam( Constants.PARAM_RECIPIENT ) String recipient,
+    @PathParam( Constants.PARAM_TITLE ) String title,
+    @PathParam( Constants.PARAM_MESSAGE ) String message ) {
 
     if ( !isValidRecipientType( recipientType ) ) {
       logger.error( "Invalid recipientType '" + recipientType + "'" );
@@ -177,11 +189,12 @@ public class NotificationApi {
   @POST
   @Path( "/notify/user" )
   public Response doPostNotifyUser(
-    @FormParam( "notificationType" ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE ) String notificationType,
-    @FormParam( "recipient" ) String recipient,
-    @FormParam( "title" ) String title,
-    @FormParam( "message" ) String message,
-    @FormParam( "link" ) String link ) {
+    @FormParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
+    String notificationType,
+    @FormParam( Constants.PARAM_RECIPIENT ) String recipient,
+    @FormParam( Constants.PARAM_TITLE ) String title,
+    @FormParam( Constants.PARAM_MESSAGE ) String message,
+    @FormParam( Constants.PARAM_LINK ) String link ) {
     return notify( notificationType, INotificationEvent.RecipientType.USER, recipient, title, message,
       link );
   }
@@ -189,11 +202,12 @@ public class NotificationApi {
   @POST
   @Path( "/notify/group" )
   public Response doPostNotifyGroup(
-    @FormParam( "notificationType" ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE ) String notificationType,
-    @FormParam( "recipient" ) String recipient,
-    @FormParam( "title" ) String title,
-    @FormParam( "message" ) String message,
-    @FormParam( "link" ) String link ) {
+    @FormParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
+    String notificationType,
+    @FormParam( Constants.PARAM_RECIPIENT ) String recipient,
+    @FormParam( Constants.PARAM_TITLE ) String title,
+    @FormParam( Constants.PARAM_MESSAGE ) String message,
+    @FormParam( Constants.PARAM_LINK ) String link ) {
     return notify( notificationType, INotificationEvent.RecipientType.ROLE, recipient, title, message,
       link );
   }
@@ -201,22 +215,24 @@ public class NotificationApi {
   @POST
   @Path( "/notify/all" )
   public Response doPostNotifyAll(
-    @FormParam( "notificationType" ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE ) String notificationType,
-    @FormParam( "title" ) String title,
-    @FormParam( "message" ) String message,
-    @FormParam( "link" ) String link ) {
+    @FormParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
+    String notificationType,
+    @FormParam( Constants.PARAM_TITLE ) String title,
+    @FormParam( Constants.PARAM_MESSAGE ) String message,
+    @FormParam( Constants.PARAM_LINK ) String link ) {
     return notify( notificationType, INotificationEvent.RecipientType.ALL, null, title, message, link );
   }
 
   @POST
   @Path( "/notify" )
   public Response doPostNotify(
-    @FormParam( "notificationType" ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE ) String notificationType,
-    @FormParam( "recipientType" ) String recipientType,
-    @FormParam( "recipient" ) String recipient,
-    @FormParam( "title" ) String title,
-    @FormParam( "message" ) String message,
-    @FormParam( "link" ) String link ) {
+    @FormParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
+    String notificationType,
+    @FormParam( Constants.PARAM_RECIPIENT_TYPE ) String recipientType,
+    @FormParam( Constants.PARAM_RECIPIENT ) String recipient,
+    @FormParam( Constants.PARAM_TITLE ) String title,
+    @FormParam( Constants.PARAM_MESSAGE ) String message,
+    @FormParam( Constants.PARAM_LINK ) String link ) {
 
     if ( !isValidRecipientType( recipientType ) ) {
       logger.error( "Invalid recipientType '" + recipientType + "'" );

@@ -20,6 +20,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.webdetails.cns.Constants;
+import pt.webdetails.cns.api.INotificationPoll;
 import pt.webdetails.cns.service.Notification;
 
 import java.util.HashMap;
@@ -28,21 +29,25 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-public class NotificationPollingQueue {
+public class DefaultQueueing implements INotificationPoll {
 
-  private Logger logger = LoggerFactory.getLogger( NotificationPollingQueue.class );
+  private Logger logger = LoggerFactory.getLogger( DefaultQueueing.class );
   private Map<String, Queue<Notification>> notificationsPollingQueue;
 
-  public NotificationPollingQueue() {
+  public DefaultQueueing() {
     notificationsPollingQueue = new HashMap<String, Queue<Notification>>();
   }
 
-  public boolean isQueueEmpty( String user ) {
+  public boolean isPollEmpty( String user ) {
     return StringUtils.isEmpty( user ) || !notificationsPollingQueue.containsKey( user )
       || notificationsPollingQueue.get( user ).size() == 0;
   }
 
-  public synchronized boolean subscribe( String user ) {
+  public synchronized boolean subscribe( String user, String eventType ) {
+    return subscribeAll( user ); // TODO
+  }
+
+  public synchronized boolean subscribeAll( String user ) {
 
     if ( StringUtils.isEmpty( user ) ) {
       logger.error( "user cannot be null" );
@@ -98,7 +103,7 @@ public class NotificationPollingQueue {
   }
 
   public synchronized Notification pop( String user ) {
-    return isQueueEmpty( user ) ? null : notificationsPollingQueue.get( user ).remove(); // a.k.a. pop from stash
+    return isPollEmpty( user ) ? null : notificationsPollingQueue.get( user ).remove(); // a.k.a. pop from stash
   }
 
   public synchronized void clearQueue( String user ) {

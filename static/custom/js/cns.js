@@ -82,7 +82,7 @@ function CnsPoll() {
                               autoHideDelay: 8000, 
                               showAnimation: 'slideDown',
                               showDuration: 500,
-                              hideAnimation: 'slideUp',
+                              hideAnimation: 'fadeOut',
                               hideDuration: 500
                             });
       }
@@ -107,7 +107,9 @@ function CnsPoll() {
               "background-color": "white",
               "padding": "10px",
               "color": "#1973BC",
-              "border-radius": "5px"
+              "border-radius": "5px",
+              "box-shadow": "0 0 5px rgba(0, 0, 0, 0.3)",
+              "float": "right"
             }
           }
         });
@@ -123,7 +125,9 @@ function CnsPoll() {
               "background-color": "#E5F2F7",
               "padding": "10px",
               "color": "black",
-              "border-radius": "5px"
+              "border-radius": "5px",
+              "box-shadow": "0 0 5px rgba(0, 0, 0, 0.3)",
+              "float": "right"
             }
           }
         });
@@ -139,7 +143,9 @@ function CnsPoll() {
               "background-color": "white",
               "padding": "10px",
               "color": "black",
-              "border-radius": "5px"
+              "border-radius": "5px",
+              "box-shadow": "0 0 5px rgba(0, 0, 0, 0.3)",
+              "float": "right"
             }
           }
         });
@@ -155,7 +161,9 @@ function CnsPoll() {
               "background-color": "white",
               "padding": "10px",
               "color": "black",
-              "border-radius": "5px"
+              "border-radius": "5px",
+              "box-shadow": "0 0 5px rgba(0, 0, 0, 0.3)",
+              "float": "right"
             }
           }
         });

@@ -14,17 +14,26 @@
 *
 * Copyright (c) 2002-2014 Pentaho Corporation..  All rights reserved.
 */
-package pt.webdetails.cns.notifications.base;
+package pt.webdetails.cns.api;
 
-import pt.webdetails.cns.api.INotificationEvent;
-import pt.webdetails.cns.api.INotificationEventHandler;
-import pt.webdetails.cns.service.NotificationEngine;
+import pt.webdetails.cns.service.Notification;
 
-public abstract class AbstractNotificationPoolingEventHandler implements INotificationEventHandler {
+import java.util.List;
 
-  protected void doEventHandling( INotificationEvent event ) {
-    if ( event != null ) {
-      NotificationEngine.getInstance().pushToPoll( event );
-    }
-  }
+public interface INotificationStorage {
+
+  int getTotalCount( String user, String[] roles, boolean unreadOnly );
+
+  Notification getNextUnread( String user, String[] roles );
+
+  List<Notification> getAll( String user, String[] roles, boolean unreadOnly );
+
+  Notification getNotificationById( String id );
+
+  boolean store( INotificationEvent.RecipientType recipientType, Notification notification );
+
+  boolean deleteNotificationById( String id );
+
+  void markNotificationAsRead( String id );
+
 }

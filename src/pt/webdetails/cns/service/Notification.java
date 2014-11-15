@@ -16,8 +16,6 @@
 */
 package pt.webdetails.cns.service;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import pt.webdetails.cns.api.INotificationEvent;
 
 import java.io.Serializable;
@@ -139,22 +137,6 @@ public class Notification implements Comparable<Notification>, Serializable {
 
   public void setLink( String link ) {
     this.link = link;
-  }
-
-  public String toJsonString() throws JSONException {
-
-    JSONObject jsonObj = new JSONObject();
-    jsonObj.put( "id", getId().toString() );
-    jsonObj.put( "notificationType", getNotificationType() );
-    jsonObj.put( "sender", getSender() );
-    jsonObj.put( "recipientType", getRecipientType().toString() );
-    jsonObj.put( "recipient", getRecipient() );
-    jsonObj.put( "title", getTitle() );
-    jsonObj.put( "message", getMessage() );
-    jsonObj.put( "link", getLink() );
-    jsonObj.put( "timestampInMillis", getTimestampInMillis() );
-
-    return jsonObj.toString( 2 );
   }
 
   @Override public int compareTo( Notification o ) {

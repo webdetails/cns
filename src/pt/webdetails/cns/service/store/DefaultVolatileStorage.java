@@ -26,13 +26,14 @@ import pt.webdetails.cns.api.INotificationEvent;
 import pt.webdetails.cns.service.Notification;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class NotificationVolatileStorage implements INotificationStorage {
+public class DefaultVolatileStorage implements pt.webdetails.cns.api.INotificationStorage {
 
   final Predicate UNREAD_FILTER = new Predicate() {
     @Override public boolean evaluate( Object o ) {
@@ -40,15 +41,15 @@ public class NotificationVolatileStorage implements INotificationStorage {
     }
   };
 
-  private Logger logger = LoggerFactory.getLogger( NotificationVolatileStorage.class );
-  private List<Notification> publicNotifications;
-  private Map<String, List<Notification>> roleNotifications;
-  private Map<String, List<Notification>> userNotifications;
+  private Logger logger = LoggerFactory.getLogger( DefaultVolatileStorage.class );
+  private List<Notification> publicStorage;
+  private Map<String, List<Notification>> roleStorage;
+  private Map<String, List<Notification>> userStorage;
 
-  public NotificationVolatileStorage() {
-    publicNotifications = new LinkedList<Notification>();
-    roleNotifications = new HashMap<String, List<Notification>>();
-    userNotifications = new HashMap<String, List<Notification>>();
+  public DefaultVolatileStorage() {
+    publicStorage = new LinkedList<Notification>();
+    roleStorage = new HashMap<String, List<Notification>>();
+    userStorage = new HashMap<String, List<Notification>>();
   }
 
   public int getTotalCount( String user, String[] roles, boolean unreadOnly ) {
@@ -60,25 +61,25 @@ public class NotificationVolatileStorage implements INotificationStorage {
 
     } else if ( unreadOnly ) {
 
-      totalCount = CollectionUtils.countMatches( publicNotifications, UNREAD_FILTER );
-      totalCount += CollectionUtils.countMatches( userNotifications.get( user ), UNREAD_FILTER );
+      totalCount = CollectionUtils.countMatches( publicStorage, UNREAD_FILTER );
+      totalCount += CollectionUtils.countMatches( userStorage.get( user ), UNREAD_FILTER );
 
       if ( roles != null ) {
 
         for ( String role : roles ) {
-          totalCount += CollectionUtils.countMatches( roleNotifications.get( role ), UNREAD_FILTER );
+          totalCount += CollectionUtils.countMatches( roleStorage.get( role ), UNREAD_FILTER );
         }
       }
 
     } else {
 
-      totalCount = publicNotifications != null ? publicNotifications.size() : 0;
-      totalCount += userNotifications.get( user ) != null ? userNotifications.get( user ).size() : 0;
+      totalCount = publicStorage != null ? publicStorage.size() : 0;
+      totalCount += userStorage.get( user ) != null ? userStorage.get( user ).size() : 0;
 
       if ( roles != null ) {
 
         for ( String role : roles ) {
-          totalCount += roleNotifications.get( role ) != null ? roleNotifications.get( role ).size() : 0;
+          totalCount += roleStorage.get( role ) != null ? roleStorage.get( role ).size() : 0;
         }
       }
     }
@@ -92,10 +93,14 @@ public class NotificationVolatileStorage implements INotificationStorage {
       logger.error( "One of: 'notification' , 'recipientType' is null" );
       return false;
 
-    } else if ( StringUtils.isEmpty( notification.getRecipient() ) ) {
+    } else if ( INotificationEvent.RecipientType.ALL != recipientType
+      && StringUtils.isEmpty( notification.getRecipient() ) ) {
       logger.error( "Null recipient for notification '" + notification.getMessage() + "'" );
       return false;
     }
+
+    notification.setUnread( true );
+    notification.setTimestampInMillis( new Date().getTime() );
 
     if ( INotificationEvent.RecipientType.ALL == recipientType ) {
 
@@ -103,11 +108,11 @@ public class NotificationVolatileStorage implements INotificationStorage {
 
     } else if ( INotificationEvent.RecipientType.ROLE == recipientType ) {
 
-      return storeInPrivate( roleNotifications, notification );
+      return storeInPrivate( roleStorage, notification );
 
     } else if ( INotificationEvent.RecipientType.USER == recipientType ) {
 
-      return storeInPrivate( userNotifications, notification );
+      return storeInPrivate( userStorage, notification );
 
     }
 
@@ -115,7 +120,7 @@ public class NotificationVolatileStorage implements INotificationStorage {
     return false;
   }
 
-  @SuppressWarnings( "unchecked" )
+  @SuppressWarnings("unchecked")
   public Notification getNextUnread( String user, String[] roles ) {
 
     if ( StringUtils.isEmpty( user ) ) {
@@ -125,13 +130,13 @@ public class NotificationVolatileStorage implements INotificationStorage {
 
       List<Notification> unreadList = new LinkedList<Notification>();
 
-      List<Notification> publicList = (List) CollectionUtils.select( publicNotifications, UNREAD_FILTER );
+      List<Notification> publicList = (List) CollectionUtils.select( publicStorage, UNREAD_FILTER );
 
       if ( publicList != null ) {
         unreadList.addAll( publicList );
       }
 
-      List<Notification> userList = (List) CollectionUtils.select( userNotifications.get( user ), UNREAD_FILTER );
+      List<Notification> userList = (List) CollectionUtils.select( userStorage.get( user ), UNREAD_FILTER );
 
       if ( userList != null ) {
         unreadList.addAll( userList );
@@ -143,7 +148,7 @@ public class NotificationVolatileStorage implements INotificationStorage {
 
         for ( String role : roles ) {
 
-          roleList = (List) CollectionUtils.select( roleNotifications.get( role ), UNREAD_FILTER );
+          roleList = (List) CollectionUtils.select( roleStorage.get( role ), UNREAD_FILTER );
 
           if ( roleList != null ) {
             unreadList.addAll( roleList );
@@ -161,7 +166,7 @@ public class NotificationVolatileStorage implements INotificationStorage {
     }
   }
 
-  @SuppressWarnings( "unchecked" )
+  @SuppressWarnings("unchecked")
   public List<Notification> getAll( String user, String[] roles, boolean unreadOnly ) {
 
     if ( StringUtils.isEmpty( user ) ) {
@@ -172,14 +177,14 @@ public class NotificationVolatileStorage implements INotificationStorage {
       List<Notification> all = new LinkedList<Notification>();
 
       List<Notification> publicList =
-        unreadOnly ? (List) CollectionUtils.select( publicNotifications, UNREAD_FILTER ) : publicNotifications;
+        unreadOnly ? (List) CollectionUtils.select( publicStorage, UNREAD_FILTER ) : publicStorage;
 
       if ( publicList != null ) {
         all.addAll( publicList );
       }
 
       List<Notification> userList = unreadOnly ?
-        (List) CollectionUtils.select( userNotifications.get( user ), UNREAD_FILTER ) : userNotifications.get( user );
+        (List) CollectionUtils.select( userStorage.get( user ), UNREAD_FILTER ) : userStorage.get( user );
 
       if ( userList != null ) {
         all.addAll( userList );
@@ -191,9 +196,8 @@ public class NotificationVolatileStorage implements INotificationStorage {
 
         for ( String role : roles ) {
 
-          roleList = userList = unreadOnly ?
-            (List) CollectionUtils.select( roleNotifications.get( role ), UNREAD_FILTER ) :
-            roleNotifications.get( role );
+          roleList = unreadOnly ?
+            (List) CollectionUtils.select( roleStorage.get( role ), UNREAD_FILTER ) : roleStorage.get( role );
 
           if ( roleList != null ) {
             all.addAll( roleList );
@@ -218,23 +222,23 @@ public class NotificationVolatileStorage implements INotificationStorage {
 
     Notification n = new Notification( id );
 
-    if ( publicNotifications.contains( n ) ) {
-      return publicNotifications.get( publicNotifications.indexOf( n ) );
+    if ( publicStorage.contains( n ) ) {
+      return publicStorage.get( publicStorage.indexOf( n ) );
 
     } else {
 
-      Set<String> roles = roleNotifications.keySet();
+      Set<String> roles = roleStorage.keySet();
       for ( String role : roles ) {
-        if ( roleNotifications.get( role ).contains( n ) ) {
-          return roleNotifications.get( role ).get( roleNotifications.get( role ).indexOf( n ) );
+        if ( roleStorage.get( role ).contains( n ) ) {
+          return roleStorage.get( role ).get( roleStorage.get( role ).indexOf( n ) );
         }
       }
 
 
-      Set<String> users = userNotifications.keySet();
+      Set<String> users = userStorage.keySet();
       for ( String user : users ) {
-        if ( roleNotifications.get( user ).contains( n ) ) {
-          return roleNotifications.get( user ).get( roleNotifications.get( user ).indexOf( n ) );
+        if ( roleStorage.get( user ).contains( n ) ) {
+          return roleStorage.get( user ).get( roleStorage.get( user ).indexOf( n ) );
         }
       }
     }
@@ -242,31 +246,31 @@ public class NotificationVolatileStorage implements INotificationStorage {
     return null;
   }
 
-  public Notification deleteNotificationById( String id ) {
+  public boolean deleteNotificationById( String id ) {
 
     if ( StringUtils.isEmpty( id ) ) {
-      return null;
+      return false;
     }
 
-    if ( containsNotification( publicNotifications, id ) ) {
+    if ( containsNotification( publicStorage, id ) ) {
 
-      return publicNotifications.get( publicNotifications.indexOf( new Notification( id ) ) );
+      publicStorage.remove( publicStorage.indexOf( new Notification( id ) ) );
 
-    } else if ( containsNotification( roleNotifications, id ) ) {
+    } else if ( containsNotification( roleStorage, id ) ) {
 
-      String role = getKey( roleNotifications, id );
-      int idx = roleNotifications.get( role ).indexOf( new Notification( id ) );
-      return roleNotifications.get( role ).get( idx );
+      String role = getKey( roleStorage, id );
+      int idx = roleStorage.get( role ).indexOf( new Notification( id ) );
+      roleStorage.get( role ).remove( idx );
 
-    } else if ( containsNotification( userNotifications, id ) ) {
+    } else if ( containsNotification( userStorage, id ) ) {
 
-      String user = getKey( userNotifications, id );
-      int idx = userNotifications.get( user ).indexOf( new Notification( id ) );
-      return userNotifications.get( user ).get( idx );
+      String user = getKey( userStorage, id );
+      int idx = userStorage.get( user ).indexOf( new Notification( id ) );
+      userStorage.get( user ).remove( idx );
 
     }
 
-    return null;
+    return true;
   }
 
   public void markNotificationAsRead( String id ) {
@@ -275,21 +279,21 @@ public class NotificationVolatileStorage implements INotificationStorage {
       return;
     }
 
-    if ( containsNotification( publicNotifications, id ) ) {
+    if ( containsNotification( publicStorage, id ) ) {
 
-      publicNotifications.get( publicNotifications.indexOf( new Notification( id ) ) ).setUnread( false );
+      publicStorage.get( publicStorage.indexOf( new Notification( id ) ) ).setUnread( false );
 
-    } else if ( containsNotification( roleNotifications, id ) ) {
+    } else if ( containsNotification( roleStorage, id ) ) {
 
-      String role = getKey( roleNotifications, id );
-      int idx = roleNotifications.get( role ).indexOf( new Notification( id ) );
-      roleNotifications.get( role ).get( idx ).setUnread( false );
+      String role = getKey( roleStorage, id );
+      int idx = roleStorage.get( role ).indexOf( new Notification( id ) );
+      roleStorage.get( role ).get( idx ).setUnread( false );
 
-    } else if ( containsNotification( userNotifications, id ) ) {
+    } else if ( containsNotification( userStorage, id ) ) {
 
-      String user = getKey( userNotifications, id );
-      int idx = userNotifications.get( user ).indexOf( new Notification( id ) );
-      userNotifications.get( user ).get( idx ).setUnread( false );
+      String user = getKey( userStorage, id );
+      int idx = userStorage.get( user ).indexOf( new Notification( id ) );
+      userStorage.get( user ).get( idx ).setUnread( false );
 
     }
   }
@@ -341,13 +345,13 @@ public class NotificationVolatileStorage implements INotificationStorage {
 
   private synchronized boolean storeInPublic( Notification notification ) {
 
-    while ( publicNotifications.size() > Constants.DEFAULT_MAX_LIST_SIZE ) {
+    while ( publicStorage.size() > Constants.DEFAULT_MAX_LIST_SIZE ) {
       logger.warn( "there are too many public notifications, deleting older ones" );
-      publicNotifications.remove( 0 ); // discard oldest one
+      publicStorage.remove( 0 ); // discard oldest one
     }
 
-    publicNotifications.add( notification );
-    Collections.sort( publicNotifications ); // recall: Notification overrides compareTo(), now sorting by timestamp
+    publicStorage.add( notification );
+    Collections.sort( publicStorage ); // recall: Notification overrides compareTo(), now sorting by timestamp
     return true;
   }
 

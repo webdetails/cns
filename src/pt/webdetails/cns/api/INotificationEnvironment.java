@@ -14,17 +14,19 @@
 *
 * Copyright (c) 2002-2014 Pentaho Corporation..  All rights reserved.
 */
-package pt.webdetails.cns.notifications.base;
+package pt.webdetails.cns.api;
 
-import pt.webdetails.cns.api.INotificationEvent;
-import pt.webdetails.cns.api.INotificationEventHandler;
-import pt.webdetails.cns.service.NotificationEngine;
+import java.util.List;
+import java.util.Map;
 
-public abstract class AbstractNotificationPoolingEventHandler implements INotificationEventHandler {
+public interface INotificationEnvironment {
 
-  protected void doEventHandling( INotificationEvent event ) {
-    if ( event != null ) {
-      NotificationEngine.getInstance().pushToPoll( event );
-    }
-  }
+  INotificationStorage getStorage();
+
+  INotificationPoll getPoll();
+
+  Map<String, INotificationEvent> getEventObjects();
+
+  List<INotificationEventHandler> getEventHandlers();
+
 }

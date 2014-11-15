@@ -23,34 +23,41 @@ import org.pentaho.platform.engine.core.system.objfac.references.SingletonPentah
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.webdetails.cns.Constants;
+import pt.webdetails.cns.api.INotificationEnvironment;
 import pt.webdetails.cns.api.INotificationEvent;
 import pt.webdetails.cns.api.INotificationEventHandler;
-import pt.webdetails.cns.service.store.INotificationStorage;
-import pt.webdetails.cns.service.store.NotificationPollingQueue;
 import pt.webdetails.cns.utils.SessionUtils;
 
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Executors;
 
 public class NotificationEngine {
 
-  public static final String EVENT_BUS_ID = "notification-async-event-bus";
-
   private static NotificationEngine instance;
   private Logger logger = LoggerFactory.getLogger( NotificationEngine.class );
-
-  private INotificationStorage notificationStorage;
-  private NotificationPollingQueue notificationPollingQueue = new NotificationPollingQueue();
-  ;
-  private Map<String, INotificationEvent> eventMap = new HashMap<String, INotificationEvent>();
+  private INotificationEnvironment environment;
 
   private NotificationEngine() {
+
+    CoreBeanFactory factory = new CoreBeanFactory( Constants.PLUGIN_NAME );
+
+    this.environment = (INotificationEnvironment) factory.getBean( INotificationEnvironment.class.getSimpleName() );
+
+    if ( environment == null ) {
+      logger.error( "INotificationEnvironment has not been set; NotificationEngine will not function properly" );
+    }
+
     if ( getAsyncEventBus() == null ) {
       initializeAsyncEventBus();
+    }
+
+    if ( getEnvironment().getEventHandlers() != null ) {
+
+      for ( INotificationEventHandler eventHandler : getEnvironment().getEventHandlers() ) {
+        registerEventHandler( eventHandler );
+      }
     }
   }
 
@@ -65,7 +72,7 @@ public class NotificationEngine {
 
   public boolean notify( INotificationEvent e ) {
     if ( e == null ) {
-      logger.error( "Notification event cannot be null" );
+      logger.error( "INotificationEvent cannot be null" );
       return false;
     }
 
@@ -80,11 +87,11 @@ public class NotificationEngine {
     return false;
   }
 
-  public boolean subscribeToPoolingQueue( String user ) {
-    return getNotificationPollingQueue().subscribe( user );
+  public boolean subscribeToPoll( String user, String eventType ) {
+    return getEnvironment().getPoll().subscribe( user, eventType );
   }
 
-  public boolean pushToPoolingQueue( INotificationEvent event ) {
+  public boolean pushToPoll( INotificationEvent event ) {
 
     Notification notification = new Notification( event );
 
@@ -111,12 +118,12 @@ public class NotificationEngine {
 
       if ( INotificationEvent.RecipientType.ALL == notification.getRecipientType() ) {
 
-        return getNotificationPollingQueue().pushToAll( notification );
+        return getEnvironment().getPoll().pushToAll( notification );
 
       } else if ( INotificationEvent.RecipientType.USER == notification.getRecipientType() ) {
 
         if ( SessionUtils.userExists( notification.getRecipient() ) ) {
-          return getNotificationPollingQueue().push( notification.getRecipient(), notification );
+          return getEnvironment().getPoll().push( notification.getRecipient(), notification );
 
         } else {
           logger.error( "notification.getRecipient(): '" + notification.getRecipient() + "' is not a valid user" );
@@ -136,7 +143,7 @@ public class NotificationEngine {
             for ( String user : users ) {
 
               notification.setRecipient( user );
-              success |= getNotificationPollingQueue().push( notification.getRecipient(), notification );
+              success |= getEnvironment().getPoll().push( notification.getRecipient(), notification );
             }
 
             return success;
@@ -155,11 +162,9 @@ public class NotificationEngine {
     return false;
   }
 
-  public Notification popFromPollingQueue( String user ) {
+  public Notification popFromPoll( String user ) {
 
-    Notification nextNotification = null;
-
-    while ( getNotificationPollingQueue().isQueueEmpty( user ) ) {
+    while ( getEnvironment().getPoll().isPollEmpty( user ) ) {
 
       try {
         logger.debug( "no notifications in queue; we'll check again in ~ 3 secs" );
@@ -169,7 +174,7 @@ public class NotificationEngine {
       }
     }
 
-    return getNotificationPollingQueue().pop( user );
+    return getEnvironment().getPoll().pop( user );
   }
 
   public boolean putInStorage( INotificationEvent event ) {
@@ -177,9 +182,6 @@ public class NotificationEngine {
     Notification notification = new Notification( event );
 
     if ( notification != null ) {
-
-      notification.setUnread( true );
-      notification.setTimestampInMillis( new Date().getTime() );
 
       if ( notification.getRecipientType() == null ) {
         logger.error( "notification from '" + notification.getSender() + "' with title '" + notification.getTitle()
@@ -195,98 +197,69 @@ public class NotificationEngine {
 
       if ( StringUtils.isEmpty( notification.getNotificationType() ) ) {
         notification.setNotificationType( Constants.DEFAULT_NOTIFICATION_TYPE );
+
       }
+      if ( INotificationEvent.RecipientType.ALL != notification.getRecipientType() ) {
 
-      if ( INotificationEvent.RecipientType.ALL == notification.getRecipientType() ) {
-
-        return getNotificationStorage().store( notification.getRecipientType(), notification );
-
-      } else if ( INotificationEvent.RecipientType.USER == notification.getRecipientType() ) {
-
-        if ( SessionUtils.userExists( notification.getRecipient() ) ) {
-          return getNotificationStorage().store( notification.getRecipientType(), notification );
-
-        } else {
+        if ( INotificationEvent.RecipientType.USER == notification.getRecipientType()
+          && !SessionUtils.userExists( notification.getRecipient() ) ) {
           logger.error( "notification.getRecipient(): '" + notification.getRecipient() + "' is not a valid user" );
           return false;
-        }
 
-      } else if ( INotificationEvent.RecipientType.ROLE == notification.getRecipientType() ) {
-
-        // INotificationEvent.RecipientType.ROLE: validate if recipient is a real role
-        if ( SessionUtils.roleExists( notification.getRecipient() ) ) {
-          return getNotificationStorage().store( notification.getRecipientType(), notification );
-
-        } else {
+        } else if ( INotificationEvent.RecipientType.ROLE == notification.getRecipientType()
+          && !SessionUtils.roleExists( notification.getRecipient() ) ) {
           logger.error( "notification.getRecipient(): '" + notification.getRecipient() + "' is not a valid role" );
           return false;
         }
       }
+
+      // call INotificationStorage.store()
+      getEnvironment().getStorage().store( notification.getRecipientType(), notification );
+
     }
     return false;
   }
 
   public int getTotalCount( String user, String[] roles, boolean unreadOnly ) {
-    return getNotificationStorage().getTotalCount( user, roles, unreadOnly );
+    return getEnvironment().getStorage().getTotalCount( user, roles, unreadOnly );
   }
 
   public Notification getNextUnread( String user, String[] roles ) {
-    return getNotificationStorage().getNextUnread( user, roles );
+    return getEnvironment().getStorage().getNextUnread( user, roles );
   }
 
   public List<Notification> getAll( String user, String[] roles, boolean unreadOnly ) {
-    return getNotificationStorage().getAll( user, roles, unreadOnly );
+    return getEnvironment().getStorage().getAll( user, roles, unreadOnly );
   }
 
   public Notification getNotificationById( String id ) {
-    return getNotificationStorage().getNotificationById( id );
+    return getEnvironment().getStorage().getNotificationById( id );
   }
 
-  public Notification deleteNotificationById( String id ) {
-    return getNotificationStorage().deleteNotificationById( id );
+  public boolean deleteNotificationById( String id ) {
+    return getEnvironment().getStorage().deleteNotificationById( id );
   }
 
   public void markNotificationAsRead( String id ) {
-    getNotificationStorage().markNotificationAsRead( id );
-  }
-
-  public AsyncEventBus getAsyncEventBus() {
-    return PentahoSystem.get( AsyncEventBus.class, NotificationEngine.EVENT_BUS_ID, null );
+    getEnvironment().getStorage().markNotificationAsRead( id );
   }
 
   public INotificationEvent getNotificationEvent( String notificationType ) {
-    if ( !StringUtils.isEmpty( notificationType ) && getEventMap().containsKey( notificationType ) ) {
-      return getEventMap().get( notificationType );
+    if ( !StringUtils.isEmpty( notificationType ) && getEnvironment().getEventObjects() != null
+      && getEnvironment().getEventObjects().containsKey( notificationType ) ) {
+      return getEnvironment().getEventObjects().get( notificationType );
     }
     return null;
   }
 
-  public void registerNotificationEvent( String eventType, INotificationEvent event ) {
-    if ( !StringUtils.isEmpty( eventType ) && event != null ) {
-      getEventMap().put( eventType, event );
-    }
-  }
-
-  public void registerNotificationEventHandler( INotificationEventHandler eventHandler ) {
+  public void registerEventHandler( INotificationEventHandler eventHandler ) {
     if ( eventHandler != null && getAsyncEventBus() != null ) {
       getAsyncEventBus().register( eventHandler );
     }
   }
 
-  protected Map<String, INotificationEvent> getEventMap() {
-    return eventMap;
-  }
-
-  protected INotificationStorage getNotificationStorage() {
-    return notificationStorage;
-  }
-
-  public void setNotificationStorage( INotificationStorage notificationStorage ) {
-    this.notificationStorage = notificationStorage;
-  }
-
-  protected NotificationPollingQueue getNotificationPollingQueue() {
-    return notificationPollingQueue;
+  protected INotificationEnvironment getEnvironment() {
+    return environment;
   }
 
   protected void initializeAsyncEventBus() {
@@ -296,8 +269,11 @@ public class NotificationEngine {
     // register the bus with PentahoSystem
     PentahoSystem.registerReference(
       new SingletonPentahoObjectReference.Builder<AsyncEventBus>( AsyncEventBus.class ).object( asyncEventBus )
-        .attributes(
-          Collections.<String, Object>singletonMap( "id", NotificationEngine.EVENT_BUS_ID ) ).build(),
+        .attributes( Collections.<String, Object>singletonMap( "id", Constants.EVENT_BUS_ID ) ).build(),
       AsyncEventBus.class );
+  }
+
+  public AsyncEventBus getAsyncEventBus() {
+    return PentahoSystem.get( AsyncEventBus.class, Constants.EVENT_BUS_ID, null );
   }
 }
