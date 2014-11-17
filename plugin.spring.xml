@@ -16,10 +16,10 @@
     
     <context:annotation-config/>
     
-    <!-- REST resources -->
-    <bean id="api" class="org.pentaho.platform.web.servlet.JAXRSPluginServlet"/>
+  <!-- REST resources -->
+  <bean id="api" class="org.pentaho.platform.web.servlet.JAXRSPluginServlet"/>
 	<bean id="cnsApi" class="pt.webdetails.cns.web.api.NotificationApi" />
 	<bean id="cnsPollApi" class="pt.webdetails.cns.web.api.NotificationPollApi" />
-    <bean id="cns.api" class="pt.webdetails.cpk.CpkApi"/>
+  <bean id="cns.api" class="pt.webdetails.cpk.CpkApi"/>
 
 </beans>

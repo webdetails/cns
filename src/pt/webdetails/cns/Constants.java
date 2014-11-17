@@ -22,7 +22,7 @@ public class Constants {
 
   public static final String EVENT_BUS_ID = "notification-async-event-bus";
 
-  public static final int DEFAULT_MAX_LIST_SIZE = 200;
+  public static final int DEFAULT_MAX_LIST_SIZE = 100;
 
   public static final String DEFAULT_NOTIFICATION_TYPE = "default";
 

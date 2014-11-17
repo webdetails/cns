@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import pt.webdetails.cns.Constants;
 import pt.webdetails.cns.api.INotificationPoll;
 import pt.webdetails.cns.service.Notification;
+import pt.webdetails.cns.utils.SessionUtils;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -60,7 +61,7 @@ public class DefaultQueueing implements INotificationPoll {
     return true;
   }
 
-  public synchronized boolean push( String user, Notification notification ) {
+  public synchronized boolean pushToUser( String user, Notification notification ) {
 
     if ( StringUtils.isEmpty( user ) ) {
       logger.error( "user cannot be null" );
@@ -83,6 +84,35 @@ public class DefaultQueueing implements INotificationPoll {
     return true;
   }
 
+  public synchronized boolean pushToRole( String role, Notification notification ) {
+
+    if ( StringUtils.isEmpty( role ) ) {
+      logger.error( "role cannot be null" );
+      return false;
+    } else if ( notification == null ) {
+      logger.error( "Notification event cannot be null" );
+      return false;
+    }
+
+    boolean success = false;
+
+    String[] users = SessionUtils.getUsersInRole( notification.getRecipient() );
+
+    if ( users != null && users.length > 0 ) {
+
+      for ( String user : users ) {
+
+        notification.setRecipient( user );
+        success |= pushToUser( notification.getRecipient(), notification );
+      }
+
+    } else {
+      logger.info( "No users found for role '" + notification.getRecipient() + "'" );
+    }
+
+    return success;
+  }
+
   public synchronized boolean pushToAll( Notification notification ) {
 
     if ( notification == null ) {
@@ -95,7 +125,7 @@ public class DefaultQueueing implements INotificationPoll {
     if ( users != null ) {
 
       for ( String user : users ) {
-        push( user, notification );
+        pushToUser( user, notification );
       }
     }
 

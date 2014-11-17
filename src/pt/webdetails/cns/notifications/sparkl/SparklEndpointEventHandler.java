@@ -17,42 +17,65 @@
 package pt.webdetails.cns.notifications.sparkl;
 
 import com.google.common.eventbus.Subscribe;
+import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.webdetails.cns.api.INotificationEvent;
-import pt.webdetails.cns.api.INotificationEventHandler;
-import pt.webdetails.cns.notifications.base.DefaultNotificationEvent;
+import pt.webdetails.cns.notifications.base.AbstractNotificationPoolingEventHandler;
 import pt.webdetails.cns.notifications.sparkl.kettle.baserver.web.utils.HttpConnectionHelper;
-import pt.webdetails.cns.notifications.twitter.TwitterNotificationEvent;
-import pt.webdetails.cns.utils.SessionUtils;
+import pt.webdetails.cns.notifications.sparkl.kettle.baserver.web.utils.Response;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SparklEndpointEventHandler implements INotificationEventHandler {
+public class SparklEndpointEventHandler extends AbstractNotificationPoolingEventHandler {
+
+  private static final String ENCODING = "UTF-8";
+
+  private static final String SPARKL_PARAM_PREFIX = "param";
 
   private Logger logger = LoggerFactory.getLogger( SparklEndpointEventHandler.class );
   private String ktrEndpoint;
 
   public SparklEndpointEventHandler( String ktrEndpoint ) {
-    this.ktrEndpoint = ktrEndpoint;
+
+    if ( StringUtils.isEmpty( ktrEndpoint ) ) {
+      logger.error( "ktrEndpoint is null! no event dispatching will be made" );
+    }
+
+    this.ktrEndpoint = ktrEndpoint.startsWith( "/" ) ? ktrEndpoint : "/" + ktrEndpoint;
   }
 
   @Subscribe
+  public void handleAllEvents( INotificationEvent event ) {
+    if ( sendToKtrEndpoint( event ) ) {
+      // send to poll is notification storing was successful
+      super.doEventHandling( event );
+    }
+  }
+
+/*
+
+  @Subscribe
   public void handleDefaultEvent( DefaultNotificationEvent event ) {
-    if ( event != null ) {
-      sendToKtrEndpoint( event );
+    if ( sendToKtrEndpoint( event ) ) {
+      // send to poll is notification storing was successful
+      super.doEventHandling( event );
     }
   }
 
   @Subscribe
   public void handleTwitterEvent( TwitterNotificationEvent event ) {
-    if ( event != null ) {
-      sendToKtrEndpoint( event );
+    if ( sendToKtrEndpoint( event ) ) {
+      // send to poll is notification storing was successful
+      super.doEventHandling( event );
     }
   }
+
+*/
 
   public String getKtrEndpoint() {
     return ktrEndpoint;
@@ -62,33 +85,27 @@ public class SparklEndpointEventHandler implements INotificationEventHandler {
     this.ktrEndpoint = ktrEndpoint;
   }
 
-  protected void sendToKtrEndpoint( INotificationEvent event ) {
+  protected boolean sendToKtrEndpoint( INotificationEvent event ) {
 
-    if ( !StringUtils.isEmpty( ktrEndpoint ) && event != null ) {
+    if ( StringUtils.isEmpty( getKtrEndpoint() ) ) {
+      logger.error( "ktrEndpoint is null" );
+      return false;
+    } else if ( event == null ) {
+      logger.error( "event is null" );
+      return false;
+    }
 
+    try {
 
-      // HttpConnectionHelper.invokeEndpoint( "cns", ktrEndpoint, "GET", toKtrParamMap( event ) );
+      Response r = HttpConnectionHelper.invokeEndpoint( "cns", ktrEndpoint, "GET", toKtrParamMap( event ) );
 
-      try {
+      return r != null && ( HttpStatus.SC_OK == r.getStatusCode() || HttpStatus.SC_NO_CONTENT == r.getStatusCode() );
 
-      // TODO this is temporary solution and should not be used going forwards (alpha build)
-
-      HttpConnectionHelper.callHttp( ktrEndpoint + "?" + toStringParamMap( event ),
-        SessionUtils.getUserInSession(), "password" );
-
-      } catch ( Exception e ) {
-        e.printStackTrace();
-      }
+    } catch ( Exception e ) {
+      logger.error( e.getLocalizedMessage(), e );
+      return false;
     }
   }
-
-
-  /**
-   * DDL
-   * <p/>
-   * id INT PRIMARY KEY AUTO_INCREMENT <p/> eventtype VARCHAR(64) NOT NULL <p/> author VARCHAR(1024) NOT NULL <p/> rcpt
-   * VARCHAR <p/> title VARCHAR(2048) <p/> message VARCHAR <p/> style VARCHAR(64) NOT NULL <p/> link VARCHAR <p/>
-   */
 
   private Map<String, String> toKtrParamMap( INotificationEvent e ) {
 
@@ -96,62 +113,35 @@ public class SparklEndpointEventHandler implements INotificationEventHandler {
 
     if ( e != null ) {
 
-      if ( e.getRecipientType() != null ) {
-        map.put( "eventtype", e.getRecipientType().toString() );
-      }
-      if ( !StringUtils.isEmpty( e.getSender() ) ) {
-        map.put( "author", e.getSender() );
-      }
-      if ( !StringUtils.isEmpty( e.getRecipient() ) ) {
-        map.put( "rcpt", e.getRecipient() );
-      }
-      if ( !StringUtils.isEmpty( e.getTitle() ) ) {
-        map.put( "title", e.getTitle() );
-      }
-      if ( !StringUtils.isEmpty( e.getMessage() ) ) {
-        map.put( "message", e.getMessage() );
-      }
-      if ( !StringUtils.isEmpty( e.getLink() ) ) {
-        map.put( "link", e.getLink() );
-      }
-      if ( !StringUtils.isEmpty( e.getNotificationType() ) ) {
-        map.put( "style", e.getNotificationType() );
+      try {
+
+        if ( e.getRecipientType() != null ) {
+          map.put( SPARKL_PARAM_PREFIX + "eventtype", URLEncoder.encode( e.getRecipientType().toString(), ENCODING ) );
+        }
+        if ( !StringUtils.isEmpty( e.getSender() ) ) {
+          map.put( SPARKL_PARAM_PREFIX + "author", URLEncoder.encode( e.getSender(), ENCODING ) );
+        }
+        if ( !StringUtils.isEmpty( e.getRecipient() ) ) {
+          map.put( SPARKL_PARAM_PREFIX + "rcpt", URLEncoder.encode( e.getRecipient(), ENCODING ) );
+        }
+        if ( !StringUtils.isEmpty( e.getTitle() ) ) {
+          map.put( SPARKL_PARAM_PREFIX + "title", URLEncoder.encode( e.getTitle(), ENCODING ) );
+        }
+        if ( !StringUtils.isEmpty( e.getMessage() ) ) {
+          map.put( SPARKL_PARAM_PREFIX + "message", URLEncoder.encode( e.getMessage(), ENCODING ) );
+        }
+        if ( !StringUtils.isEmpty( e.getLink() ) ) {
+          map.put( SPARKL_PARAM_PREFIX + "link", URLEncoder.encode( e.getLink(), ENCODING ) );
+        }
+        if ( !StringUtils.isEmpty( e.getNotificationType() ) ) {
+          map.put( SPARKL_PARAM_PREFIX + "style", URLEncoder.encode( e.getNotificationType(), ENCODING ) );
+        }
+
+      } catch ( UnsupportedEncodingException ex ) {
+        logger.error( ex.getLocalizedMessage(), ex );
       }
     }
 
     return map;
-  }
-
-
-  private String toStringParamMap( INotificationEvent e ) {
-
-    String param = "";
-
-    if ( e != null ) {
-
-      if ( e.getRecipientType() != null ) {
-        param += "parameventtype=" + URLEncoder.encode( e.getRecipientType().toString() ) + "&";
-      }
-      if ( !StringUtils.isEmpty( e.getSender() ) ) {
-        param += "paramauthor=" + URLEncoder.encode( e.getSender() ) + "&";
-      }
-      if ( !StringUtils.isEmpty( e.getRecipient() ) ) {
-        param += "paramrcpt=" + URLEncoder.encode( e.getRecipient() ) + "&";
-      }
-      if ( !StringUtils.isEmpty( e.getTitle() ) ) {
-        param += "paramtitle=" + URLEncoder.encode( e.getTitle() ) + "&";
-      }
-      if ( !StringUtils.isEmpty( e.getMessage() ) ) {
-        param += "parammessage=" + URLEncoder.encode( e.getMessage() ) + "&";
-      }
-      if ( !StringUtils.isEmpty( e.getLink() ) ) {
-        param += "paramlink=" + URLEncoder.encode( e.getLink() ) + "&";
-      }
-      if ( !StringUtils.isEmpty( e.getNotificationType() ) ) {
-        param += "paramstyle=" + URLEncoder.encode( e.getNotificationType() );
-      }
-    }
-
-    return param;
   }
 }

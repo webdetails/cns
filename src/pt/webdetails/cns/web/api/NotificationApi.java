@@ -78,9 +78,9 @@ public class NotificationApi {
   @GET
   @Path( "/notify/user" )
   public Response doGetQueryNotifyUser(
+    @QueryParam( Constants.PARAM_RECIPIENT ) String recipient,
     @QueryParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
     String notificationType,
-    @QueryParam( Constants.PARAM_RECIPIENT ) String recipient,
     @QueryParam( Constants.PARAM_TITLE ) String title,
     @QueryParam( Constants.PARAM_MESSAGE ) String message,
     @QueryParam( Constants.PARAM_LINK ) String link ) {
@@ -91,9 +91,9 @@ public class NotificationApi {
   @GET
   @Path( "/notify/group" )
   public Response doGetQueryNotifyGroup(
+    @QueryParam( Constants.PARAM_RECIPIENT ) String recipient,
     @QueryParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
     String notificationType,
-    @QueryParam( Constants.PARAM_RECIPIENT ) String recipient,
     @QueryParam( Constants.PARAM_TITLE ) String title,
     @QueryParam( Constants.PARAM_MESSAGE ) String message,
     @QueryParam( Constants.PARAM_LINK ) String link ) {
@@ -133,11 +133,11 @@ public class NotificationApi {
   }
 
   @GET
-  @Path( "/notify/user/{notificationType: [^?]+ }/{recipient: [^?]+ }/{title: [^?]+ }/{message: [^?]+ }" )
+  @Path( "/notify/user/{recipient: [^?]+ }/{notificationType: [^?]+ }/{title: [^?]+ }/{message: [^?]+ }" )
   public Response doGetPathNotifyUser(
+    @PathParam( Constants.PARAM_RECIPIENT ) String recipient,
     @PathParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
     String notificationType,
-    @PathParam( Constants.PARAM_RECIPIENT ) String recipient,
     @PathParam( Constants.PARAM_TITLE ) String title,
     @PathParam( Constants.PARAM_MESSAGE ) String message ) {
     return notify( notificationType, INotificationEvent.RecipientType.USER, recipient, title, message,
@@ -145,11 +145,11 @@ public class NotificationApi {
   }
 
   @GET
-  @Path( "/notify/group/{notificationType: [^?]+ }/{recipient: [^?]+ }/{title: [^?]+ }/{message: [^?]+ }" )
-  public Response doGetPathNotifyGroup(
+  @Path( "/notify/role/{recipient: [^?]+ }/{notificationType: [^?]+ }/{title: [^?]+ }/{message: [^?]+ }" )
+  public Response doGetPathNotifyRole(
+    @PathParam( Constants.PARAM_RECIPIENT ) String recipient,
     @PathParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
     String notificationType,
-    @PathParam( Constants.PARAM_RECIPIENT ) String recipient,
     @PathParam( Constants.PARAM_TITLE ) String title,
     @PathParam( Constants.PARAM_MESSAGE ) String message ) {
     return notify( notificationType, INotificationEvent.RecipientType.ROLE, recipient, title, message,
@@ -168,12 +168,12 @@ public class NotificationApi {
 
   @GET
   @Path(
-    "/notify/{notificationType: [^?]+ }/{recipientType: [^?]+ }/{recipient: [^?]+ }/{title: [^?]+ }/{message: [^?]+ }" )
+    "/notify/{recipient: [^?]+ }/{recipientType: [^?]+ }/{notificationType: [^?]+ }/{title: [^?]+ }/{message: [^?]+ }" )
   public Response doGetPathNotify(
+    @PathParam( Constants.PARAM_RECIPIENT ) String recipient,
+    @PathParam( Constants.PARAM_RECIPIENT_TYPE ) String recipientType,
     @PathParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
     String notificationType,
-    @PathParam( Constants.PARAM_RECIPIENT_TYPE ) String recipientType,
-    @PathParam( Constants.PARAM_RECIPIENT ) String recipient,
     @PathParam( Constants.PARAM_TITLE ) String title,
     @PathParam( Constants.PARAM_MESSAGE ) String message ) {
 
@@ -189,9 +189,9 @@ public class NotificationApi {
   @POST
   @Path( "/notify/user" )
   public Response doPostNotifyUser(
+    @FormParam( Constants.PARAM_RECIPIENT ) String recipient,
     @FormParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
     String notificationType,
-    @FormParam( Constants.PARAM_RECIPIENT ) String recipient,
     @FormParam( Constants.PARAM_TITLE ) String title,
     @FormParam( Constants.PARAM_MESSAGE ) String message,
     @FormParam( Constants.PARAM_LINK ) String link ) {
@@ -200,11 +200,11 @@ public class NotificationApi {
   }
 
   @POST
-  @Path( "/notify/group" )
-  public Response doPostNotifyGroup(
+  @Path( "/notify/role" )
+  public Response doPostNotifyRole(
+    @FormParam( Constants.PARAM_RECIPIENT ) String recipient,
     @FormParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
     String notificationType,
-    @FormParam( Constants.PARAM_RECIPIENT ) String recipient,
     @FormParam( Constants.PARAM_TITLE ) String title,
     @FormParam( Constants.PARAM_MESSAGE ) String message,
     @FormParam( Constants.PARAM_LINK ) String link ) {
@@ -226,9 +226,9 @@ public class NotificationApi {
   @POST
   @Path( "/notify" )
   public Response doPostNotify(
+    @FormParam( Constants.PARAM_RECIPIENT_TYPE ) String recipientType,
     @FormParam( Constants.PARAM_NOTIFICATION_TYPE ) @DefaultValue( Constants.DEFAULT_NOTIFICATION_TYPE )
     String notificationType,
-    @FormParam( Constants.PARAM_RECIPIENT_TYPE ) String recipientType,
     @FormParam( Constants.PARAM_RECIPIENT ) String recipient,
     @FormParam( Constants.PARAM_TITLE ) String title,
     @FormParam( Constants.PARAM_MESSAGE ) String message,

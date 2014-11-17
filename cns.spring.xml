@@ -24,8 +24,11 @@
 		<constructor-arg ref="cnsEventHandlers" />
 	</bean>
 
-	<!-- <bean id="storage" class="pt.webdetails.cns.service.store.NoStorage" /> -->
-	<bean id="cnsStorage" class="pt.webdetails.cns.service.store.DefaultVolatileStorage" />
+
+	<!-- SparklEndpointEventHandler is taking care of notification storage, 
+	so there's no need for us to worry about that -->
+	<bean id="cnsStorage" class="pt.webdetails.cns.service.store.NoStorage" /> 
+	<!-- <bean id="cnsStorage" class="pt.webdetails.cns.service.store.DefaultVolatileStorage" /> --> 
 
 	<bean id="cnsPoll" class="pt.webdetails.cns.service.store.DefaultQueueing" />
 
@@ -42,11 +45,11 @@
 	</util:map>
 
 	<util:list id="cnsEventHandlers" value-type="pt.webdetails.cns.api.INotificationEventHandler">
-		<bean class="pt.webdetails.cns.notifications.base.DefaultNotificationEventHandler" />
-		<bean class="pt.webdetails.cns.notifications.twitter.TwitterNotificationEventHandler" />
-
+		<!--<bean class="pt.webdetails.cns.notifications.base.DefaultNotificationEventHandler" />-->
+		<!--<bean class="pt.webdetails.cns.notifications.twitter.TwitterNotificationEventHandler" />-->
 		<bean class="pt.webdetails.cns.notifications.sparkl.SparklEndpointEventHandler">
-			<constructor-arg value="http://localhost:8080/pentaho/plugin/cns/api/eventstorage" />
+			<!--<constructor-arg value="http://localhost:8080/pentaho/plugin/cns/api/eventstorage" />-->
+			<constructor-arg value="eventstorage" />
 		</bean>
 	</util:list>
 

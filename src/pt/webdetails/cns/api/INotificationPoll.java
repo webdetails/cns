@@ -26,7 +26,9 @@ public interface INotificationPoll {
 
   boolean subscribeAll( String user );
 
-  boolean push( String user, Notification notification );
+  boolean pushToUser( String user, Notification notification );
+
+  boolean pushToRole( String role, Notification notification );
 
   boolean pushToAll( Notification notification );
 

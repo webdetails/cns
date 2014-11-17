@@ -123,42 +123,21 @@ public class NotificationEngine {
       } else if ( INotificationEvent.RecipientType.USER == notification.getRecipientType() ) {
 
         if ( SessionUtils.userExists( notification.getRecipient() ) ) {
-          return getEnvironment().getPoll().push( notification.getRecipient(), notification );
-
+          return getEnvironment().getPoll().pushToUser( notification.getRecipient(), notification );
         } else {
           logger.error( "notification.getRecipient(): '" + notification.getRecipient() + "' is not a valid user" );
-          return false;
         }
 
       } else if ( INotificationEvent.RecipientType.ROLE == notification.getRecipientType() ) {
 
         if ( SessionUtils.roleExists( notification.getRecipient() ) ) {
-
-          String[] users = SessionUtils.getUsersInRole( notification.getRecipient() );
-
-          if ( users != null && users.length > 0 ) {
-
-            boolean success = false;
-
-            for ( String user : users ) {
-
-              notification.setRecipient( user );
-              success |= getEnvironment().getPoll().push( notification.getRecipient(), notification );
-            }
-
-            return success;
-
-          } else {
-            logger.warn( "no users were found having the role: '" + notification.getRecipient() + "' => discading" );
-            return true;
-          }
-
+          return getEnvironment().getPoll().pushToRole( notification.getRecipient(), notification );
         } else {
           logger.error( "notification.getRecipient(): '" + notification.getRecipient() + "' is not a valid role" );
-          return false;
         }
       }
     }
+
     return false;
   }
 
@@ -167,7 +146,7 @@ public class NotificationEngine {
     while ( getEnvironment().getPoll().isPollEmpty( user ) ) {
 
       try {
-        logger.debug( "no notifications in queue; we'll check again in ~ 3 secs" );
+        logger.trace( "no notifications in queue; we'll check again in ~ 3 secs" );
         Thread.sleep( 3000 ); // sleep for 3 secs
       } catch ( InterruptedException e ) {
         // do nothing

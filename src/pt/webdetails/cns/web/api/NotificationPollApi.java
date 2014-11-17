@@ -10,6 +10,7 @@ import pt.webdetails.cns.utils.SessionUtils;
 import pt.webdetails.cns.utils.Utils;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -21,14 +22,28 @@ public class NotificationPollApi {
 
   @GET
   @Path( "/subscribe/all" )
-  public String subscribeAll() {
+  public String doGetSubscribeAll() {
+    boolean success = getEngine().subscribeToPoll( SessionUtils.getUserInSession(), null );
+    return success ? "OK" : "ERROR";
+  }
+
+  @POST
+  @Path( "/subscribe/all" )
+  public String doPostSubscribeAll() {
     boolean success = getEngine().subscribeToPoll( SessionUtils.getUserInSession(), null );
     return success ? "OK" : "ERROR";
   }
 
   @GET
   @Path( "/subscribe/{notificationType: [^?]+ }" )
-  public String subscribe( @PathParam( Constants.PARAM_NOTIFICATION_TYPE ) String notificationType ) {
+  public String doGetSubscribe( @PathParam( Constants.PARAM_NOTIFICATION_TYPE ) String notificationType ) {
+    boolean success = getEngine().subscribeToPoll( SessionUtils.getUserInSession(), notificationType );
+    return success ? "OK" : "ERROR";
+  }
+
+  @POST
+  @Path( "/subscribe/{notificationType: [^?]+ }" )
+  public String doPostSubscribe( @PathParam( Constants.PARAM_NOTIFICATION_TYPE ) String notificationType ) {
     boolean success = getEngine().subscribeToPoll( SessionUtils.getUserInSession(), notificationType );
     return success ? "OK" : "ERROR";
   }
