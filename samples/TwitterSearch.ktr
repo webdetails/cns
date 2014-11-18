@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>MyTwitterSearch</name>
+    <name>TwitterSearch</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -101,13 +101,13 @@
   <hop> <from>Data Grid - OAUTH Parameter</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>Modified Java Script Value - Generate Header</from><to>REST Client</to><enabled>Y</enabled> </hop>
   <hop> <from>Join Rows &#x28;cartesian product&#x29;</from><to>Modified Java Script Value - Generate Header</to><enabled>Y</enabled> </hop>
-  <hop> <from>REST Client</from><to>Text file output - raw json</to><enabled>Y</enabled> </hop>
+  <hop> <from>REST Client</from><to>Text file output - raw json</to><enabled>N</enabled> </hop>
   <hop> <from>REST Client</from><to>Json - Twits</to><enabled>Y</enabled> </hop>
   <hop> <from>Json - Twits</from><to>Json - Hashtags</to><enabled>Y</enabled> </hop>
-  <hop> <from>Json - Hashtags</from><to>Text file output - hashtags</to><enabled>Y</enabled> </hop>
+  <hop> <from>Json - Hashtags</from><to>Text file output - hashtags</to><enabled>N</enabled> </hop>
   <hop> <from>Json - Twits</from><to>Filter rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Json - Twits</from><to>Text file output - Twits</to><enabled>Y</enabled> </hop>
+  <hop> <from>Json - Twits</from><to>Text file output - Twits</to><enabled>N</enabled> </hop>
   <hop> <from>Select values</from><to>Delay row</to><enabled>Y</enabled> </hop>
   <hop> <from>Delay row</from><to>HTTP Client</to><enabled>Y</enabled> </hop>
   </order>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>eventConsumer</name>
+    <name>getNotifications</name>
     <description>Clean Transformation</description>
     <extended_description/>
     <trans_version/>
@@ -236,7 +236,7 @@
            <schema_name/>
            </partitioning>
     <connection>cns_db</connection>
-    <sql>SELECT&#xa;  ID&#xa;, EVENTTYPE&#xa;, AUTHOR&#xa;, RCPT&#xa;, TITLE&#xa;, MESSAGE&#xa;, STYLE&#xa;, LINK&#xa;FROM NOTIFICATIONS&#xa;</sql>
+    <sql>SELECT&#xa;  ID&#xa;, EVENTTYPE&#xa;, AUTHOR&#xa;, RCPT&#xa;, TITLE&#xa;, MESSAGE&#xa;, STYLE&#xa;, LINK&#xa;, UNREAD&#xa;, FORMATDATETIME&#x28;CREATED_DATE , &#x27;yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x27;&#x29; AS CREATED_DATE&#xa;FROM NOTIFICATIONS&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

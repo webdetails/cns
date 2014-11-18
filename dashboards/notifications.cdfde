@@ -549,8 +549,8 @@
    },
    {
     "id": "8ac3ba83-2753-1f74-21eb-0fd0b745988d",
-    "type": "Componentscns_eventConsumer_CPKENDPOINT",
-    "typeDesc": "eventConsumer Endpoint",
+    "type": "Componentscns_getNotifications_CPKENDPOINT",
+    "typeDesc": "getNotifications Endpoint",
     "parent": "CNP_CPKENDPOINTS",
     "properties": [
      {
@@ -571,7 +571,7 @@
     ],
     "meta": "CPK",
     "meta_pluginId": "cns",
-    "meta_endpoint": "eventConsumer"
+    "meta_endpoint": "getNotifications"
    }
   ]
  },

@@ -48,8 +48,7 @@
 		<!--<bean class="pt.webdetails.cns.notifications.base.DefaultNotificationEventHandler" />-->
 		<!--<bean class="pt.webdetails.cns.notifications.twitter.TwitterNotificationEventHandler" />-->
 		<bean class="pt.webdetails.cns.notifications.sparkl.SparklEndpointEventHandler">
-			<!--<constructor-arg value="http://localhost:8080/pentaho/plugin/cns/api/eventstorage" />-->
-			<constructor-arg value="eventstorage" />
+			<constructor-arg value="setnotifications" />
 		</bean>
 	</util:list>
 

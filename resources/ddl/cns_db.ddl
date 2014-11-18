@@ -1,13 +1,14 @@
-
-
-create table if not exists notifications (
-	id INT PRIMARY KEY AUTO_INCREMENT, 
-	eventtype VARCHAR(64) NOT NULL,
-	author VARCHAR(1024) NOT NULL,
-	rcpt VARCHAR,
-	title VARCHAR(2048),
-	message VARCHAR,
-	style VARCHAR(64) NOT NULL,
-	link VARCHAR
-	);
-
+CREATE TABLE IF NOT EXISTS NOTIFICATIONS
+(
+   ID integer PRIMARY KEY AUTO_INCREMENT, 
+   EVENTTYPE varchar(64) NOT NULL,
+   AUTHOR varchar(1024) NOT NULL,
+   RCPT varchar,
+   TITLE varchar(2048),
+   MESSAGE varchar,
+   STYLE varchar(64) NOT NULL,
+   LINK varchar,
+   UNREAD boolean NOT NULL DEFAULT TRUE,
+   CREATED_DATE timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+;
