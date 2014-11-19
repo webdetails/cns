@@ -3,7 +3,7 @@ $(window).load(function(){
   //callback to open each tab after the PerspectivesLoadedEvent gets fired
   var callback = function(args) {
     setTimeout(function(){
-      startCnsPoll();
+      startNotificationsPoll();
     }, 3000);
   };
 
@@ -35,16 +35,16 @@ $(window).load(function(){
     } else {
       if(typeof mantle_addHandler != "undefined"){ 
         window.top.mantle_addHandler("PerspectivesLoadedEvent", callback);
-        window.clearInterval(timeoutMangeOpenTab);
+        window.clearInterval(timeoutManageOpenTab);
       } else {
         //set runs interval again
       }
     }
   };
 
-  var timeoutMangeOpenTab = setInterval(functionTimed, 100);
+  var timeoutManageOpenTab = setInterval(functionTimed, 100);
 
-  var startCnsPoll = function(){
-    new CnsPoll().start("plugin/cns/api/poll/subscribe/all","plugin/cns/api/poll/get");
+  var startNotificationsPoll = function(){
+    new NotificationsPoll().start("plugin/cns/api/poll/subscribe/all","plugin/cns/api/poll/get");
   };
 });

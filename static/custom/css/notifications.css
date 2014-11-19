@@ -1,0 +1,125 @@
+/*
+ * IMPORTANT 
+ *
+ * the classes *must* abide by the following rules:
+ * 
+ * .notifyjs-<STYLE>-base
+ *
+ * for the overall styling of the notification container, and
+ *
+ * .notifyjs-<STYLE>-image
+ *
+ * for any image you would like to see appearing alongside the notification
+*/
+
+/* default style */
+
+.notifyjs-default-base { 
+    display: inline-block;
+    font-size: 14px;
+    margin: 3px;
+    white-space: nowrap;
+    background-color: white;
+    padding: 10px;
+    color: #1973BC;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    float: right;
+}
+
+.notifyjs-default-image { 
+    vertical-align:middle;
+    padding-right: 10px;
+    background: url("../img/pentaho_24x24.png");
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+}
+
+/* end default style */
+
+
+/* twitter style */
+
+.notifyjs-twitter-base { 
+    display: inline-block;
+    font-size: 14px;
+    margin: 3px;
+    white-space: nowrap;
+    background-color: #E5F2F7;
+    padding: 10px;
+    color: black;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    float: right;
+}
+
+.notifyjs-twitter-image { 
+    vertical-align:middle;
+    padding-right: 10px;
+    background: url("../img/twitter_24x24.png");
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+}
+
+/* end twitter style */
+
+
+/* pdi style */
+
+.notifyjs-pdi-base {
+  display: inline-block;
+  font-size: 14px;
+  margin: 3px;
+  white-space: nowrap;
+  background-color: white;
+  padding: 10px;
+  color: black;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  float: right;
+}
+
+.notifyjs-pdi-image { 
+    vertical-align:middle;
+    padding-right: 10px;
+    background: url("../img/pdi_24x24.png");
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+}
+
+/* end pdi style */
+
+
+/* mail style */
+
+.notifyjs-mail-base {
+  display: inline-block;
+  font-size: 14px;
+  margin: 3px;
+  white-space: nowrap;
+  background-color: white;
+  padding: 10px;
+  color: black;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  float: right;
+}
+
+.notifyjs-mail-image { 
+    vertical-align:middle;
+    padding-right: 10px;
+    background: url("../img/mail_24x24.png");
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+}
+
+/* end mail style */
+
