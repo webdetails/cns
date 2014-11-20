@@ -10,3 +10,6 @@ TODO list ( by priority)
 4 - eventStorage.ktr must include a step that does a UrlDecoder.decode for each of the received params (either that or within cpk itself)
 5 - in the sparkl dashboard, implement the 'mark as read/unread' , the 'delete notification' and the 'count total/unread'
 6 - sparkl dashboard: provide some filtering capabilities ( unread only , to: USER/ROLE/ALL , from: sender X/Y/Z, from-to Date, ... )
+7 - surround rest call cns/api/do/notify/all with administrator priviledges: only admin may do an operation that could potentially be misused as spam
+8 - provide the means for a user to subscribe / unsubscribe ( perhaps an option within the notifications dashboard itself )
+9 - pass the notifications dashboard through UX
