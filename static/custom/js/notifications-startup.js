@@ -30,7 +30,7 @@ $(window).load(function(){
   //add the handler as soon as it becomes available
   var functionTimed = function(){
     if(typeof mantle_openTab != "undefined"){
-      window.clearInterval(timeoutMangeOpenTab);
+      window.clearInterval(timeoutManageOpenTab);
       callback();
     } else {
       if(typeof mantle_addHandler != "undefined"){ 
