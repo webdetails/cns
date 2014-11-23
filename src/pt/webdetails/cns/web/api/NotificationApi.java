@@ -263,6 +263,10 @@ public class NotificationApi {
     } else if ( StringUtils.isEmpty( message ) ) {
       logger.error( "Empty message not allowed" );
       return Response.status( Status.INTERNAL_SERVER_ERROR ).build();
+
+    } else if ( INotificationEvent.RecipientType.ALL == recipientType && !SessionUtils.isAdministrator() ) {
+      logger.error( "Only users with administrator privileges can send notifications to /all" );
+      return Response.status( Status.UNAUTHORIZED ).build();
     }
 
     INotificationEvent appropriateEvent = NotificationEngine.getInstance().getNotificationEvent( notificationType );

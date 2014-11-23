@@ -19,10 +19,15 @@ package pt.webdetails.cns.utils;
 import org.pentaho.platform.api.engine.IUserRoleListService;
 import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
+import org.pentaho.platform.engine.security.SecurityHelper;
 
 import java.util.List;
 
 public class SessionUtils {
+
+  public static boolean isAdministrator() {
+    return SecurityHelper.getInstance().isPentahoAdministrator( PentahoSessionHolder.getSession() );
+  }
 
   public static String getUserInSession() {
     return PentahoSessionHolder.getSession().getName();
@@ -86,6 +91,14 @@ public class SessionUtils {
       if ( roles != null ) {
         return roles.toArray( new String[] { } );
       }
+    }
+    return null;
+  }
+
+  public static String[] getAllUsers() {
+    List<String> users =  getUserRoleListService().getAllUsers();
+    if( users != null ){
+      return users.toArray( new String[]{} );
     }
     return null;
   }

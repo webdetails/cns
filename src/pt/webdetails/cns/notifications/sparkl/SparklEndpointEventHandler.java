@@ -25,6 +25,7 @@ import pt.webdetails.cns.api.INotificationEvent;
 import pt.webdetails.cns.notifications.base.AbstractNotificationPoolingEventHandler;
 import pt.webdetails.cns.notifications.sparkl.kettle.baserver.web.utils.HttpConnectionHelper;
 import pt.webdetails.cns.notifications.sparkl.kettle.baserver.web.utils.Response;
+import pt.webdetails.cns.utils.SessionUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -87,6 +88,8 @@ public class SparklEndpointEventHandler extends AbstractNotificationPoolingEvent
 
   protected boolean sendToKtrEndpoint( INotificationEvent event ) {
 
+    final String COMMA = ",";
+
     if ( StringUtils.isEmpty( getKtrEndpoint() ) ) {
       logger.error( "ktrEndpoint is null" );
       return false;
@@ -97,7 +100,27 @@ public class SparklEndpointEventHandler extends AbstractNotificationPoolingEvent
 
     try {
 
-      Response r = HttpConnectionHelper.invokeEndpoint( "cns", ktrEndpoint, "GET", toKtrParamMap( event ) );
+      String commaSeparatedRecipientList = null;
+      String eventSubType = null;
+
+      switch( event.getRecipientType() ) {
+
+        case ALL:
+          commaSeparatedRecipientList = StringUtils.join( SessionUtils.getAllUsers(), COMMA );
+          break;
+
+        case ROLE:
+          eventSubType = event.getRecipient();
+          commaSeparatedRecipientList = StringUtils.join( SessionUtils.getUsersInRole( event.getRecipient() ), COMMA );
+          break;
+
+        default:
+          /* USER */
+          commaSeparatedRecipientList = event.getRecipient();
+      }
+
+      Response r = HttpConnectionHelper
+        .invokeEndpoint( "cns", ktrEndpoint, "GET", toKtrParamMap( event, commaSeparatedRecipientList, eventSubType ) );
 
       return r != null && ( HttpStatus.SC_OK == r.getStatusCode() || HttpStatus.SC_NO_CONTENT == r.getStatusCode() );
 
@@ -107,22 +130,30 @@ public class SparklEndpointEventHandler extends AbstractNotificationPoolingEvent
     }
   }
 
-  private Map<String, String> toKtrParamMap( INotificationEvent e ) {
+
+  private Map<String, String> toKtrParamMap( INotificationEvent e, String commaSeparatedRecipientList,
+                                             String eventSubType ) {
 
     Map<String, String> map = new HashMap<String, String>();
 
-    if ( e != null ) {
+    if ( e != null && !StringUtils.isEmpty( commaSeparatedRecipientList ) ) {
 
       try {
 
+        map.put( SPARKL_PARAM_PREFIX + "rcpts", URLEncoder.encode( commaSeparatedRecipientList, ENCODING ) );
+
         if ( e.getRecipientType() != null ) {
-          map.put( SPARKL_PARAM_PREFIX + "eventtype", URLEncoder.encode( e.getRecipientType().toString(), ENCODING ) );
+
+          String type = e.getRecipientType().toString();
+
+          if( !StringUtils.isEmpty( eventSubType ) ){
+            type += " (" + eventSubType + ")";
+          }
+
+          map.put( SPARKL_PARAM_PREFIX + "eventtype", URLEncoder.encode( type, ENCODING ) );
         }
         if ( !StringUtils.isEmpty( e.getSender() ) ) {
           map.put( SPARKL_PARAM_PREFIX + "author", URLEncoder.encode( e.getSender(), ENCODING ) );
-        }
-        if ( !StringUtils.isEmpty( e.getRecipient() ) ) {
-          map.put( SPARKL_PARAM_PREFIX + "rcpt", URLEncoder.encode( e.getRecipient(), ENCODING ) );
         }
         if ( !StringUtils.isEmpty( e.getTitle() ) ) {
           map.put( SPARKL_PARAM_PREFIX + "title", URLEncoder.encode( e.getTitle(), ENCODING ) );
