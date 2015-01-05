@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>setNotifications</name>
+    <name>updateNotificationsUnreadFlag</name>
     <description>Clean Transformation</description>
     <extended_description/>
     <trans_version/>
@@ -60,11 +60,6 @@
             <description>The roles of the username executing this transformation. This value is automatically set at runtime if &#x27;&#x23;&#x27; is removed from variable name.</description>
         </parameter>
         <parameter>
-            <name>&#x23;cpk.session.username</name>
-            <default_value/>
-            <description>The username that is executing this transformation. This value is automatically set at runtime if &#x27;&#x23;&#x27; is removed from variable name.</description>
-        </parameter>
-        <parameter>
             <name>&#x23;cpk.webapp.dir</name>
             <default_value>&#x24;&#x7b;cpk.solution.system.dir&#x7d;&#x2f;..&#x2f;..&#x2f;tomcat&#x2f;webapps&#x2f;pentaho</default_value>
             <description>The webapp folder. This value is automatically set at runtime if &#x27;&#x23;&#x27; is removed from variable name.</description>
@@ -73,11 +68,6 @@
             <name>_cns_db</name>
             <default_value>.cns_dbx</default_value>
             <description>The default database name</description>
-        </parameter>
-        <parameter>
-            <name>author</name>
-            <default_value/>
-            <description>The user that has sent the notification &#x28; a.k.a. notification sender &#x29;</description>
         </parameter>
         <parameter>
             <name>cpk.plugin.dir</name>
@@ -90,44 +80,24 @@
             <description>The id of the plugin. This value is automatically set at runtime if  &#x27;&#x23;&#x27; is removed from variable name.&#xa;</description>
         </parameter>
         <parameter>
+            <name>cpk.session.username</name>
+            <default_value/>
+            <description>The username that is executing this transformation. This value is automatically set at runtime if &#x27;&#x23;&#x27; is removed from variable name.</description>
+        </parameter>
+        <parameter>
             <name>cpk.solution.system.dir</name>
             <default_value>&#x24;&#x7b;cpk.plugin.dir&#x7d;&#x2f;..</default_value>
             <description>The pentaho-solutions folder. This value is automatically set at runtime if &#x27;&#x23;&#x27; is removed from variable name.</description>
         </parameter>
         <parameter>
-            <name>eventid</name>
+            <name>notifications</name>
             <default_value/>
-            <description/>
+            <description>Comma-separated list of notification ids</description>
         </parameter>
         <parameter>
-            <name>eventtype</name>
+            <name>unread</name>
             <default_value/>
-            <description>The type of notification&#x3b; a notification can be sent to a USER, to a ROLE &#x28; a.k.a. a list of all users that have that role&#x29;, or to ALL &#x28; all users in the platform &#x29;</description>
-        </parameter>
-        <parameter>
-            <name>link</name>
-            <default_value/>
-            <description>A link to include alongside the notification</description>
-        </parameter>
-        <parameter>
-            <name>message</name>
-            <default_value/>
-            <description>The notification message</description>
-        </parameter>
-        <parameter>
-            <name>rcpts</name>
-            <default_value/>
-            <description>Comma-separated list of notification recipients</description>
-        </parameter>
-        <parameter>
-            <name>style</name>
-            <default_value/>
-            <description>The style &#x28; or &#x27;type&#x27;&#x29; of the notification&#x3b; common examples are &#x27;twitter&#x27;, &#x27;default&#x27;, &#x27;mail&#x27;, ...</description>
-        </parameter>
-        <parameter>
-            <name>title</name>
-            <default_value/>
-            <description>The title of the notification</description>
+            <description>Unread flag</description>
         </parameter>
     </parameters>
     <log>
@@ -243,17 +213,20 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Recipients is a comma-separated list &#x3f;</from><to>Split Recipients list into multiple single recipient rows</to><enabled>Y</enabled> </hop>
-  <hop> <from>Split Recipients list into multiple single recipient rows</from><to>Discard recipients list, use single recipient value at each row</to><enabled>Y</enabled> </hop>
-  <hop> <from>Recipients is a comma-separated list &#x3f;</from><to>Handle Recipients list as a single recipient</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Notification values</from><to>Write to log</to><enabled>Y</enabled> </hop>
-  <hop> <from>Handle Recipients list as a single recipient</from><to>Write to log 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Write to log 2</from><to>Store notification for a recipient</to><enabled>Y</enabled> </hop>
+  <hop> <from>Split notification id list</from><to>Discard recipients list, use single recipient value at each row</to><enabled>Y</enabled> </hop>
+  <hop> <from>Notification ids is a comma-separated list &#x3f;</from><to>Handle Notification id list as a single notification id</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Notification id list</from><to>Write to log</to><enabled>Y</enabled> </hop>
+  <hop> <from>Handle Notification id list as a single notification id</from><to>Write to log 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Discard recipients list, use single recipient value at each row</from><to>Write to log 3</to><enabled>Y</enabled> </hop>
-  <hop> <from>Write to log 3</from><to>Store notification for a recipient</to><enabled>Y</enabled> </hop>
-  <hop> <from>Write to log</from><to>Recipients is empty &#x3f;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Recipients is empty &#x3f;</from><to>Recipients is a comma-separated list &#x3f;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Recipients is empty &#x3f;</from><to>Abort</to><enabled>Y</enabled> </hop>
+  <hop> <from>Write to log</from><to>Notifications id list is empty &#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Notifications id list is empty &#x3f;</from><to>Notification ids is a comma-separated list &#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Notifications id list is empty &#x3f;</from><to>Abort</to><enabled>Y</enabled> </hop>
+  <hop> <from>Write to log 3</from><to>Update notification unread flag</to><enabled>Y</enabled> </hop>
+  <hop> <from>Write to log 2</from><to>Update notification unread flag</to><enabled>Y</enabled> </hop>
+  <hop> <from>Notification ids is a comma-separated list &#x3f;</from><to>is comma url encoded &#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Split notification id list 2</from><to>Discard recipients list, use single recipient value at each row</to><enabled>Y</enabled> </hop>
+  <hop> <from>is comma url encoded &#x3f;</from><to>Split notification id list 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>is comma url encoded &#x3f;</from><to>Split notification id list</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Abort</name>
@@ -278,6 +251,41 @@
     </step>
 
   <step>
+    <name>Update notification unread flag</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>cns_db</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>Y</single_statement>
+    <replace_variables>Y</replace_variables>
+    <quoteString>Y</quoteString>
+    <sql>UPDATE NOTIFICATIONS SET UNREAD &#x3d; &#x3f; WHERE ID &#x3d; &#x3f; AND RCPT &#x3d; &#x3f;</sql>
+    <set_params>Y</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+       <argument><name>unreadFlag</name></argument>
+       <argument><name>notification</name></argument>
+       <argument><name>username</name></argument>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>453</xloc>
+      <yloc>1085</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Discard recipients list, use single recipient value at each row</name>
     <type>SelectValues</type>
     <description/>
@@ -288,54 +296,44 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>      <field>        <name>author</name>
+    <fields>      <field>        <name>notification</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>eventtype</name>
+      </field>      <field>        <name>username</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>rcpt</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>title</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>message</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>link</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>style</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>eventid</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>rcpts</name>
+      </field>      <field>        <name>unreadFlag</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
-      <remove>        <name>rcpts</name>
-      </remove>    </fields>     <cluster_schema/>
+      <meta>        <name>notification</name>
+        <rename>notification</rename>
+        <type>Integer</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>&#x23;</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>285</xloc>
-      <yloc>685</yloc>
+      <xloc>276</xloc>
+      <yloc>830</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Get Notification values</name>
+    <name>Get Notification id list</name>
     <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -347,8 +345,8 @@
            </partitioning>
     <fields>
       <field>
-        <name>author</name>
-        <variable>&#x24;&#x7b;author&#x7d;</variable>
+        <name>notifications</name>
+        <variable>&#x24;&#x7b;notifications&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -359,8 +357,8 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>eventtype</name>
-        <variable>&#x24;&#x7b;eventtype&#x7d;</variable>
+        <name>username</name>
+        <variable>&#x24;&#x7b;cpk.session.username&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -371,69 +369,9 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>rcpts</name>
-        <variable>&#x24;&#x7b;rcpts&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>title</name>
-        <variable>&#x24;&#x7b;title&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>message</name>
-        <variable>&#x24;&#x7b;message&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>link</name>
-        <variable>&#x24;&#x7b;link&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>style</name>
-        <variable>&#x24;&#x7b;style&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>eventid</name>
-        <variable>&#x24;&#x7b;eventid&#x7d;</variable>
-        <type>Integer</type>
+        <name>unreadFlag</name>
+        <variable>&#x24;&#x7b;unread&#x7d;</variable>
+        <type>Boolean</type>
         <format/>
         <currency/>
         <decimal/>
@@ -452,7 +390,7 @@
     </step>
 
   <step>
-    <name>Handle Recipients list as a single recipient</name>
+    <name>Handle Notification id list as a single notification id</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -462,118 +400,25 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>        <select_unspecified>N</select_unspecified>
-      <meta>        <name>author</name>
-        <rename>author</rename>
-        <type>None</type>
-        <length>14</length>
+    <fields>      <field>        <name>username</name>
+        <rename/>
+        <length>-2</length>
         <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>eventtype</name>
-        <rename>eventtype</rename>
-        <type>None</type>
-        <length>14</length>
+      </field>      <field>        <name>notifications</name>
+        <rename/>
+        <length>-2</length>
         <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>rcpts</name>
-        <rename>rcpt</rename>
-        <type>None</type>
-        <length>14</length>
+      </field>      <field>        <name>unreadFlag</name>
+        <rename/>
+        <length>-2</length>
         <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>title</name>
-        <rename>title</rename>
-        <type>None</type>
-        <length>14</length>
+      </field>        <select_unspecified>N</select_unspecified>
+      <meta>        <name>notifications</name>
+        <rename>notification</rename>
+        <type>Integer</type>
+        <length>-2</length>
         <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>message</name>
-        <rename>message</rename>
-        <type>None</type>
-        <length>14</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>link</name>
-        <rename>link</rename>
-        <type>None</type>
-        <length>14</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>style</name>
-        <rename>style</rename>
-        <type>None</type>
-        <length>14</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>eventid</name>
-        <rename>eventid</rename>
-        <type>None</type>
-        <length>14</length>
-        <precision>0</precision>
-        <conversion_mask/>
+        <conversion_mask>&#x23;</conversion_mask>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone/>
@@ -585,14 +430,14 @@
         <storage_type/>
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>637</xloc>
-      <yloc>589</yloc>
+      <xloc>634</xloc>
+      <yloc>641</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Recipients is a comma-separated list &#x3f;</name>
+    <name>Notification ids is a comma-separated list &#x3f;</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -602,22 +447,22 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Split Recipients list into multiple single recipient rows</send_true_to>
-<send_false_to>Handle Recipients list as a single recipient</send_false_to>
+<send_true_to>is comma url encoded &#x3f;</send_true_to>
+<send_false_to>Handle Notification id list as a single notification id</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
  <conditions>
   <condition>
    <negated>N</negated>
-   <leftvalue>rcpts</leftvalue>
+   <leftvalue>notifications</leftvalue>
    <function>CONTAINS</function>
    <rightvalue/>
    <value><name>constant</name><type>String</type><text>&#x25;2C</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   <condition>
    <negated>N</negated>
    <operator>OR</operator>
-   <leftvalue>rcpts</leftvalue>
+   <leftvalue>notifications</leftvalue>
    <function>CONTAINS</function>
    <rightvalue/>
    <value><name>constant</name><type>String</type><text>,</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
@@ -626,14 +471,14 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>445</xloc>
-      <yloc>461</yloc>
+      <xloc>452</xloc>
+      <yloc>465</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Recipients is empty &#x3f;</name>
+    <name>Notifications id list is empty &#x3f;</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -644,21 +489,21 @@
            <schema_name/>
            </partitioning>
 <send_true_to>Abort</send_true_to>
-<send_false_to>Recipients is a comma-separated list &#x3f;</send_false_to>
+<send_false_to>Notification ids is a comma-separated list &#x3f;</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
  <conditions>
   <condition>
    <negated>N</negated>
-   <leftvalue>rcpts</leftvalue>
+   <leftvalue>notifications</leftvalue>
    <function>IS NULL</function>
    <rightvalue/>
    <value><name>constant</name><type>String</type><text>&#x25;2C</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   <condition>
    <negated>N</negated>
    <operator>OR</operator>
-   <leftvalue>rcpts</leftvalue>
+   <leftvalue>notifications</leftvalue>
    <function>&#x3d;</function>
    <rightvalue/>
    <value><name>constant</name><type>String</type><text/><length>-1</length><precision>-1</precision><isnull>Y</isnull><mask/></value>   </condition>
@@ -674,7 +519,7 @@
     </step>
 
   <step>
-    <name>Split Recipients list into multiple single recipient rows</name>
+    <name>Split notification id list</name>
     <type>SplitFieldToRows3</type>
     <description/>
     <distribute>Y</distribute>
@@ -684,24 +529,24 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-   <splitfield>rcpts</splitfield>
+   <splitfield>notifications</splitfield>
    <delimiter>&#x25;2C</delimiter>
-   <newfield>rcpt</newfield>
+   <newfield>notification</newfield>
    <rownum>N</rownum>
    <rownum_field/>
    <resetrownumber>Y</resetrownumber>
    <delimiter_is_regex>N</delimiter_is_regex>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>285</xloc>
-      <yloc>589</yloc>
+      <xloc>177</xloc>
+      <yloc>728</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Store notification for a recipient</name>
-    <type>TableOutput</type>
+    <name>Split notification id list 2</name>
+    <type>SplitFieldToRows3</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -710,57 +555,17 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>cns_db</connection>
-    <schema>PUBLIC</schema>
-    <table>NOTIFICATIONS</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-        <field>
-          <column_name>author</column_name>
-          <stream_name>author</stream_name>
-        </field>
-        <field>
-          <column_name>eventtype</column_name>
-          <stream_name>eventtype</stream_name>
-        </field>
-        <field>
-          <column_name>title</column_name>
-          <stream_name>title</stream_name>
-        </field>
-        <field>
-          <column_name>message</column_name>
-          <stream_name>message</stream_name>
-        </field>
-        <field>
-          <column_name>link</column_name>
-          <stream_name>link</stream_name>
-        </field>
-        <field>
-          <column_name>style</column_name>
-          <stream_name>style</stream_name>
-        </field>
-        <field>
-          <column_name>rcpt</column_name>
-          <stream_name>rcpt</stream_name>
-        </field>
-    </fields>
+   <splitfield>notifications</splitfield>
+   <delimiter>,</delimiter>
+   <newfield>notification</newfield>
+   <rownum>N</rownum>
+   <rownum_field/>
+   <resetrownumber>Y</resetrownumber>
+   <delimiter_is_regex>N</delimiter_is_regex>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>452</xloc>
-      <yloc>922</yloc>
+      <xloc>378</xloc>
+      <yloc>730</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -783,28 +588,13 @@
       <logmessage>ENTRY VALUES</logmessage>
     <fields>
       <field>
-        <name>author</name>
+        <name>notifications</name>
         </field>
       <field>
-        <name>eventtype</name>
+        <name>unreadFlag</name>
         </field>
       <field>
-        <name>rcpts</name>
-        </field>
-      <field>
-        <name>title</name>
-        </field>
-      <field>
-        <name>message</name>
-        </field>
-      <field>
-        <name>link</name>
-        </field>
-      <field>
-        <name>style</name>
-        </field>
-      <field>
-        <name>eventid</name>
+        <name>username</name>
         </field>
       </fields>
      <cluster_schema/>
@@ -833,34 +623,19 @@
       <logmessage>SINGLE RECIPIENT</logmessage>
     <fields>
       <field>
-        <name>author</name>
+        <name>notification</name>
         </field>
       <field>
-        <name>eventtype</name>
+        <name>username</name>
         </field>
       <field>
-        <name>rcpt</name>
-        </field>
-      <field>
-        <name>title</name>
-        </field>
-      <field>
-        <name>message</name>
-        </field>
-      <field>
-        <name>link</name>
-        </field>
-      <field>
-        <name>style</name>
-        </field>
-      <field>
-        <name>eventid</name>
+        <name>unreadFlag</name>
         </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>637</xloc>
-      <yloc>813</yloc>
+      <xloc>634</xloc>
+      <yloc>950</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -883,34 +658,53 @@
       <logmessage>MULTIPLE RECIPIENTS&#x3a; CURRENT ROW VALUES&#x3a;</logmessage>
     <fields>
       <field>
-        <name>author</name>
+        <name>notification</name>
         </field>
       <field>
-        <name>eventtype</name>
+        <name>username</name>
         </field>
       <field>
-        <name>rcpt</name>
-        </field>
-      <field>
-        <name>title</name>
-        </field>
-      <field>
-        <name>message</name>
-        </field>
-      <field>
-        <name>link</name>
-        </field>
-      <field>
-        <name>style</name>
-        </field>
-      <field>
-        <name>eventid</name>
+        <name>unreadFlag</name>
         </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>285</xloc>
-      <yloc>813</yloc>
+      <xloc>276</xloc>
+      <yloc>958</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>is comma url encoded &#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Split notification id list</send_true_to>
+<send_false_to>Split notification id list 2</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>notifications</leftvalue>
+   <function>CONTAINS</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>&#x25;2C</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>279</xloc>
+      <yloc>633</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
