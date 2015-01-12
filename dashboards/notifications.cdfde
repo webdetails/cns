@@ -278,11 +278,6 @@
       "type": "JavaScript"
      },
      {
-      "name": "colFormats",
-      "value": "[]",
-      "type": "Array"
-     },
-     {
       "name": "colWidths",
       "value": "[]",
       "type": "Array"
@@ -308,8 +303,13 @@
       "type": "Array"
      },
      {
-      "name": "colTypes",
+      "name": "colFormats",
       "value": "[]",
+      "type": "Array"
+     },
+     {
+      "name": "colTypes",
+      "value": "[\"formattedText\",\"string\",\"string\",\"string\",\"string\",\"string\",\"string\",\"string\",\"string\",\"string\"]",
       "type": "colTypesCustom"
      },
      {
@@ -363,14 +363,14 @@
       "type": "Datasource"
      },
      {
-      "name": "sDom",
-      "value": "",
-      "type": "JavaScript"
-     },
-     {
       "name": "sortBy",
       "value": "[]",
       "type": "SortByArray"
+     },
+     {
+      "name": "sDom",
+      "value": "",
+      "type": "JavaScript"
      },
      {
       "name": "refreshPeriod",
@@ -409,7 +409,7 @@
      },
      {
       "name": "preExecution",
-      "value": "",
+      "value": "function notificationActions() {\n  \n  var opts = {\n    \n    textFormat: function( id , st ) {\n      var $deleteButton = $( '<button name=\\'delete-notification\\'  notification=' + id + '>delete</button>' );\n      $deleteButton.on('click', function( e ){\n        \n        if( e && e.srcElement.attributes[\"notification\"] ){\n          \n          var id = e.srcElement.attributes[\"notification\"].value;\n          \n          $.ajax({\n            type: 'GET',\n            url: '/pentaho/plugin/cns/api/deletenotifications?paramnotifications=' + id,\n            success: function ( xhr ) {\n              //alert(\"deleted successfully\");\n              render_notifications.update();\n            },\n            error: function ( xhr, error ) {\n              alert(\"error deleting -> \" + error );\n            }\n          });\n        }\n      });\n      \n      var isUnread = st.tableData[rowIdx][8]; // 8th column, unread flag\n      var markAsLabel = 'mark as ' + ( isUnread ? 'read' : 'unread' );\n      \n      var $updateUnreadFlagButton = $( '<button name=\\'update-unread-flag-notification\\'  notification=' + id + ' unread=' + isUnread + '>' + markAsLabel + '</button>' );\n      $updateUnreadFlagButton.on('click', function( e ){\n        \n        if( e && e.srcElement.attributes[\"notification\"] ){\n          \n          var id = e.srcElement.attributes[\"notification\"].value;\n          var unread = ( e.srcElement.attributes[\"unread\"].value == \"true\" ) ? true : false;\n          \n          $.ajax({\n            type: 'GET',\n            url: '/pentaho/plugin/cns/api/updatenotificationsunreadflag?paramnotifications=' + id + '&paramunread=' + !unread,\n            success: function ( xhr ) {\n              render_notifications.update();\n            },\n            error: function ( xhr, error ) {\n              alert(\"error deleting -> \" + error );\n            }\n          });\n        }\n      });\n      \n      return [$deleteButton,$updateUnreadFlagButton];\n    }\n  }\n  \n  this.setAddInOptions( \"colType\", \"formattedText\", opts );\n} ",
       "type": "JavaScript"
      },
      {
@@ -575,5 +575,5 @@
    }
   ]
  },
- "filename": "/system/cns/dashboards/notifications.cdfde"
+ "filename": "/home/admin/notifications.cdfde"
 }
