@@ -322,7 +322,7 @@
            <schema_name/>
            </partitioning>
     <connection>cns_db</connection>
-    <sql>SELECT&#xa;  ID&#xa;, EVENTTYPE&#xa;, AUTHOR&#xa;, RCPT&#xa;, TITLE&#xa;, MESSAGE&#xa;, STYLE&#xa;, LINK&#xa;, UNREAD&#xa;, FORMATDATETIME&#x28;CREATED_DATE , &#x27;yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x27;&#x29; AS CREATED_DATE&#xa;FROM NOTIFICATIONS&#xa;WHERE &#xa;RCPT IS NOT NULL AND RCPT &#x3d; &#x27;&#x24;&#x7b;cpk.session.username&#x7d;&#x27;&#xa;AND&#xa;UNREAD IN &#x28; &#x27;true&#x27; , &#x27;&#x24;&#x7b;unreadOnly&#x7d;&#x27; &#x29;&#xa;AND&#xa;EVENTTYPE LIKE &#x27;&#x24;&#x7b;rcptType&#x7d;&#x27;&#xa;AND&#xa;UPPER&#x28; AUTHOR &#x29; LIKE UPPER &#x28; &#x27;&#x25;&#x24;&#x7b;fromSender&#x7d;&#x25;&#x27; &#x29;</sql>
+    <sql>SELECT&#xa;  FORMATDATETIME&#x28;CREATED_DATE , &#x27;yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x27;&#x29; AS CREATION_DATE&#xa;, AUTHOR&#xa;, TITLE&#xa;, MESSAGE&#xa;, ID AS ACTIONS&#xa;, UNREAD&#xa;FROM NOTIFICATIONS&#xa;WHERE &#xa;RCPT IS NOT NULL AND RCPT &#x3d; &#x27;&#x24;&#x7b;cpk.session.username&#x7d;&#x27;&#xa;AND&#xa;UNREAD IN &#x28; &#x27;true&#x27; , &#x27;&#x24;&#x7b;unreadOnly&#x7d;&#x27; &#x29;&#xa;AND&#xa;EVENTTYPE LIKE &#x27;&#x24;&#x7b;rcptType&#x7d;&#x27;&#xa;AND&#xa;UPPER&#x28; AUTHOR &#x29; LIKE UPPER &#x28; &#x27;&#x25;&#x24;&#x7b;fromSender&#x7d;&#x25;&#x27; &#x29;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

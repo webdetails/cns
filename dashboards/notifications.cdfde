@@ -278,11 +278,6 @@
       "type": "JavaScript"
      },
      {
-      "name": "colWidths",
-      "value": "[]",
-      "type": "Array"
-     },
-     {
       "name": "colHeaders",
       "value": "[]",
       "type": "Array"
@@ -308,8 +303,13 @@
       "type": "Array"
      },
      {
+      "name": "colWidths",
+      "value": "[]",
+      "type": "Array"
+     },
+     {
       "name": "colTypes",
-      "value": "[\"formattedText\",\"string\",\"string\",\"string\",\"string\",\"string\",\"string\",\"string\",\"string\",\"string\"]",
+      "value": "[\"string\",\"string\",\"string\",\"string\",\"formattedText\",\"string\"]",
       "type": "colTypesCustom"
      },
      {
@@ -363,14 +363,14 @@
       "type": "Datasource"
      },
      {
-      "name": "sortBy",
-      "value": "[]",
-      "type": "SortByArray"
-     },
-     {
       "name": "sDom",
       "value": "",
       "type": "JavaScript"
+     },
+     {
+      "name": "sortBy",
+      "value": "[]",
+      "type": "SortByArray"
      },
      {
       "name": "refreshPeriod",
