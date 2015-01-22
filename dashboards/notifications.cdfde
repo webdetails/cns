@@ -3,78 +3,25 @@
   "title": "notifications",
   "rows": [
    {
-    "id": "08a7d4e2-5a0b-6686-1be1-13d72d3d14a5",
-    "type": "LayoutRow",
-    "typeDesc": "Row",
+    "id": "9ff2e6a1-3699-5f47-da20-a0b0ef81b3ae",
+    "type": "LayoutResourceFile",
+    "typeDesc": "Resource",
     "parent": "UnIqEiD",
     "properties": [
      {
       "name": "name",
-      "value": "spacer",
+      "value": "cnsCSS",
       "type": "Id"
      },
      {
-      "name": "height",
-      "value": "20",
-      "type": "Integer"
+      "name": "resourceFile",
+      "value": "${system:../static/custom/css/cns.css}",
+      "type": "ResourceFile"
      },
      {
-      "name": "backgroundColor",
-      "value": "",
-      "type": "Color"
-     },
-     {
-      "name": "roundCorners",
-      "value": "",
-      "type": "RoundCorners"
-     },
-     {
-      "name": "textAlign",
-      "value": "",
-      "type": "TextAlign"
-     },
-     {
-      "name": "cssClass",
-      "value": "",
-      "type": "String"
-     }
-    ]
-   },
-   {
-    "id": "264e4438-6be6-bf2b-7a60-33adb1ac1494",
-    "type": "LayoutRow",
-    "typeDesc": "Row",
-    "parent": "UnIqEiD",
-    "properties": [
-     {
-      "name": "name",
-      "value": "Body",
-      "type": "Id"
-     },
-     {
-      "name": "height",
-      "value": "",
-      "type": "Integer"
-     },
-     {
-      "name": "backgroundColor",
-      "value": "",
-      "type": "Color"
-     },
-     {
-      "name": "roundCorners",
-      "value": "",
-      "type": "RoundCorners"
-     },
-     {
-      "name": "textAlign",
-      "value": "",
-      "type": "TextAlign"
-     },
-     {
-      "name": "cssClass",
-      "value": "",
-      "type": "String"
+      "name": "resourceType",
+      "value": "Css",
+      "type": "Label"
      }
     ]
    },
@@ -82,7 +29,7 @@
     "id": "fa5ca01a-25a8-094c-a44c-5763bf52546f",
     "type": "BootstrapPanel",
     "typeDesc": "Bootstrap Panel",
-    "parent": "264e4438-6be6-bf2b-7a60-33adb1ac1494",
+    "parent": "UnIqEiD",
     "properties": [
      {
       "name": "name",
@@ -167,7 +114,7 @@
      },
      {
       "name": "cssClass",
-      "value": "h2",
+      "value": "",
       "type": "String"
      }
     ]
@@ -195,35 +142,7 @@
      },
      {
       "name": "cssClass",
-      "value": "",
-      "type": "String"
-     }
-    ]
-   },
-   {
-    "id": "9c26e4a7-1fd0-fd91-53cf-712263407acb",
-    "type": "BootstrapPanelFooter",
-    "typeDesc": "Panel Footer",
-    "parent": "fa5ca01a-25a8-094c-a44c-5763bf52546f",
-    "properties": [
-     {
-      "name": "name",
-      "value": "",
-      "type": "Id"
-     },
-     {
-      "name": "roundCorners",
-      "value": "",
-      "type": "RoundCorners"
-     },
-     {
-      "name": "textAlign",
-      "value": "",
-      "type": "TextAlign"
-     },
-     {
-      "name": "cssClass",
-      "value": "",
+      "value": "tableObj",
       "type": "String"
      }
     ]
@@ -278,16 +197,6 @@
       "type": "JavaScript"
      },
      {
-      "name": "colHeaders",
-      "value": "[]",
-      "type": "Array"
-     },
-     {
-      "name": "parameters",
-      "value": "[]",
-      "type": "ValuesArray"
-     },
-     {
       "name": "expandParameters",
       "value": "[]",
       "type": "ValuesArray"
@@ -306,6 +215,16 @@
       "name": "colWidths",
       "value": "[]",
       "type": "Array"
+     },
+     {
+      "name": "colHeaders",
+      "value": "[]",
+      "type": "Array"
+     },
+     {
+      "name": "parameters",
+      "value": "[]",
+      "type": "ValuesArray"
      },
      {
       "name": "colTypes",
@@ -354,7 +273,7 @@
      },
      {
       "name": "drawCallback",
-      "value": "",
+      "value": "function f(){    \r\n    this.ph.find('tbody > tr').each(function() {\r\n        var unread = $(this).find('td.column5').text();\r\n        \r\n        if(unread == \"true\") {\r\n            $(this).addClass('unread');\r\n        } else if (unread == \"false\") {\r\n            $(this).addClass('read');\r\n        }\r\n    });\r\n} ",
       "type": "JavaScript"
      },
      {
@@ -409,7 +328,7 @@
      },
      {
       "name": "preExecution",
-      "value": "function notificationActions() {\n  \n  var opts = {\n    \n    textFormat: function( id , st ) {\n      var $deleteButton = $( '<button name=\\'delete-notification\\'  notification=' + id + '>delete</button>' );\n      $deleteButton.on('click', function( e ){\n        \n        if( e && e.srcElement.attributes[\"notification\"] ){\n          \n          var id = e.srcElement.attributes[\"notification\"].value;\n          \n          $.ajax({\n            type: 'GET',\n            url: '/pentaho/plugin/cns/api/deletenotifications?paramnotifications=' + id,\n            success: function ( xhr ) {\n              //alert(\"deleted successfully\");\n              render_notifications.update();\n            },\n            error: function ( xhr, error ) {\n              alert(\"error deleting -> \" + error );\n            }\n          });\n        }\n      });\n      \n      var isUnread = st.tableData[rowIdx][8]; // 8th column, unread flag\n      var markAsLabel = 'mark as ' + ( isUnread ? 'read' : 'unread' );\n      \n      var $updateUnreadFlagButton = $( '<button name=\\'update-unread-flag-notification\\'  notification=' + id + ' unread=' + isUnread + '>' + markAsLabel + '</button>' );\n      $updateUnreadFlagButton.on('click', function( e ){\n        \n        if( e && e.srcElement.attributes[\"notification\"] ){\n          \n          var id = e.srcElement.attributes[\"notification\"].value;\n          var unread = ( e.srcElement.attributes[\"unread\"].value == \"true\" ) ? true : false;\n          \n          $.ajax({\n            type: 'GET',\n            url: '/pentaho/plugin/cns/api/updatenotificationsunreadflag?paramnotifications=' + id + '&paramunread=' + !unread,\n            success: function ( xhr ) {\n              render_notifications.update();\n            },\n            error: function ( xhr, error ) {\n              alert(\"error deleting -> \" + error );\n            }\n          });\n        }\n      });\n      \n      return [$deleteButton,$updateUnreadFlagButton];\n    }\n  }\n  \n  this.setAddInOptions( \"colType\", \"formattedText\", opts );\n} ",
+      "value": "function notificationActions() {\n  \n  var opts = {\n    \n    textFormat: function( id , st ) {\n      var $deleteButton = $( '<button name=\\'delete-notification\\' class=\\'delete-notification btn btn-default\\'  notification=' + id + '></button>' );\n      $deleteButton.on('click', function( e ){\n        \n        if( e && e.srcElement.attributes[\"notification\"] ){\n          \n          var id = e.srcElement.attributes[\"notification\"].value;\n          \n          $.ajax({\n            type: 'GET',\n            url: '/pentaho/plugin/cns/api/deletenotifications?paramnotifications=' + id,\n            success: function ( xhr ) {\n              //alert(\"deleted successfully\");\n              render_notifications.update();\n            },\n            error: function ( xhr, error ) {\n              alert(\"error deleting -> \" + error );\n            }\n          });\n        }\n      });\n      \n      var isUnread = st.tableData[rowIdx][5]; // 5th column, unread flag\n      var markAsLabel = 'mark as ' + ( isUnread ? 'read' : 'unread' );\n      \n      var $updateUnreadFlagButton = $( '<button name=\\'update-unread-flag-notification\\' class=\\'update-unread-flag-notification btn btn-default\\'  notification=' + id + ' unread=' + isUnread + '></button>' );\n      $updateUnreadFlagButton.on('click', function( e ){\n        \n        if( e && e.srcElement.attributes[\"notification\"] ){\n          \n          var id = e.srcElement.attributes[\"notification\"].value;\n          var unread = ( e.srcElement.attributes[\"unread\"].value == \"true\" ) ? true : false;\n          \n          $.ajax({\n            type: 'GET',\n            url: '/pentaho/plugin/cns/api/updatenotificationsunreadflag?paramnotifications=' + id + '&paramunread=' + !unread,\n            success: function ( xhr ) {\n              render_notifications.update();\n            },\n            error: function ( xhr, error ) {\n              alert(\"error deleting -> \" + error );\n            }\n          });\n        }\n      });\n      \n      return [$deleteButton,$updateUnreadFlagButton];\n    }\n  }\n  \n  this.setAddInOptions( \"colType\", \"formattedText\", opts );\n} ",
       "type": "JavaScript"
      },
      {
@@ -575,5 +494,5 @@
    }
   ]
  },
- "filename": "/home/admin/notifications.cdfde"
+ "filename": "/system/cns/dashboards/notifications.cdfde"
 }

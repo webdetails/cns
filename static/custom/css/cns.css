@@ -1,0 +1,171 @@
+/* =========================================== */
+/* ==== COMMUNITY NOTIFICATION SYSTEM CSS ==== */
+/* =========================================== */
+
+
+/* ================ FONTS =============== */
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src:  local('Open Sans Light'), 
+        local('OpenSans-Light'),
+        url('../../../../common-ui/resources/themes/crystal/opensans-light.eot') format('embedded-opentype'),
+        url('../../../../common-ui/resources/themes/crystal/opensans-light.woff') format('woff'),
+        url('../../../../common-ui/resources/themes/crystal/opensans-light.ttf') format('truetype'),
+        url('../../../../common-ui/resources/themes/crystal/opensans-light.svg#OpenSansLight') format('svg');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src:  local('Open Sans'), 
+        local('OpenSans'),
+        url('../../../../common-ui/resources/themes/crystal/opensans-regular.eot') format('embedded-opentype'),
+        url('../../../../common-ui/resources/themes/crystal/opensans-regular.woff') format('woff'),
+        url('../../../../common-ui/resources/themes/crystal/opensans-regular.ttf') format('truetype'),
+        url('../../../../common-ui/resources/themes/crystal/opensans-regular.svg#OpenSansRegular') format('svg');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src:  local('Open Sans'), 
+        local('OpenSans'),
+        url('../../../../common-ui/resources/themes/crystal/opensans-bold.eot') format('embedded-opentype'),
+        url('../../../../common-ui/resources/themes/crystal/opensans-bold.woff') format('woff'),
+        url('../../../../common-ui/resources/themes/crystal/opensans-bold.ttf') format('truetype'),
+        url('../../../../common-ui/resources/themes/crystal/opensans-bold.svg#OpenSansRegular') format('svg');
+}
+
+
+/* ================ GENERAL STYLES ================ */
+
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    background: #FFFFFF;
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 40px;
+    padding-top: 30px;
+    color: #26363D;
+}
+
+
+/* ================ NOTIFICATIONS PANEL ================ */
+
+
+.panel {
+    border: none;
+}
+
+.panel .panel-heading {
+    border: none;
+    background: none;
+    color: #1973bc;
+    font-size: 22px;
+    cursor: default;
+}
+
+
+/* ================ NOTIFICATIONS TABLE ================ */
+
+
+.tableObj table {
+    border: none;
+    border-top: 1px solid #d7d7d7;
+    border-left: 1px solid #d7d7d7;
+}
+
+.tableObj table > thead > tr > th {
+    color: #FFF;
+    text-shadow: none;
+    font-size: 16px;
+    padding: 8px 20px 10px 10px;
+    font-weight: normal;
+    border-top: none;
+    border-left: none;
+    border-right: 1px solid #d7d7d7;
+    border-bottom: 1px solid #d7d7d7 !important;
+}
+
+.tableObj table > thead > tr > th,
+.tableObj table > thead > tr > th.sorting,
+.tableObj table > thead > tr > th.sorting_asc,
+.tableObj table > thead > tr > th.sorting_desc {
+    background: #8AB3C6;    
+    position: relative;
+}
+
+.tableObj table > tbody > tr > td {
+    border-top: none;
+    border-left: none;
+    border-right: 1px solid #d7d7d7;
+    border-bottom: 1px solid #d7d7d7;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.tableObj table > tbody > tr.read,
+.tableObj table > tbody > tr.read > td {
+    background: #f0f0f0;
+    font-weight: 400;
+}
+
+.tableObj table > tbody > tr.unread,
+.tableObj table > tbody > tr.unread > td {
+    background: #FFF;
+    font-weight: 600;
+}
+
+.tableObj table > thead > tr > th.sorting_asc:after {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 4px solid #fff;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+}
+
+.tableObj table > thead > tr > th.sorting_desc:after {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    content: '';
+    width: 0;
+    height: 0;
+    border-bottom: 4px solid #fff;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+}
+
+button.delete-notification,
+button.update-unread-flag-notification {
+    height: 24px;
+    width: 24px;
+    padding: 0;
+    border: 1px solid #d7d7d7;
+}
+
+button.delete-notification {
+    margin-right: 5px;
+    background: url(../img/delete.svg) no-repeat center center;
+}
+
+button.update-unread-flag-notification[unread="false"] {
+    background: url(../img/unread.svg) no-repeat center center;
+}
+
+button.update-unread-flag-notification[unread="true"] {
+    background: url(../img/read.svg) no-repeat center center;
+}
