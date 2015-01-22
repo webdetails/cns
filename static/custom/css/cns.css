@@ -149,6 +149,52 @@ body {
     border-right: 4px solid transparent;
 }
 
+.tableObj table .checkboxColumn,
+.tableObj table .checkboxColumn {
+    width: 30px;
+    max-width: 30px;
+    min-width: 30px;
+    padding: 8px 0 10px;
+}
+
+.tableObj table .checkboxColumn .checkbox {
+    width: 24px;
+    height: 24px;
+    background: #FFF;
+    border: 1px solid #d7d7d7;
+    display: block;
+    padding: 0;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.tableObj table .checkboxColumn .checkbox:hover {
+    border: 1px solid #3e6480;
+}
+
+.tableObj table > tbody > tr.checked,
+.tableObj table > tbody > tr.checked > td {
+    background: #ffffd8;
+}
+
+.tableObj table .checked .checkboxColumn .checkbox,
+.tableObj table .checked-all .checkboxColumn .checkbox {
+    background: #FFF url(../img/checked-all.svg) no-repeat center center;
+}
+
+.no-svg .tableObj table .checked .checkboxColumn .checkbox,
+.no-svg .tableObj table .checked-all .checkboxColumn .checkbox {
+    background: #FFF url(../img/checked-all.png) no-repeat center center;
+}
+
+.tableObj table .checked-some .checkboxColumn .checkbox {
+    background: #FFF url(../img/checked-some.svg) no-repeat center center;
+}
+
+.no-svg .tableObj table .checked-some .checkboxColumn .checkbox {
+    background: #FFF url(../img/checked-some.png) no-repeat center center;
+}
+
 button.delete-notification,
 button.update-unread-flag-notification {
     height: 24px;
