@@ -197,16 +197,6 @@
       "type": "JavaScript"
      },
      {
-      "name": "colHeaders",
-      "value": "[\"Date\",\"Author\",\"Message\",\"Actions\",\"Unread\"]",
-      "type": "Array"
-     },
-     {
-      "name": "parameters",
-      "value": "[]",
-      "type": "ValuesArray"
-     },
-     {
       "name": "expandParameters",
       "value": "[]",
       "type": "ValuesArray"
@@ -223,8 +213,18 @@
      },
      {
       "name": "colWidths",
-      "value": "[]",
+      "value": "[\"95\",\"95\",\"280\",\"90\"]",
       "type": "Array"
+     },
+     {
+      "name": "colHeaders",
+      "value": "[\"Date\",\"Author\",\"Message\",\"Actions\",\"Unread\"]",
+      "type": "Array"
+     },
+     {
+      "name": "parameters",
+      "value": "[]",
+      "type": "ValuesArray"
      },
      {
       "name": "colTypes",
@@ -273,7 +273,7 @@
      },
      {
       "name": "drawCallback",
-      "value": "function f(){\r\n    var placeholder = this.ph;\r\n    \r\n    placeholder.find('tbody > tr').each(function() {\r\n        var unread = $(this).find('td.column4').text();\r\n        \r\n        if(unread == \"true\") {\r\n            $(this).addClass('unread');\r\n        } else if (unread == \"false\") {\r\n            $(this).addClass('read');\r\n        }\r\n    });\r\n    \r\n    var tbodyCheckbox = \"<td class='checkboxColumn'><div class='checkbox'></div></td>\",\r\n        theadCheckbox = \"<th class='checkboxColumn'><div class='checkbox'></div></th>\"\r\n    \r\n    placeholder.find('thead > tr').prepend(theadCheckbox);\r\n    placeholder.find('tbody > tr').prepend(tbodyCheckbox);\r\n    \r\n    placeholder.find('tbody .checkbox').click(function() {\r\n        var checkboxRow = $(this).closest('tr');\r\n            \r\n        // toggle clicked checkbox's 'checked' class\r\n        checkboxRow.toggleClass('checked');\r\n        \r\n        var tbodyCheckboxes = $('tbody tr'),\r\n            tbodyCheckboxesLength = tbodyCheckboxes.length,\r\n            tbodyCheckboxesChecked = $('tbody tr.checked');\r\n            tbodyCheckboxesCheckedLength = tbodyCheckboxesChecked.length;\r\n        \r\n        // if all tbody checkboxes are checked after the click,\r\n        // add checked-all class to thead checkbox\r\n        if(tbodyCheckboxesLength == tbodyCheckboxesCheckedLength) {\r\n            $('thead .checkbox').closest('tr').removeClass('checked-some').addClass('checked-all');\r\n        }\r\n        \r\n        // if only some of the tbody checkboxes are checked after the click,\r\n        // add checked-some class to thead checkbox\r\n        if(tbodyCheckboxesLength > tbodyCheckboxesCheckedLength && tbodyCheckboxesCheckedLength > 0) {\r\n            $('thead .checkbox').closest('tr').removeClass('checked-all').addClass('checked-some');\r\n        }\r\n        \r\n        // if none of the tbody checkboxes are checked after the click,\r\n        // remove checked-all and checked-some classes from thead checkbox\r\n        if(tbodyCheckboxesCheckedLength === 0) {\r\n            $('thead .checkbox').closest('tr').removeClass('checked-some checked-all');\r\n        }\r\n        \r\n    });\r\n    \r\n    placeholder.find('thead .checkbox').click(function() {\r\n        var checkbox = $(this),\r\n            checkboxRow = checkbox.closest('tr'),\r\n            tbodyCheckboxes = $('tbody tr'),\r\n            tbodyCheckboxesLength = tbodyCheckboxes.length,\r\n            tbodyCheckboxesChecked = $('tbody tr.checked');\r\n            tbodyCheckboxesCheckedLength = tbodyCheckboxesChecked.length;\r\n        \r\n        // if none of the checkboxes are checked\r\n        if(tbodyCheckboxesCheckedLength === 0) {\r\n            checkboxRow.addClass('checked-all');\r\n            // check all checkboxes\r\n            tbodyCheckboxes.addClass('checked');\r\n        }\r\n        \r\n        // if none of the checkboxes are checked\r\n        if(tbodyCheckboxesCheckedLength > 0) {\r\n            checkboxRow.removeClass('checked-some checked-all');\r\n            // uncheck all checkboxes\r\n            tbodyCheckboxes.removeClass('checked');\r\n        }\r\n        \r\n    });\r\n    \r\n    placeholder.find('.column4').remove();\r\n} ",
+      "value": "function f(){\r\n    var placeholder = this.ph;\r\n    var tdCheckbox = \"<td class='checkboxColumn'><div class='checkbox'></div></td>\";\r\n    \r\n    placeholder.find('tbody > tr').each(function() {\r\n        \r\n        var unread = $(this).find('td.column4').text();\r\n        \r\n        if(unread == \"true\") {\r\n            $(this).addClass('unread');\r\n        } else if (unread == \"false\") {\r\n            $(this).addClass('read');\r\n        }\r\n        \r\n        \r\n        var isCheckboxAdded =  $(this).find('td').eq(0).size() > 0\r\n                && \"checkboxColumn\" == $(this).find('td').eq(0)[0].className;\r\n        \r\n        // add checkbox td if it hasn't got one already\r\n        if( !isCheckboxAdded ){ $(this).find('td').eq(0).before(tdCheckbox); }\r\n    });\r\n    \r\n    var theadCheckbox = \"<th class='checkboxColumn'><div class='checkbox'></div></th>\"\r\n    \r\n    var theadCheckboxColumnAdded = placeholder.find('thead > tr > th') \r\n        && placeholder.find('thead > tr > th').length > 0\r\n        && \"checkboxColumn\" == placeholder.find('thead > tr > th')[0].className;\r\n        \r\n    if( !theadCheckboxColumnAdded ){\r\n        placeholder.find('thead > tr').prepend(theadCheckbox);\r\n    }\r\n    \r\n    placeholder.find('tbody .checkbox').off('click').on('click' , function() {\r\n        var checkboxRow = $(this).closest('tr');\r\n            \r\n        // toggle clicked checkbox's 'checked' class\r\n        checkboxRow.toggleClass('checked');\r\n        \r\n        var tbodyCheckboxes = $('tbody tr'),\r\n            tbodyCheckboxesLength = tbodyCheckboxes.length,\r\n            tbodyCheckboxesChecked = $('tbody tr.checked');\r\n            tbodyCheckboxesCheckedLength = tbodyCheckboxesChecked.length;\r\n        \r\n        // if all tbody checkboxes are checked after the click,\r\n        // add checked-all class to thead checkbox\r\n        if(tbodyCheckboxesLength == tbodyCheckboxesCheckedLength) {\r\n            $('thead .checkbox').closest('tr').removeClass('checked-some').addClass('checked-all');\r\n        }\r\n        \r\n        // if only some of the tbody checkboxes are checked after the click,\r\n        // add checked-some class to thead checkbox\r\n        if(tbodyCheckboxesLength > tbodyCheckboxesCheckedLength && tbodyCheckboxesCheckedLength > 0) {\r\n            $('thead .checkbox').closest('tr').removeClass('checked-all').addClass('checked-some');\r\n        }\r\n        \r\n        // if none of the tbody checkboxes are checked after the click,\r\n        // remove checked-all and checked-some classes from thead checkbox\r\n        if(tbodyCheckboxesCheckedLength === 0) {\r\n            $('thead .checkbox').closest('tr').removeClass('checked-some checked-all');\r\n        }\r\n        \r\n        return false;\r\n    });\r\n    \r\n    placeholder.find('thead .checkbox').off('click').on('click', function() {\r\n        var checkbox = $(this),\r\n            checkboxRow = checkbox.closest('tr'),\r\n            tbodyCheckboxes = $('tbody tr'),\r\n            tbodyCheckboxesLength = tbodyCheckboxes.length,\r\n            tbodyCheckboxesChecked = $('tbody tr.checked');\r\n            tbodyCheckboxesCheckedLength = tbodyCheckboxesChecked.length;\r\n        \r\n        // if none of the checkboxes are checked\r\n        if(tbodyCheckboxesCheckedLength === 0) {\r\n            checkboxRow.addClass('checked-all');\r\n            // check all checkboxes\r\n            tbodyCheckboxes.addClass('checked');\r\n        }\r\n        \r\n        // if none of the checkboxes are checked\r\n        if(tbodyCheckboxesCheckedLength > 0) {\r\n            checkboxRow.removeClass('checked-some checked-all');\r\n            // uncheck all checkboxes\r\n            tbodyCheckboxes.removeClass('checked');\r\n        }\r\n        \r\n    });\r\n    \r\n    placeholder.find('.column4').remove();\r\n} ",
       "type": "JavaScript"
      },
      {

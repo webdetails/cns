@@ -13,7 +13,6 @@ RUNSCRIPT FROM '/W:/Pentaho Installers/Community Edition/biserver-ce-5.2.CNS/bis
 
 - first access to Tools > Notifications with 0 (zero) notifications stored: "Error processing component"
 - pass the notifications dashboard through UX
-- changing pages in the Tools > Notifications re-triggers the unread style check
 - add a persistent mechanism for subscribe/{notificationType} and unsubscribe/{notificationType}
 - validate incoming notifications against list of subscribed notificationTypes
 - eventStorage.ktr must include a step that does a UrlDecoder.decode for each of the received params (either that or within cpk itself)
