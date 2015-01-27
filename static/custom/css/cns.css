@@ -166,7 +166,7 @@ body {
     font-weight: 600;
 }
 
-.tableObj table > thead > tr > th.sorting_asc:after {
+.tableObj table > thead > tr > th.sorting_desc:after {
     position: absolute;
     right: 10px;
     top: 0;
@@ -180,7 +180,7 @@ body {
     border-right: 4px solid transparent;
 }
 
-.tableObj table > thead > tr > th.sorting_desc:after {
+.tableObj table > thead > tr > th.sorting_asc:after {
     position: absolute;
     right: 10px;
     top: 0;
@@ -399,6 +399,7 @@ button.delete-button:hover {
 	-webkit-transition: all .5s;
 	-moz-transition: all .5s;
 	transition: all .5s;
+    margin-left: 0;
 }
 
 .no-svg .tableObj input[type=search] {
@@ -410,7 +411,7 @@ button.delete-button:hover {
 }
 
 .tableObj input[type=search]:focus {
-    width: 150px;
+    width: 130px;
 	background-color: #FFF;
 	border-color: #3e6480;
     padding-left: 5px;
@@ -504,4 +505,14 @@ button.delete-button:hover {
     color: #3e6480 !important;
     background: none;
     font-weight: 600;
+}
+
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter {
+    text-align: right !important;
+}
+
+@media (max-width: 767px) {
+    .tableObj table .column2 {
+        width: 350px !important;
+    }
 }
