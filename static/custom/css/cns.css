@@ -72,6 +72,11 @@ body {
     color: #1973bc;
     font-size: 22px;
     cursor: default;
+    padding-bottom: 0;
+}
+
+.panel .panel-body {
+    padding-top: 0;
 }
 
 
@@ -243,25 +248,113 @@ body {
     background: #FFF url(../img/checkbox.png) no-repeat right center;
 }
 
-button.delete-notification,
-button.update-unread-flag-notification {
+/* delete button */
+
+button.delete-button {
     height: 24px;
     width: 24px;
     padding: 0;
-    border: 1px solid #d7d7d7;
-}
-
-button.delete-notification {
-    margin-right: 5px;
+    border: 1px solid transparent;
     background: url(../img/delete.svg) no-repeat center center;
+    margin-right: 5px;
+    margin-left: 5px;
+    -webkit-transition: border .5s;
+    -moz-transition: border .5s;
+	transition: border .5s;
+    outline: none;
 }
 
-button.update-unread-flag-notification[unread="false"] {
-    background: url(../img/unread.svg) no-repeat center center;
+.no-svg button.delete-button {
+    background: url(../img/delete.png) no-repeat center center;
 }
 
-button.update-unread-flag-notification[unread="true"] {
-    background: url(../img/read.svg) no-repeat center center;
+button.delete-button:hover {
+    border: 1px solid #3e6480;
+}
+
+/* actions selector */
+.actions-container .selector-button {
+    padding: 0 40px 0 5px;
+    position: relative;
+    height: 24px;
+    line-height: 22px;
+    border: 1px solid transparent;
+    -webkit-transition: border .5s;
+    -moz-transition: border .5s;
+    transition: border .5s;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+.actions-container .selector-button:hover,
+.actions-container .open .selector-button {
+    border: 1px solid #3e6480;
+}
+
+.actions-container .selector-button:before {
+    border-style: solid;
+    border-width: 1px 1px 0 0;
+    border-color: #4d4d4d;
+    content: '';
+    display: block;
+    height: 8px;
+    right: 10px;
+    top: 5px;
+    position: absolute;
+    -webkit-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    transform: rotate(135deg);
+    vertical-align: top;
+    width: 8px;
+}
+
+.actions-container .open .selector-button:before {
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    top: 9px;
+}
+
+.actions-container .selector-dropdown {
+    position: absolute;
+    border: 1px solid #3e6480;
+    padding: 5px;
+    background: #FFF;
+    z-index: 100;
+    right: 0;
+    margin-top: -1px;
+    display: none;
+}
+
+.actions-container .open .selector-dropdown {
+    display: block;
+}
+
+.actions-container .selector-dropdown button {
+    display: block;
+    white-space: nowrap;
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: #FFF;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
+}
+
+.actions-container .selector-dropdown button:hover,
+.actions-container .selector-dropdown button:active {
+    background: #005ca7;
+    color: #FFF;
 }
 
 /* date column width */
@@ -320,7 +413,7 @@ button.update-unread-flag-notification[unread="true"] {
     width: 150px;
 	background-color: #FFF;
 	border-color: #3e6480;
-    padding-left: 10px;
+    padding-left: 5px;
     color: #000;
     cursor: auto;
 }
