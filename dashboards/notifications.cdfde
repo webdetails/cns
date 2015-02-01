@@ -197,18 +197,13 @@
       "type": "JavaScript"
      },
      {
-      "name": "parameters",
-      "value": "[]",
-      "type": "ValuesArray"
-     },
-     {
       "name": "expandParameters",
       "value": "[]",
       "type": "ValuesArray"
      },
      {
       "name": "colSortable",
-      "value": "[\"true\",\"true\",\"true\",\"false\",\"false\"]",
+      "value": "[\"false\",\"true\",\"true\",\"true\"]",
       "type": "Array"
      },
      {
@@ -223,12 +218,17 @@
      },
      {
       "name": "colHeaders",
-      "value": "[\"Date\",\"Author\",\"Message\",\"Actions\",\"Unread\"]",
+      "value": "[\"ID\",\"Date\",\"Author\",\"Message\"]",
       "type": "Array"
      },
      {
+      "name": "parameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
       "name": "colTypes",
-      "value": "[\"string\",\"string\",\"string\",\"formattedText\",\"string\"]",
+      "value": "[\"string\",\"string\",\"string\",\"string\"]",
       "type": "colTypesCustom"
      },
      {
@@ -238,7 +238,7 @@
      },
      {
       "name": "lengthChange",
-      "value": "false",
+      "value": "true",
       "type": "Boolean"
      },
      {
@@ -263,7 +263,7 @@
      },
      {
       "name": "displayLength",
-      "value": "15",
+      "value": "10",
       "type": "Integer"
      },
      {
@@ -273,7 +273,7 @@
      },
      {
       "name": "drawCallback",
-      "value": "function f(){\r\n    var placeholder = this.ph;\r\n    var tdCheckbox = \"<td class='checkboxColumn'><div class='checkbox'></div></td>\";\r\n    \r\n    placeholder.find('tbody > tr').each(function() {\r\n        \r\n        var unread = $(this).find('td.column4').text();\r\n        \r\n        if(unread == \"true\") {\r\n            $(this).addClass('unread');\r\n        } else if (unread == \"false\") {\r\n            $(this).addClass('read');\r\n        }\r\n        \r\n        \r\n        var isCheckboxAdded =  $(this).find('td').eq(0).size() > 0\r\n                && \"checkboxColumn\" == $(this).find('td').eq(0)[0].className;\r\n        \r\n        // add checkbox td if it hasn't got one already\r\n        if( !isCheckboxAdded ){ $(this).find('td').eq(0).before(tdCheckbox); }\r\n    });\r\n    \r\n    var theadCheckbox = \"<th class='checkboxColumn'><div class='checkbox'></div></th>\"\r\n    \r\n    var theadCheckboxColumnAdded = placeholder.find('thead > tr > th') \r\n        && placeholder.find('thead > tr > th').length > 0\r\n        && \"checkboxColumn\" == placeholder.find('thead > tr > th')[0].className;\r\n        \r\n    if( !theadCheckboxColumnAdded ){\r\n        placeholder.find('thead > tr').prepend(theadCheckbox);\r\n    }\r\n    \r\n    placeholder.find('tbody .checkbox').off('click').on('click' , function() {\r\n        var checkboxRow = $(this).closest('tr');\r\n            \r\n        // toggle clicked checkbox's 'checked' class\r\n        checkboxRow.toggleClass('checked');\r\n        \r\n        var tbodyCheckboxes = $('tbody tr'),\r\n            tbodyCheckboxesLength = tbodyCheckboxes.length,\r\n            tbodyCheckboxesChecked = $('tbody tr.checked');\r\n            tbodyCheckboxesCheckedLength = tbodyCheckboxesChecked.length;\r\n        \r\n        // if all tbody checkboxes are checked after the click,\r\n        // add checked-all class to thead checkbox\r\n        if(tbodyCheckboxesLength == tbodyCheckboxesCheckedLength) {\r\n            $('thead .checkbox').closest('tr').removeClass('checked-some').addClass('checked-all');\r\n        }\r\n        \r\n        // if only some of the tbody checkboxes are checked after the click,\r\n        // add checked-some class to thead checkbox\r\n        if(tbodyCheckboxesLength > tbodyCheckboxesCheckedLength && tbodyCheckboxesCheckedLength > 0) {\r\n            $('thead .checkbox').closest('tr').removeClass('checked-all').addClass('checked-some');\r\n        }\r\n        \r\n        // if none of the tbody checkboxes are checked after the click,\r\n        // remove checked-all and checked-some classes from thead checkbox\r\n        if(tbodyCheckboxesCheckedLength === 0) {\r\n            $('thead .checkbox').closest('tr').removeClass('checked-some checked-all');\r\n        }\r\n        \r\n        return false;\r\n    });\r\n    \r\n    placeholder.find('thead .checkbox').off('click').on('click', function() {\r\n        var checkbox = $(this),\r\n            checkboxRow = checkbox.closest('tr'),\r\n            tbodyCheckboxes = $('tbody tr'),\r\n            tbodyCheckboxesLength = tbodyCheckboxes.length,\r\n            tbodyCheckboxesChecked = $('tbody tr.checked');\r\n            tbodyCheckboxesCheckedLength = tbodyCheckboxesChecked.length;\r\n        \r\n        // if none of the checkboxes are checked\r\n        if(tbodyCheckboxesCheckedLength === 0) {\r\n            checkboxRow.addClass('checked-all');\r\n            // check all checkboxes\r\n            tbodyCheckboxes.addClass('checked');\r\n        }\r\n        \r\n        // if none of the checkboxes are checked\r\n        if(tbodyCheckboxesCheckedLength > 0) {\r\n            checkboxRow.removeClass('checked-some checked-all');\r\n            // uncheck all checkboxes\r\n            tbodyCheckboxes.removeClass('checked');\r\n        }\r\n        \r\n    });\r\n    \r\n    // remove unread and actions column\r\n    placeholder.find('.column4, .column3').remove();\r\n    \r\n    // add responsive behaviour to table\r\n    placeholder.find('table').wrap( \"<div class='table-responsive'></div>\" );\r\n    \r\n    // check if actions container exists\r\n    var actionsContainerAdded = placeholder.find('.actions-container').length > 0;\r\n    \r\n    if(!actionsContainerAdded) {\r\n        // add actions div\r\n        placeholder.find('.dataTables_wrapper').prepend('<div class=\"actions-container pull-right\"></div>');\r\n        \r\n        // add delete button\r\n        placeholder.find('.actions-container').append('<div class=\"pull-left\"><button class=\"delete-button\"></button></div>');\r\n        \r\n        // add actions selector\r\n        var actionsSelector = '<div class=\"pull-left actions-selector\">'\r\n                            + '<div class=\"selector-button\">More..</div>'\r\n                            + '<div class=\"selector-dropdown\">'\r\n                            + '<button id=\"markRead\">Mark as read</button>'\r\n                            + '<button id=\"markUnread\">Mark as unread</button>'\r\n                            + '</div>'\r\n                            + '</div>';\r\n        placeholder.find('.actions-container').append(actionsSelector);\r\n        \r\n        // add actions selector interaction\r\n        placeholder.find('.actions-container .selector-button').click(function() {\r\n            $(this).closest('.actions-selector').toggleClass('open');       \r\n        });\r\n        \r\n        // add interaction to mark as read button\r\n        placeholder.find('#markRead').click(function() {\r\n            $(this).closest('.actions-selector').toggleClass('open');   \r\n            \r\n            // mark as read code here\r\n        });\r\n        \r\n        // add interaction to mark as unread button\r\n        placeholder.find('#markUnread').click(function() {\r\n            $(this).closest('.actions-selector').toggleClass('open');   \r\n            \r\n            // mark as unread code here\r\n        });\r\n        \r\n        $(document).mouseup(function (e) {\r\n            var container = $('.actions-selector');\r\n                    \r\n            if (!container.is(e.target) // if the target of the click isn't the container...\r\n                && container.has(e.target).length === 0 ) // ... nor a descendant of the container\r\n            {\r\n                container.removeClass('open');\r\n            }\r\n        });\r\n    }\r\n} ",
+      "value": "function f(){\n \n    console.log(\"draw function\");\n\n    var placeholder = this.ph;\n    \n    placeholder.find( 'tbody > tr' ).each( function() {\n        \n        // td.column0 holds a compound id of <id>:<unread>\n        var checkboxColumn = $( this ).find( 'td.column0' );\n        \n        // '<id>:<unread>' ( ex: '74:unread', '23:read' )\n        var compoundId = checkboxColumn.text();\n        \n        var delimiter = \":\";\n        \n        var id = compoundId.split( delimiter )[0]; // notification id\n        var unread = compoundId.split( delimiter )[1]; // unread flag\n        \n        $( this ).addClass( unread ); // one of 'read' / 'unread'\n        \n        // ensure td has checkboxColumn class\n        if( !checkboxColumn.hasClass( \"checkboxColumn\" ) ){\n            \n            checkboxColumn.text( '' ); // clear the compoundId text\n            checkboxColumn.addClass( \"checkboxColumn\" );\n            checkboxColumn.attr( \"notification\", id );\n            checkboxColumn.attr( \"unread\", unread );\n            checkboxColumn.attr( \"unread\", unread );\n        }\n        \n        // .. and its child div holds the 'id' and 'unread' attributes\n        if( checkboxColumn.find( \"div.checkbox\" ).length === 0 ){\n            \n            // create the div\n            \n            var $checkboxDiv = $( \"<div class='checkbox' notification='\" + id + \"' unread='\" + unread + \"'></div>\" );\n            \n            // define the click behaviour\n            \n            $checkboxDiv.on( 'click', function( e ) {\n        \n                if( e && e.srcElement.attributes[\"notification\"] ){\n                  \n                    var id = e.srcElement.attributes[\"notification\"].value;\n                    var unread = e.srcElement.attributes[\"unread\"].value;\n                  \n                    var checkboxRow = $(this).closest('tr');\n            \n                    // toggle clicked checkbox's 'checked' class\n                    checkboxRow.toggleClass('checked');\n        \n                    var tbodyCheckboxes = $('tbody tr'),\n                        tbodyCheckboxesLength = tbodyCheckboxes.length,\n                        tbodyCheckboxesChecked = $('tbody tr.checked');\n                        tbodyCheckboxesCheckedLength = tbodyCheckboxesChecked.length;\n        \n                    // if all tbody checkboxes are checked after the click,\n                    // add checked-all class to thead checkbox\n                    if(tbodyCheckboxesLength == tbodyCheckboxesCheckedLength) {\n                        $('thead .checkbox').closest('tr').removeClass('checked-some').addClass('checked-all');\n                    }\n                    \n                    // if only some of the tbody checkboxes are checked after the click,\n                    // add checked-some class to thead checkbox\n                    if(tbodyCheckboxesLength > tbodyCheckboxesCheckedLength && tbodyCheckboxesCheckedLength > 0) {\n                        $('thead .checkbox').closest('tr').removeClass('checked-all').addClass('checked-some');\n                    }\n                    \n                    // if none of the tbody checkboxes are checked after the click,\n                    // remove checked-all and checked-some classes from thead checkbox\n                    if(tbodyCheckboxesCheckedLength === 0) {\n                        $('thead .checkbox').closest('tr').removeClass('checked-some checked-all');\n                    }\n                    \n                    return false;\n                }\n              });\n            \n            checkboxColumn.append( $checkboxDiv );\n        }\n        \n    });\n} ",
       "type": "JavaScript"
      },
      {
@@ -282,14 +282,14 @@
       "type": "Datasource"
      },
      {
-      "name": "sortBy",
-      "value": "[[\"0\",\"desc\"]]",
-      "type": "SortByArray"
-     },
-     {
       "name": "sDom",
       "value": "",
       "type": "JavaScript"
+     },
+     {
+      "name": "sortBy",
+      "value": "[]",
+      "type": "SortByArray"
      },
      {
       "name": "refreshPeriod",
@@ -328,27 +328,27 @@
      },
      {
       "name": "preExecution",
-      "value": "function notificationActions() {\n  \n  var opts = {\n    \n    textFormat: function( id , st ) {\n      var $deleteButton = $( '<button name=\\'delete-notification\\' class=\\'delete-notification btn btn-default\\'  notification=' + id + '></button>' );\n      $deleteButton.on('click', function( e ){\n        \n        if( e && e.srcElement.attributes[\"notification\"] ){\n          \n          var id = e.srcElement.attributes[\"notification\"].value;\n          \n          $.ajax({\n            type: 'GET',\n            url: '/pentaho/plugin/cns/api/deletenotifications?paramnotifications=' + id,\n            success: function ( xhr ) {\n              //alert(\"deleted successfully\");\n              render_notifications.update();\n            },\n            error: function ( xhr, error ) {\n              alert(\"error deleting -> \" + error );\n            }\n          });\n        }\n      });\n      \n      var isUnread = st.tableData[rowIdx][4]; // 4th column, unread flag\n      var markAsLabel = 'mark as ' + ( isUnread ? 'read' : 'unread' );\n      \n      var $updateUnreadFlagButton = $( '<button name=\\'update-unread-flag-notification\\' class=\\'update-unread-flag-notification btn btn-default\\'  notification=' + id + ' unread=' + isUnread + '></button>' );\n      $updateUnreadFlagButton.on('click', function( e ){\n        \n        if( e && e.srcElement.attributes[\"notification\"] ){\n          \n          var id = e.srcElement.attributes[\"notification\"].value;\n          var unread = ( e.srcElement.attributes[\"unread\"].value == \"true\" ) ? true : false;\n          \n          $.ajax({\n            type: 'GET',\n            url: '/pentaho/plugin/cns/api/updatenotificationsunreadflag?paramnotifications=' + id + '&paramunread=' + !unread,\n            success: function ( xhr ) {\n              render_notifications.update();\n            },\n            error: function ( xhr, error ) {\n              alert(\"error deleting -> \" + error );\n            }\n          });\n        }\n      });\n      \n      return [$deleteButton,$updateUnreadFlagButton];\n    }\n  }\n  \n  this.setAddInOptions( \"colType\", \"formattedText\", opts );\n  \n  this.extraOptions = [\n    [ \"aoColumnDefs\"   ,  [ { \"asSorting\": [ \"desc\", \"asc\" ], aTargets: [ 0 ] } ]  ],\n    [ \"oLanguage\" , {\"sSearch\": \"\"}]\n  ]\n} ",
+      "value": "function f(){\n    console.log(\"pre exec\");\n} ",
       "type": "JavaScript"
      },
      {
       "name": "postFetch",
-      "value": "",
+      "value": "function f(){\n    console.log(\"post fetch\");\n} ",
       "type": "JavaScript"
      },
      {
       "name": "postExecution",
-      "value": "",
+      "value": "function f(){\n    \n    console.log(\"post exec\");\n \n    var placeholder = this.ph;\n    \n    if( !placeholder.find( 'thead > tr > th.column0' ).hasClass( \"checkboxColumn\" ) ){\n        \n        // clear th's text\n        placeholder.find( 'thead > tr > th.column0' ).text('');\n        \n        // add checkboxColumn class\n        placeholder.find( 'thead > tr > th.column0' ).addClass( \"checkboxColumn\" );\n        \n        // add child checkbox div\n        placeholder.find( 'thead > tr > th.column0' ).prepend( \"<div class='checkbox'></div>\" );\n        \n        placeholder.find( 'thead > tr > th.column0 > div' ).on('click', function() {\n        \n            var checkbox = $(this),\n                checkboxRow = checkbox.closest('tr'),\n                tbodyCheckboxes = $('tbody tr'),\n                tbodyCheckboxesLength = tbodyCheckboxes.length,\n                tbodyCheckboxesChecked = $('tbody tr.checked');\n                tbodyCheckboxesCheckedLength = tbodyCheckboxesChecked.length;\n            \n            // if none of the checkboxes are checked\n            if(tbodyCheckboxesCheckedLength === 0) {\n                checkboxRow.addClass('checked-all');\n                // check all checkboxes\n                tbodyCheckboxes.addClass('checked');\n            }\n            \n            // if none of the checkboxes are checked\n            if(tbodyCheckboxesCheckedLength > 0) {\n                checkboxRow.removeClass('checked-some checked-all');\n                // uncheck all checkboxes\n                tbodyCheckboxes.removeClass('checked');\n            }\n            \n        });\n    }\n    \n    // add responsive behaviour to table\n    placeholder.find('table').wrap( \"<div class='table-responsive'></div>\" );\n    \n    // check if actions container exists\n    var actionsContainerAdded = placeholder.find('.actions-container').length > 0;\n    \n    if(!actionsContainerAdded) {\n        // add actions div\n        placeholder.find('.dataTables_wrapper').prepend('<div class=\"actions-container pull-right\"></div>');\n        \n        // add delete button\n        placeholder.find('.actions-container').append('<div class=\"pull-left\"><button class=\"delete-button\"></button></div>');\n        \n        // add actions selector\n        var actionsSelector = '<div class=\"pull-left actions-selector\">'\n                            + '<div class=\"selector-button\">More..</div>'\n                            + '<div class=\"selector-dropdown\">'\n                            + '<button id=\"markRead\">Mark as read</button>'\n                            + '<button id=\"markUnread\">Mark as unread</button>'\n                            + '</div>'\n                            + '</div>';\n        placeholder.find('.actions-container').append(actionsSelector);\n        \n        // add actions selector interaction\n        placeholder.find('.actions-container .selector-button').click(function() {\n            $(this).closest('.actions-selector').toggleClass('open');       \n        });\n        \n        // add interaction to mark as read button\n        placeholder.find('#markRead').click(function() {\n            $(this).closest('.actions-selector').toggleClass('open');   \n            \n            // mark as read code here\n        });\n        \n        // add interaction to mark as unread button\n        placeholder.find('#markUnread').click(function() {\n            $(this).closest('.actions-selector').toggleClass('open');   \n            \n            // mark as unread code here\n        });\n        \n        $(document).mouseup(function (e) {\n            var container = $('.actions-selector');\n                    \n            if (!container.is(e.target) // if the target of the click isn't the container...\n                && container.has(e.target).length === 0 ) // ... nor a descendant of the container\n            {\n                container.removeClass('open');\n            }\n        });\n    }\n} ",
       "type": "JavaScript"
      },
      {
       "name": "preChange",
-      "value": "",
+      "value": "function f(){\n    console.log(\"pre change\");\n    return true;\n} ",
       "type": "JavaScript"
      },
      {
       "name": "postChange",
-      "value": "",
+      "value": "function f(){\n \n    console.log(\"post change\");\n} ",
       "type": "JavaScript"
      },
      {
@@ -494,5 +494,5 @@
    }
   ]
  },
- "filename": "/system/cns/dashboards/notifications.cdfde"
+ "filename": "/home/admin/notifications.cdfde"
 }

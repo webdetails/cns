@@ -322,7 +322,7 @@
            <schema_name/>
            </partitioning>
     <connection>cns_db</connection>
-    <sql>SELECT&#xa;  FORMATDATETIME&#x28;CREATED_DATE , &#x27;yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x27;&#x29; AS CREATION_DATE&#xa;, AUTHOR&#xa;, MESSAGE&#xa;, ID AS ACTIONS&#xa;, UNREAD&#xa;FROM NOTIFICATIONS&#xa;WHERE &#xa;RCPT IS NOT NULL AND RCPT &#x3d; &#x27;&#x24;&#x7b;cpk.session.username&#x7d;&#x27;&#xa;AND&#xa;UNREAD IN &#x28; &#x27;true&#x27; , &#x27;&#x24;&#x7b;unreadOnly&#x7d;&#x27; &#x29;&#xa;AND&#xa;EVENTTYPE LIKE &#x27;&#x24;&#x7b;rcptType&#x7d;&#x27;&#xa;AND&#xa;UPPER&#x28; AUTHOR &#x29; LIKE UPPER &#x28; &#x27;&#x25;&#x24;&#x7b;fromSender&#x7d;&#x25;&#x27; &#x29;</sql>
+    <sql>select&#xa;  &#x28; ID &#x7c;&#x7c; &#x27;&#x3a;&#x27; &#x7c;&#x7c; &#x28; casewhen&#x28; UNREAD , &#x27;unread&#x27; , &#x27;read&#x27; &#x29; &#x29; &#x29; as ID_UNREAD,&#xa;  FORMATDATETIME&#x28;CREATED_DATE , &#x27;yyyy&#x2f;MM&#x2f;dd&#x27;&#x29; as CREATION_DATE,&#xa;  AUTHOR,&#xa;  MESSAGE&#xa;&#xa;from &#xa;  NOTIFICATIONS&#xa;&#xa;where &#xa;  RCPT is not null and RCPT &#x3d; &#x27;&#x24;&#x7b;cpk.session.username&#x7d;&#x27;&#xa;  and&#xa;  UNREAD in &#x28; &#x27;true&#x27; , &#x27;&#x24;&#x7b;unreadOnly&#x7d;&#x27; &#x29;&#xa;  and&#xa;  EVENTTYPE LIKE &#x27;&#x24;&#x7b;rcptType&#x7d;&#x27;&#xa;  and&#xa;  upper&#x28; AUTHOR &#x29; like upper &#x28; &#x27;&#x25;&#x24;&#x7b;fromSender&#x7d;&#x25;&#x27; &#x29;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
