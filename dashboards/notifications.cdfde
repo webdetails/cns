@@ -197,11 +197,6 @@
       "type": "JavaScript"
      },
      {
-      "name": "expandParameters",
-      "value": "[]",
-      "type": "ValuesArray"
-     },
-     {
       "name": "colSortable",
       "value": "[\"false\",\"true\",\"true\",\"true\"]",
       "type": "Array"
@@ -223,6 +218,11 @@
      },
      {
       "name": "parameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "expandParameters",
       "value": "[]",
       "type": "ValuesArray"
      },
@@ -282,14 +282,14 @@
       "type": "Datasource"
      },
      {
+      "name": "sortBy",
+      "value": "[[\"1\",\"desc\"]]",
+      "type": "SortByArray"
+     },
+     {
       "name": "sDom",
       "value": "",
       "type": "JavaScript"
-     },
-     {
-      "name": "sortBy",
-      "value": "[]",
-      "type": "SortByArray"
      },
      {
       "name": "refreshPeriod",
@@ -328,27 +328,27 @@
      },
      {
       "name": "preExecution",
-      "value": "function f(){\n    console.log(\"pre exec\");\n} ",
+      "value": "",
       "type": "JavaScript"
      },
      {
       "name": "postFetch",
-      "value": "function f(){\n    console.log(\"post fetch\");\n} ",
+      "value": "",
       "type": "JavaScript"
      },
      {
       "name": "postExecution",
-      "value": "function f(){\n    \n    console.log(\"post exec\");\n \n    var placeholder = this.ph;\n    \n    if( !placeholder.find( 'thead > tr > th.column0' ).hasClass( \"checkboxColumn\" ) ){\n        \n        // clear th's text\n        placeholder.find( 'thead > tr > th.column0' ).text('');\n        \n        // add checkboxColumn class\n        placeholder.find( 'thead > tr > th.column0' ).addClass( \"checkboxColumn\" );\n        \n        // add child checkbox div\n        placeholder.find( 'thead > tr > th.column0' ).prepend( \"<div class='checkbox'></div>\" );\n        \n        placeholder.find( 'thead > tr > th.column0 > div' ).on('click', function() {\n        \n            var checkbox = $(this),\n                checkboxRow = checkbox.closest('tr'),\n                tbodyCheckboxes = $('tbody tr'),\n                tbodyCheckboxesLength = tbodyCheckboxes.length,\n                tbodyCheckboxesChecked = $('tbody tr.checked');\n                tbodyCheckboxesCheckedLength = tbodyCheckboxesChecked.length;\n            \n            // if none of the checkboxes are checked\n            if(tbodyCheckboxesCheckedLength === 0) {\n                checkboxRow.addClass('checked-all');\n                // check all checkboxes\n                tbodyCheckboxes.addClass('checked');\n            }\n            \n            // if none of the checkboxes are checked\n            if(tbodyCheckboxesCheckedLength > 0) {\n                checkboxRow.removeClass('checked-some checked-all');\n                // uncheck all checkboxes\n                tbodyCheckboxes.removeClass('checked');\n            }\n            \n        });\n    }\n    \n    // add responsive behaviour to table\n    placeholder.find('table').wrap( \"<div class='table-responsive'></div>\" );\n    \n    // check if actions container exists\n    var actionsContainerAdded = placeholder.find('.actions-container').length > 0;\n    \n    if(!actionsContainerAdded) {\n        // add actions div\n        placeholder.find('.dataTables_wrapper').prepend('<div class=\"actions-container pull-right\"></div>');\n        \n        // add delete button\n        placeholder.find('.actions-container').append('<div class=\"pull-left\"><button class=\"delete-button\"></button></div>');\n        \n        // add actions selector\n        var actionsSelector = '<div class=\"pull-left actions-selector\">'\n                            + '<div class=\"selector-button\">More..</div>'\n                            + '<div class=\"selector-dropdown\">'\n                            + '<button id=\"markRead\">Mark as read</button>'\n                            + '<button id=\"markUnread\">Mark as unread</button>'\n                            + '</div>'\n                            + '</div>';\n        placeholder.find('.actions-container').append(actionsSelector);\n        \n        // add actions selector interaction\n        placeholder.find('.actions-container .selector-button').click(function() {\n            $(this).closest('.actions-selector').toggleClass('open');       \n        });\n        \n        // add interaction to mark as read button\n        placeholder.find('#markRead').click(function() {\n            $(this).closest('.actions-selector').toggleClass('open');   \n            \n            // mark as read code here\n        });\n        \n        // add interaction to mark as unread button\n        placeholder.find('#markUnread').click(function() {\n            $(this).closest('.actions-selector').toggleClass('open');   \n            \n            // mark as unread code here\n        });\n        \n        $(document).mouseup(function (e) {\n            var container = $('.actions-selector');\n                    \n            if (!container.is(e.target) // if the target of the click isn't the container...\n                && container.has(e.target).length === 0 ) // ... nor a descendant of the container\n            {\n                container.removeClass('open');\n            }\n        });\n    }\n} ",
+      "value": "function f(){\n    \n    console.log(\"post exec\");\n \n    var placeholder = this.ph;\n    \n    if( !placeholder.find( 'thead > tr > th.column0' ).hasClass( \"checkboxColumn\" ) ){\n        \n        // clear th's text\n        placeholder.find( 'thead > tr > th.column0' ).text('');\n        \n        // add checkboxColumn class\n        placeholder.find( 'thead > tr > th.column0' ).addClass( \"checkboxColumn\" );\n        \n        // add child checkbox div\n        var $headerCheckboxDiv = $( '<div class=\"checkbox\"></div>' );\n        \n        $headerCheckboxDiv.on('click', function() {\n        \n            var checkbox = $(this),\n                checkboxRow = checkbox.closest('tr'),\n                tbodyCheckboxes = $('tbody tr'),\n                tbodyCheckboxesLength = tbodyCheckboxes.length,\n                tbodyCheckboxesChecked = $('tbody tr.checked');\n                tbodyCheckboxesCheckedLength = tbodyCheckboxesChecked.length;\n            \n            // if none of the checkboxes are checked\n            if(tbodyCheckboxesCheckedLength === 0) {\n                checkboxRow.addClass('checked-all');\n                // check all checkboxes\n                tbodyCheckboxes.addClass('checked');\n            }\n            \n            // if none of the checkboxes are checked\n            if(tbodyCheckboxesCheckedLength > 0) {\n                checkboxRow.removeClass('checked-some checked-all');\n                // uncheck all checkboxes\n                tbodyCheckboxes.removeClass('checked');\n            }\n            \n        });\n        \n        placeholder.find( 'thead > tr > th.column0' ).prepend( $headerCheckboxDiv );\n    }\n    \n    // add responsive behaviour to table\n    placeholder.find('table').wrap( \"<div class='table-responsive'></div>\" );\n    \n    // check if actions container exists\n    var actionsContainerAdded = placeholder.find('.actions-container').length > 0;\n    \n    if(!actionsContainerAdded) {\n        // add actions div\n        placeholder.find('.dataTables_wrapper').prepend('<div class=\"actions-container pull-right\"></div>');\n        \n        // add delete button\n        var $deleteButton = $( '<button class=\"delete-button\"></button>' );\n        \n         $deleteButton.on('click', function() {\n            \n            var commaSeparatedIds = '';\n            \n            placeholder.find( 'table > tbody > tr.checked' ).each( function() {\n            \n                var checkboxColumn = $( this ).find( 'td.checkboxColumn' );\n                commaSeparatedIds += ( checkboxColumn.attr( 'notification' ) + ',' );\n            });\n            \n            if( commaSeparatedIds.length > 0 ){\n            \n                // remove the last char ( a rogue comma )\n                commaSeparatedIds = commaSeparatedIds.slice(0 , -1 ); \n                \n                $.ajax({\n                type: 'GET',\n                url: '/pentaho/plugin/cns/api/deletenotifications?paramnotifications=' + commaSeparatedIds,\n                success: function ( xhr ) {\n                  render_notifications.update();\n                }\n              });\n            }\n        });\n        \n        placeholder.find('.actions-container').append('<div class=\"pull-left\"></div>');\n        placeholder.find('.actions-container > div.pull-left').append( $deleteButton );\n        \n        // add actions selector\n        var actionsSelector = '<div class=\"pull-left actions-selector\">'\n                            + '<div class=\"selector-button\">More..</div>'\n                            + '<div class=\"selector-dropdown\">'\n                            + '<button id=\"markRead\">Mark as read</button>'\n                            + '<button id=\"markUnread\">Mark as unread</button>'\n                            + '</div>'\n                            + '</div>';\n        placeholder.find('.actions-container').append(actionsSelector);\n        \n        // add actions selector interaction\n        placeholder.find('.actions-container .selector-button').click(function() {\n            $(this).closest('.actions-selector').toggleClass('open');       \n        });\n        \n        // add interaction to mark as read button\n        placeholder.find('#markRead').click(function() {\n            $(this).closest('.actions-selector').toggleClass('open');   \n            \n            var commaSeparatedIds = '';\n            \n            placeholder.find( 'table > tbody > tr.checked' ).each( function() {\n            \n                var checkboxColumn = $( this ).find( 'td.checkboxColumn' );\n                commaSeparatedIds += ( checkboxColumn.attr( 'notification' ) + ',' );\n            });\n            \n            if( commaSeparatedIds.length > 0 ){\n            \n                // remove the last char ( a rogue comma )\n                commaSeparatedIds = commaSeparatedIds.slice(0 , -1 ); \n                \n                $.ajax({\n                type: 'GET',\n                url: '/pentaho/plugin/cns/api/updatenotificationsunreadflag?paramunread=false&paramnotifications=' + commaSeparatedIds,\n                success: function ( xhr ) {\n                  render_notifications.update();\n                }\n              });\n            }\n        });\n        \n        // add interaction to mark as unread button\n        placeholder.find('#markUnread').click(function() {\n            $(this).closest('.actions-selector').toggleClass('open');   \n            \n            var commaSeparatedIds = '';\n            \n            placeholder.find( 'table > tbody > tr.checked' ).each( function() {\n            \n                var checkboxColumn = $( this ).find( 'td.checkboxColumn' );\n                commaSeparatedIds += ( checkboxColumn.attr( 'notification' ) + ',' );\n            });\n            \n            if( commaSeparatedIds.length > 0 ){\n            \n                // remove the last char ( a rogue comma )\n                commaSeparatedIds = commaSeparatedIds.slice(0 , -1 ); \n                \n                $.ajax({\n                type: 'GET',\n                url: '/pentaho/plugin/cns/api/updatenotificationsunreadflag?paramunread=true&paramnotifications=' + commaSeparatedIds,\n                success: function ( xhr ) {\n                  render_notifications.update();\n                }\n              });\n            }\n        });\n        \n        $(document).mouseup(function (e) {\n            var container = $('.actions-selector');\n                    \n            if (!container.is(e.target) // if the target of the click isn't the container...\n                && container.has(e.target).length === 0 ) // ... nor a descendant of the container\n            {\n                container.removeClass('open');\n            }\n        });\n    }\n} ",
       "type": "JavaScript"
      },
      {
       "name": "preChange",
-      "value": "function f(){\n    console.log(\"pre change\");\n    return true;\n} ",
+      "value": "",
       "type": "JavaScript"
      },
      {
       "name": "postChange",
-      "value": "function f(){\n \n    console.log(\"post change\");\n} ",
+      "value": "",
       "type": "JavaScript"
      },
      {

@@ -17,7 +17,5 @@ RUNSCRIPT FROM '/W:/Pentaho Installers/Community Edition/biserver-ce-5.2.CNS/bis
 - validate incoming notifications against list of subscribed notificationTypes
 - eventStorage.ktr must include a step that does a UrlDecoder.decode for each of the received params (either that or within cpk itself)
 - provide the means for a user to subscribe / unsubscribe ( perhaps an option within the notifications dashboard itself )
-- add functionality to the delete button (add ability to delete multiple notifications at once)
-- add functionality to the "More.." actions dropdown ("Mark as read" marks all selected items as read, "Mark as unred" does the opposite)
 - when we move to another page or filter the notifications using the search box, the table header checkbox must update
 - change notifications dashboard title to "Community Notifications System" (on browser tabs)
