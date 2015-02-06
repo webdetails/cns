@@ -205,7 +205,7 @@
     <index_tablespace/>
     <attributes>
       <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>org.h2.Driver</attribute></attribute>
-      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;h2&#x3a;&#x24;&#x7b;cpk.solution.system.dir&#x7d;&#x2f;&#x24;&#x7b;_cns_db&#x7d;&#x3b;DB_CLOSE_DELAY&#x3d;-1&#x3b;AUTO_SERVER&#x3d;TRUE&#x3b;INIT&#x3d;RUNSCRIPT FROM &#x27;&#x24;&#x7b;cpk.plugin.dir&#x7d;&#x2f;resources&#x2f;ddl&#x2f;cns_db.ddl&#x27;</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;h2&#x3a;file&#x3a;&#x24;&#x7b;cpk.solution.system.dir&#x7d;&#x2f;&#x24;&#x7b;_cns_db&#x7d;&#x3b;DB_CLOSE_DELAY&#x3d;-1&#x3b;AUTO_SERVER&#x3d;TRUE&#x3b;INIT&#x3d;RUNSCRIPT FROM &#x27;file&#x3a;&#x24;&#x7b;cpk.plugin.dir&#x7d;&#x2f;resources&#x2f;ddl&#x2f;cns_db.ddl&#x27;</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
