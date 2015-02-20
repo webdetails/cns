@@ -267,36 +267,41 @@ input {
 
 /* delete button */
 
-button.delete-button {
+.action-buttons-container button {
     height: 24px;
-    width: 24px;
-    padding: 0;
-    border: 1px solid transparent;
-    background: url(../img/delete.svg) no-repeat center center;
-    margin-right: 5px;
+    padding: 0 10px;
+    line-height: 22px;
+    border: 1px solid #d7d7d7;
     margin-left: 5px;
+    background: none;
+    filter: none;
+    display: none;
     -webkit-transition: border .5s;
     -moz-transition: border .5s;
-	transition: border .5s;
-    outline: none;
-    display: block;
+    transition: border .5s;
 }
 
-.no-svg button.delete-button {
-    background: url(../img/delete.png) no-repeat center center;
+.show-delete button.delete-button,
+.show-mark-read button.markRead,
+.show-mark-unread button.markUnread {
+    display: inline-block;
 }
 
-button.delete-button:hover {
+.action-buttons-container button:hover {
     border: 1px solid #3e6480;
 }
 
 /* actions selector */
+.actions-selector {
+    position: relative;
+}
+
 .actions-container .selector-button {
     padding: 0 40px 0 5px;
     position: relative;
     height: 24px;
     line-height: 22px;
-    border: 1px solid transparent;
+    border: 1px solid #d7d7d7;
     -webkit-transition: border .5s;
     -moz-transition: border .5s;
     transition: border .5s;
@@ -307,6 +312,7 @@ button.delete-button:hover {
     -ms-user-select: none;
     user-select: none;
     cursor: pointer;
+    margin-left: 5px;
 }
 
 .actions-container .selector-button:hover,
@@ -344,7 +350,7 @@ button.delete-button:hover {
     padding: 5px;
     background: #FFF;
     z-index: 100;
-    right: 0;
+    left: 5px;
     margin-top: -1px;
     display: none;
 }
@@ -406,7 +412,7 @@ button.delete-button:hover {
 
 .tableObj input[type=search] {
     background: #FFF url(../img/search.svg) no-repeat right center;
-    border: solid 1px #FFF;
+    border: solid 1px #d7d7d7;
 	padding: 0 22px 0 0;
     width: 0px;
     height: 24px;
@@ -418,6 +424,9 @@ button.delete-button:hover {
 	-moz-transition: all .5s;
 	transition: all .5s;
     margin-left: 0;
+    -webkit-box-sizing: border-box !important;
+    -moz-box-sizing: border-box !important;
+    box-sizing: border-box !important;
 }
 
 .no-svg .tableObj input[type=search] {
@@ -614,6 +623,11 @@ button.delete-button:hover {
 .paginate_enabled_next:hover {
     border: 1px solid #3e6480;
     z-index: 100;
+}
+
+.paginate_disabled_previous,
+.paginate_disabled_next {
+    cursor: default;
 }
 
 .paginate_disabled_previous:after,
