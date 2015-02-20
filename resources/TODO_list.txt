@@ -19,3 +19,4 @@ RUNSCRIPT FROM '/W:/Pentaho Installers/Community Edition/biserver-ce-5.2.CNS/bis
 - provide the means for a user to subscribe / unsubscribe ( perhaps an option within the notifications dashboard itself )
 - when we move to another page or filter the notifications using the search box, the table header checkbox must update
 - change notifications dashboard title to "Community Notifications System" (on browser tabs)
+- e.srcElement used on Table Component doesn't work in Firefox. Alternatives: use e.target (only works for IE9+) or use jQuery equivalent - $(this)
