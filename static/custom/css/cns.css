@@ -52,6 +52,12 @@ body {
     color: #26363D;
 }
 
+button,
+a,
+input {
+    outline: 0 none !important;
+}
+
 /* ================ NOTIFICATIONS PANEL ================ */
 
 
@@ -70,7 +76,7 @@ body {
 }
 
 .panel .panel-body {
-    padding-top: 0;
+    padding-top: 30px;
 }
 
 
@@ -100,6 +106,8 @@ body {
 .tableObj .dataTables_wrapper .dataTables_info {
     line-height: 24px;
     padding: 0;
+    margin-left: 10px;
+    float: right;
 }
 
 .tableObj table > thead > tr > th,
@@ -108,7 +116,24 @@ body {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    cursor: pointer;
 }
+
+/* when row is expanded */
+.tableObj table > tbody > tr.expandingClass > td.column3 {
+    overflow: visible;
+    white-space: normal;
+    text-overflow: none;
+    word-wrap: break-word;
+}
+
+.tableObj table > tbody > tr.expandingClass > td.expandingClass {
+    display: none;
+}
+
+.tableObj table > tbody > tr.expandingClass > td {
+}
+/* when row is expanded */
 
 .tableObj table > thead > tr > th {
     color: #FFF;
@@ -137,15 +162,12 @@ body {
 .tableObj table > tbody > tr > td {
     border-top: none;
     border-left: none;
-    border-right: 1px solid #d7d7d7;
+    border-right: none;
     border-bottom: 1px solid #d7d7d7;
     font-size: 14px;
     font-weight: 400;
     line-height: 24px;
-    padding: 8px 10px 10px 10px;
-    
-    /* alternative version */    
-    border-right: none;
+    padding: 8px 10px 10px 10px;  
 }
 
 .tableObj table > tbody > tr.read,
@@ -221,7 +243,8 @@ body {
 
 .tableObj table > tbody > tr.checked,
 .tableObj table > tbody > tr.checked > td {
-    background: #ffffd8;
+    background: #ffffd8 !important;
+    background: #dce7ed !important;
 }
 
 .tableObj table .checked .checkboxColumn .checkbox,
@@ -256,6 +279,7 @@ button.delete-button {
     -moz-transition: border .5s;
 	transition: border .5s;
     outline: none;
+    display: block;
 }
 
 .no-svg button.delete-button {
@@ -352,12 +376,12 @@ button.delete-button:hover {
 }
 
 /* date column width */
-.tableObj table .column0 {
+.tableObj table .column1 {
     width: 160px !important;
     min-width: 160px !important;
     max-width: 160px !important;
 }
-.tableObj table .column1 {
+.tableObj table .column2 {
     width: 140px !important;
     min-width: 140px !important;
     max-width: 140px !important;
@@ -385,7 +409,7 @@ button.delete-button:hover {
     border: solid 1px #FFF;
 	padding: 0 22px 0 0;
     width: 0px;
-    height: 22px;
+    height: 24px;
     line-height: 22px;
     font-weight: 400;
 	color: transparent;
@@ -509,4 +533,100 @@ button.delete-button:hover {
     .tableObj table .column2 {
         width: 350px !important;
     }
+}
+
+/* table pagination */
+.paginate_disabled_previous,
+.paginate_enabled_previous,
+.paginate_disabled_next,
+.paginate_enabled_next {
+    color: #111;
+    height: 24px;
+    width: 24px;
+    border: 1px solid #d7d7d7;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.paginate_disabled_previous,
+.paginate_disabled_next {
+    border: 1px solid #E9E9E9;
+}
+
+.paginate_disabled_previous,
+.paginate_enabled_previous,
+.paginate_disabled_previous:hover,
+.paginate_enabled_previous:hover {
+    background: none;
+}
+
+.paginate_disabled_previous:after,
+.paginate_enabled_previous:after {
+    height: 22px;
+    width: 22px;
+    content: '';
+    position:absolute;
+    left: 0px;
+    top: 0px;
+    background: url(../img/left-arrow.svg) no-repeat center center;
+}
+
+.no-svg .paginate_disabled_previous:after,
+.no-svg .paginate_enabled_previous:after {
+    background: url(../img/left-arrow.png) no-repeat center center;
+}
+
+.paginate_disabled_next:after,
+.paginate_enabled_next:after {
+    height: 22px;
+    width: 22px;
+    content: '';
+    position:absolute;
+    left: 0px;
+    top: 0px;
+    background: url(../img/right-arrow.svg) no-repeat center center;
+}
+
+.no-svg .paginate_disabled_next:after,
+.no-svg .paginate_enabled_next:after {
+    background: url(../img/right-arrow.png) no-repeat center center;
+}
+
+.paginate_disabled_next,
+.paginate_enabled_next,
+.paginate_disabled_next:hover,
+.paginate_enabled_next:hover {
+    margin-left: -1px;
+    background: none;
+}
+
+.no-svg .paginate_disabled_next,
+.no-svg .paginate_enabled_next,
+.no-svg .paginate_disabled_next:hover,
+.no-svg .paginate_enabled_next:hover {
+    background: url(../img/right-arrow.png) no-repeat center center;
+}
+
+.paginate_enabled_previous:hover,
+.paginate_enabled_next:hover {
+    border: 1px solid #3e6480;
+    z-index: 100;
+}
+
+.paginate_disabled_previous:after,
+.paginate_disabled_next:after {
+    opacity: 0.2;
+}
+
+.paginate_enabled_previous:after,
+.paginate_enabled_next:after {
+    opacity: .6;
+}
+
+.paginate_enabled_previous:hover:after,
+.paginate_enabled_next:hover:after {
+    opacity: 1;
 }
