@@ -90,9 +90,9 @@
             <description>The pentaho-solutions folder. This value is automatically set at runtime if &#x27;&#x23;&#x27; is removed from variable name.</description>
         </parameter>
         <parameter>
-            <name>unreadOnly</name>
-            <default_value>false</default_value>
-            <description>Get unread notifications only</description>
+            <name>filter</name>
+            <default_value>all</default_value>
+            <description>Filter notifications by read &#x7c; unread &#x7c; all</description>
         </parameter>
     </parameters>
     <log>
@@ -208,9 +208,9 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Table input</from><to>OUTPUT</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get notifications from DB</from><to>OUTPUT</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Variables</from><to>Write to log</to><enabled>Y</enabled> </hop>
-  <hop> <from>Write to log</from><to>Table input</to><enabled>Y</enabled> </hop>
+  <hop> <from>Write to log</from><to>Get notifications from DB</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Get Variables</name>
@@ -277,7 +277,7 @@
     </step>
 
   <step>
-    <name>Table input</name>
+    <name>Get notifications from DB</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -288,7 +288,7 @@
            <schema_name/>
            </partitioning>
     <connection>cns_db</connection>
-    <sql>SELECT COUNT&#x28;&#x2a;&#x29;&#xa;FROM NOTIFICATIONS&#xa;WHERE &#xa;RCPT IS NOT NULL &#xa;AND &#xa;RCPT &#x3d; &#x27;&#x24;&#x7b;cpk.session.username&#x7d;&#x27;&#xa;AND&#xa;&#x28; &#x27;&#x24;&#x7b;unreadOnly&#x7d;&#x27; &#x3d; &#x27;false&#x27; OR UNREAD &#x3d; &#x27;true&#x27; &#x29;</sql>
+    <sql>select &#xa;	count&#x28;&#x2a;&#x29;&#xa;from &#xa;	NOTIFICATIONS&#xa;where&#xa;	RCPT is not null&#xa;	and&#xa;	RCPT &#x3d; &#x27;&#x24;&#x7b;cpk.session.username&#x7d;&#x27;&#xa;	and&#xa;  	&#x28; &#xa;		&#x28; upper &#x28; &#x27;&#x24;&#x7b;filter&#x7d;&#x27; &#x29; &#x3d; &#x28; &#x27;ALL&#x27; &#x29; &#x29;  &#xa;		OR&#xa;		&#x28; &#x28; casewhen&#x28; UNREAD , &#x27;unread&#x27; , &#x27;read&#x27; &#x29; &#x29; &#x3d; &#x27;&#x24;&#x7b;filter&#x7d;&#x27; &#x29;  &#xa;	&#x29;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

@@ -90,6 +90,11 @@
             <description>The pentaho-solutions folder. This value is automatically set at runtime if &#x27;&#x23;&#x27; is removed from variable name.</description>
         </parameter>
         <parameter>
+            <name>filter</name>
+            <default_value>all</default_value>
+            <description>Filter notifications by read &#x7c; unread &#x7c; all</description>
+        </parameter>
+        <parameter>
             <name>fromSender</name>
             <default_value>&#x25;</default_value>
             <description>sender of notification</description>
@@ -98,11 +103,6 @@
             <name>rcptType</name>
             <default_value>&#x25;</default_value>
             <description>Type of recipient &#x28; USER &#x2f; ROLE &#x2f; ALL &#x29;</description>
-        </parameter>
-        <parameter>
-            <name>unreadOnly</name>
-            <default_value>false</default_value>
-            <description>Get unread notifications only</description>
         </parameter>
     </parameters>
     <log>
@@ -218,9 +218,9 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Table input</from><to>OUTPUT</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get notifications from DB</from><to>OUTPUT</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Variables</from><to>Write to log</to><enabled>Y</enabled> </hop>
-  <hop> <from>Write to log</from><to>Table input</to><enabled>Y</enabled> </hop>
+  <hop> <from>Write to log</from><to>Get notifications from DB</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Get Variables</name>
@@ -247,9 +247,9 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>unreadOnly</name>
-        <variable>&#x24;&#x7b;unreadOnly&#x7d;</variable>
-        <type>Boolean</type>
+        <name>filter</name>
+        <variable>&#x24;&#x7b;filter&#x7d;</variable>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -285,8 +285,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>384</xloc>
-      <yloc>96</yloc>
+      <xloc>350</xloc>
+      <yloc>49</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -304,14 +304,14 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>384</xloc>
-      <yloc>384</yloc>
+      <xloc>351</xloc>
+      <yloc>345</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Table input</name>
+    <name>Get notifications from DB</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -322,7 +322,7 @@
            <schema_name/>
            </partitioning>
     <connection>cns_db</connection>
-    <sql>select&#xa;  &#x28; ID &#x7c;&#x7c; &#x27;&#x3a;&#x27; &#x7c;&#x7c; &#x28; casewhen&#x28; UNREAD , &#x27;unread&#x27; , &#x27;read&#x27; &#x29; &#x29; &#x29; as ID_UNREAD,&#xa;  FORMATDATETIME&#x28;CREATED_DATE , &#x27;yyyy&#x2f;MM&#x2f;dd&#x27;&#x29; as CREATION_DATE,&#xa;  AUTHOR,&#xa;  MESSAGE&#xa;&#xa;from &#xa;  NOTIFICATIONS&#xa;&#xa;where &#xa;  RCPT is not null and RCPT &#x3d; &#x27;&#x24;&#x7b;cpk.session.username&#x7d;&#x27;&#xa;  and&#xa;  UNREAD in &#x28; &#x27;true&#x27; , &#x27;&#x24;&#x7b;unreadOnly&#x7d;&#x27; &#x29;&#xa;  and&#xa;  EVENTTYPE LIKE &#x27;&#x24;&#x7b;rcptType&#x7d;&#x27;&#xa;  and&#xa;  upper&#x28; AUTHOR &#x29; like upper &#x28; &#x27;&#x25;&#x24;&#x7b;fromSender&#x7d;&#x25;&#x27; &#x29;</sql>
+    <sql>select&#xa;  &#x28; ID &#x7c;&#x7c; &#x27;&#x3a;&#x27; &#x7c;&#x7c; &#x28; casewhen&#x28; UNREAD , &#x27;unread&#x27; , &#x27;read&#x27; &#x29; &#x29; &#x29; as ID_UNREAD,&#xa;  FORMATDATETIME&#x28;CREATED_DATE , &#x27;yyyy&#x2f;MM&#x2f;dd&#x27;&#x29; as CREATION_DATE,&#xa;  AUTHOR,&#xa;  MESSAGE&#xa;&#xa;from &#xa;  NOTIFICATIONS&#xa;&#xa;where &#xa;  RCPT is not null and RCPT &#x3d; &#x27;&#x24;&#x7b;cpk.session.username&#x7d;&#x27;&#xa;  and&#xa;  	&#x28; &#xa;		&#x28; upper &#x28; &#x27;&#x24;&#x7b;filter&#x7d;&#x27; &#x29; &#x3d; &#x28; &#x27;ALL&#x27; &#x29; &#x29;  &#xa;		OR&#xa;		&#x28; &#x28; casewhen&#x28; UNREAD , &#x27;unread&#x27; , &#x27;read&#x27; &#x29; &#x29; &#x3d; &#x27;&#x24;&#x7b;filter&#x7d;&#x27; &#x29;  &#xa;	&#x29;&#xa;  and&#xa;  EVENTTYPE LIKE &#x27;&#x24;&#x7b;rcptType&#x7d;&#x27;&#xa;  and&#xa;  upper&#x28; AUTHOR &#x29; like upper &#x28; &#x27;&#x25;&#x24;&#x7b;fromSender&#x7d;&#x25;&#x27; &#x29;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -330,8 +330,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>384</xloc>
-      <yloc>288</yloc>
+      <xloc>351</xloc>
+      <yloc>249</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -351,13 +351,13 @@
       <displayHeader>Y</displayHeader>
       <limitRows>N</limitRows>
       <limitRowsNumber>0</limitRowsNumber>
-      <logmessage>FETCHING NOTIFICATIONS FOR USER&#x3a;</logmessage>
+      <logmessage>Fetching notifications with values&#x3a;</logmessage>
     <fields>
       <field>
         <name>cpk.session.username</name>
         </field>
       <field>
-        <name>unreadOnly</name>
+        <name>filter</name>
         </field>
       <field>
         <name>rcptType</name>
@@ -368,8 +368,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>384</xloc>
-      <yloc>192</yloc>
+      <xloc>350</xloc>
+      <yloc>145</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
