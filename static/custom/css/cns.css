@@ -385,6 +385,10 @@ input {
     outline: none;
 }
 
+.actions-container .selector-dropdown button.selected {
+    display: none;
+}
+
 .actions-container .selector-dropdown button:hover,
 .actions-container .selector-dropdown button:active {
     background: #005ca7;
