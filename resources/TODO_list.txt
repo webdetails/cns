@@ -5,12 +5,6 @@ TODO list ( ordered by priority)
 ---------
 
 
-- Tools > Notifications: error when in Windows OS: 
-
-2015/01/21 10:31:13 - Table input.0 - Error connecting to database: (using class org.h2.Driver)
-2015/01/21 10:31:13 - Table input.0 - IO Exception: "java.net.MalformedURLException: no protocol: /W:/Pentaho Installers/Community Edition/biserver-ce-5.2.CNS/biserver-ce/pentaho-solutions/system/cns//resources/ddl/cns_db.ddl"; "/W:/Pentaho Installers/Community Edition/biserver-ce-5.2.CNS/biserver-ce/pentaho-solutions/system/cns//resources/ddl/cns_db.ddl"; SQL statement:
-RUNSCRIPT FROM '/W:/Pentaho Installers/Community Edition/biserver-ce-5.2.CNS/biserver-ce/pentaho-solutions/system/cns//resources/ddl/cns_db.ddl' [90031-131]
-
 - first access to Tools > Notifications with 0 (zero) notifications stored: "Error processing component"
 - pass the notifications dashboard through UX
 - add a persistent mechanism for subscribe/{notificationType} and unsubscribe/{notificationType}
@@ -20,4 +14,3 @@ RUNSCRIPT FROM '/W:/Pentaho Installers/Community Edition/biserver-ce-5.2.CNS/bis
 - when we move to another page or filter the notifications using the search box, the table header checkbox must update
 - change notifications dashboard title to "Community Notifications System" (on browser tabs)
 - e.srcElement used on Table Component doesn't work in Firefox. Alternatives: use e.target (only works for IE9+) or use jQuery equivalent - $(this)
-- change getNotifications endpoint to listen to "paramfilter" instead of "paramunreadOnly" ("paramfilter" values can be: "read" / "unread" / "all")
