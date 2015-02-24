@@ -82,12 +82,14 @@ input {
 
 /* ================ NOTIFICATIONS TABLE ================ */
 
+.table-responsive {
+    margin-bottom: 10px;
+}
 
 .tableObj table {
     border: none;
     border-top: 1px solid #d7d7d7;
     border-left: 1px solid #d7d7d7;
-    margin-bottom: 10px;
     table-layout: fixed;
     
     /* alternative version */    
@@ -106,8 +108,9 @@ input {
 .tableObj .dataTables_wrapper .dataTables_info {
     line-height: 24px;
     padding: 0;
-    margin-left: 10px;
+    margin-right: 10px;
     float: right;
+    clear: none;
 }
 
 .tableObj table > thead > tr > th,
@@ -272,7 +275,7 @@ input {
     padding: 0 10px;
     line-height: 22px;
     border: 1px solid #d7d7d7;
-    margin-left: 5px;
+    margin-right: 5px;
     background: none;
     filter: none;
     display: none;
@@ -294,10 +297,15 @@ input {
 /* actions selector */
 .actions-selector {
     position: relative;
+    margin-left: 5px;
+}
+
+.actions-selector .selected-text {
+    text-transform: capitalize;
 }
 
 .actions-container .selector-button {
-    padding: 0 40px 0 5px;
+    padding: 0 28px 0 5px;
     position: relative;
     height: 24px;
     line-height: 22px;
@@ -312,7 +320,7 @@ input {
     -ms-user-select: none;
     user-select: none;
     cursor: pointer;
-    margin-left: 5px;
+    min-width: 86px;
 }
 
 .actions-container .selector-button:hover,
@@ -350,9 +358,11 @@ input {
     padding: 5px;
     background: #FFF;
     z-index: 100;
-    left: 5px;
+    left: 0;
     margin-top: -1px;
     display: none;
+    min-width: 100%;
+    width: auto;
 }
 
 .actions-container .open .selector-dropdown {
@@ -362,7 +372,7 @@ input {
 .actions-container .selector-dropdown button {
     display: block;
     white-space: nowrap;
-    width: 100%;
+    min-width: 100%;
     text-align: left;
     border: none;
     background: #FFF;

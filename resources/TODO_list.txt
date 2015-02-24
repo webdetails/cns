@@ -20,3 +20,4 @@ RUNSCRIPT FROM '/W:/Pentaho Installers/Community Edition/biserver-ce-5.2.CNS/bis
 - when we move to another page or filter the notifications using the search box, the table header checkbox must update
 - change notifications dashboard title to "Community Notifications System" (on browser tabs)
 - e.srcElement used on Table Component doesn't work in Firefox. Alternatives: use e.target (only works for IE9+) or use jQuery equivalent - $(this)
+- change getNotifications endpoint to listen to "paramfilter" instead of "paramunreadOnly" ("paramfilter" values can be: "read" / "unread" / "all")
