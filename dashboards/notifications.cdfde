@@ -87,10 +87,111 @@
     ]
    },
    {
+    "id": "cf0c66ce-b97a-2ab4-c45f-6691ee547c4f",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "64f6921a-ae00-16bc-f1c0-e01645bd1618",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "321b0098-df19-b2e7-46a2-d6d45a86c4ae",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "cf0c66ce-b97a-2ab4-c45f-6691ee547c4f",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "10",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
     "id": "b770a559-88de-9c38-df61-b64f3b37e3ac",
     "type": "LayoutHtml",
     "typeDesc": "Html",
-    "parent": "64f6921a-ae00-16bc-f1c0-e01645bd1618",
+    "parent": "321b0098-df19-b2e7-46a2-d6d45a86c4ae",
     "properties": [
      {
       "name": "name",
@@ -120,6 +221,69 @@
     ]
    },
    {
+    "id": "4b307595-58b5-bc1f-67b9-5b3f8b9b77b4",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "cf0c66ce-b97a-2ab4-c45f-6691ee547c4f",
+    "properties": [
+     {
+      "name": "name",
+      "value": "createNotificationBtnObj",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "2",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "createNotificationBtnObj",
+      "type": "String"
+     }
+    ]
+   },
+   {
     "id": "a1abbcbc-d44f-8f8e-0200-ea079e35e655",
     "type": "BootstrapPanelBody",
     "typeDesc": "Panel Body",
@@ -143,6 +307,973 @@
      {
       "name": "cssClass",
       "value": "tableObj",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "1989867e-452a-590c-9e2f-eab16992894d",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "createNotificationPopupObj",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "691fdb76-ad9f-50b2-8840-21b39266d519",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "1989867e-452a-590c-9e2f-eab16992894d",
+    "properties": [
+     {
+      "name": "name",
+      "value": "popupContainer",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "12",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "popupContainer",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "6d18b364-8afb-8b34-2e94-a1e4f4c80a79",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "691fdb76-ad9f-50b2-8840-21b39266d519",
+    "properties": [
+     {
+      "name": "name",
+      "value": "popupHeader",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "popupHeader",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "9f4f140a-8420-8b43-4d23-dd5acde40cdd",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "6d18b364-8afb-8b34-2e94-a1e4f4c80a79",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "12",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "ccbb3860-b193-8eac-86c2-1a9c3c1b3cec",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "9f4f140a-8420-8b43-4d23-dd5acde40cdd",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "New Notification ",
+      "type": "Html"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "2e47619b-5f55-4f60-757a-ec42b0ad7955",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "691fdb76-ad9f-50b2-8840-21b39266d519",
+    "properties": [
+     {
+      "name": "name",
+      "value": "popupContent",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "popupContent",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "a99f7430-3b4a-d5c3-3c19-e38d651ee57e",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "2e47619b-5f55-4f60-757a-ec42b0ad7955",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "12",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "3e0a7220-dad1-4b33-7e1d-3326810622a6",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "a99f7430-3b4a-d5c3-3c19-e38d651ee57e",
+    "properties": [
+     {
+      "name": "name",
+      "value": "subject",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "subject",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "72d73c3c-6960-97d2-c539-7e42829e76a0",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "3e0a7220-dad1-4b33-7e1d-3326810622a6",
+    "properties": [
+     {
+      "name": "name",
+      "value": "subjectInputObj",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "12",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "subjectInputObj",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "23fca3b9-f964-ae02-9578-396f30d12f9b",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "a99f7430-3b4a-d5c3-3c19-e38d651ee57e",
+    "properties": [
+     {
+      "name": "name",
+      "value": "message",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "message",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "46044ccd-2159-bf5f-3dfe-4bcaddda0485",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "23fca3b9-f964-ae02-9578-396f30d12f9b",
+    "properties": [
+     {
+      "name": "name",
+      "value": "messageInputObj",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "12",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "messageInputObj",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "83bbc719-86fb-d8a0-f9e2-66b49e175423",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "a99f7430-3b4a-d5c3-3c19-e38d651ee57e",
+    "properties": [
+     {
+      "name": "name",
+      "value": "link",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "link",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "db97de2f-8e9b-e5ba-b927-77f5bc36c434",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "83bbc719-86fb-d8a0-f9e2-66b49e175423",
+    "properties": [
+     {
+      "name": "name",
+      "value": "linkInputObj",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "12",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "linkInputObj",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "187e1d68-196d-c2ed-96d4-fcb8108e368b",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "a99f7430-3b4a-d5c3-3c19-e38d651ee57e",
+    "properties": [
+     {
+      "name": "name",
+      "value": "recipient",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "recipient",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "1e3b6559-ea8f-ff53-a831-f14ca4edee38",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "187e1d68-196d-c2ed-96d4-fcb8108e368b",
+    "properties": [
+     {
+      "name": "name",
+      "value": "recipientTypeInputObj",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "12",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "6",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "recipientTypeInputObj",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "7c416469-fd4d-00b5-1176-c4e683a1cb59",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "187e1d68-196d-c2ed-96d4-fcb8108e368b",
+    "properties": [
+     {
+      "name": "name",
+      "value": "recipientNameInputObj",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "12",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "6",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "recipientNameInputObj",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "7f51f713-7f30-0a99-86bc-4fb20f8d5283",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "691fdb76-ad9f-50b2-8840-21b39266d519",
+    "properties": [
+     {
+      "name": "name",
+      "value": "popupFooter",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "popupFooter",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "41ec0a32-1f9f-1320-0073-a8adc8754ead",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "7f51f713-7f30-0a99-86bc-4fb20f8d5283",
+    "properties": [
+     {
+      "name": "name",
+      "value": "popupCancelBtnObj",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "4",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "popupCancelBtnObj",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "15c13379-39fa-5395-b7f9-39fc04e5c85a",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "7f51f713-7f30-0a99-86bc-4fb20f8d5283",
+    "properties": [
+     {
+      "name": "name",
+      "value": "popupSendBtnObj",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "8",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "popupSendBtnObj",
       "type": "String"
      }
     ]
@@ -197,21 +1328,6 @@
       "type": "JavaScript"
      },
      {
-      "name": "colHeaders",
-      "value": "[\"ID\",\"Date\",\"Author\",\"Message\"]",
-      "type": "Array"
-     },
-     {
-      "name": "parameters",
-      "value": "[[\"filter\",\"showFilter\"]]",
-      "type": "ValuesArray"
-     },
-     {
-      "name": "expandParameters",
-      "value": "[]",
-      "type": "ValuesArray"
-     },
-     {
       "name": "colSortable",
       "value": "[\"false\",\"true\",\"true\",\"true\"]",
       "type": "Array"
@@ -225,6 +1341,21 @@
       "name": "colWidths",
       "value": "[]",
       "type": "Array"
+     },
+     {
+      "name": "colHeaders",
+      "value": "[\"ID\",\"Date\",\"Author\",\"Message\"]",
+      "type": "Array"
+     },
+     {
+      "name": "parameters",
+      "value": "[[\"filter\",\"showFilter\"]]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "expandParameters",
+      "value": "[]",
+      "type": "ValuesArray"
      },
      {
       "name": "colTypes",
@@ -282,14 +1413,14 @@
       "type": "Datasource"
      },
      {
-      "name": "sDom",
-      "value": "",
-      "type": "JavaScript"
-     },
-     {
       "name": "sortBy",
       "value": "[[\"1\",\"desc\"]]",
       "type": "SortByArray"
+     },
+     {
+      "name": "sDom",
+      "value": "",
+      "type": "JavaScript"
      },
      {
       "name": "refreshPeriod",
@@ -338,7 +1469,7 @@
      },
      {
       "name": "postExecution",
-      "value": "function f(){\n    \n    var placeholder = this.ph;\n    \n    if( !placeholder.find( 'thead > tr > th.column0' ).hasClass( \"checkboxColumn\" ) ){\n        \n        // clear th's text\n        placeholder.find( 'thead > tr > th.column0' ).text('');\n        \n        // add checkboxColumn class\n        placeholder.find( 'thead > tr > th.column0' ).addClass( \"checkboxColumn\" );\n        \n        // add child checkbox div\n        var $headerCheckboxDiv = $( '<div class=\"checkbox\"></div>' );\n        \n        $headerCheckboxDiv.on('click', function() {\n        \n            var checkbox = $(this),\n                checkboxRow = checkbox.closest('tr'),\n                tbodyCheckboxes = $('tbody tr'),\n                tbodyCheckboxesLength = tbodyCheckboxes.length,\n                tbodyCheckboxesChecked = $('tbody tr.checked');\n                tbodyCheckboxesCheckedLength = tbodyCheckboxesChecked.length;\n            \n            // if none of the checkboxes are checked\n            if(tbodyCheckboxesCheckedLength === 0) {\n                checkboxRow.addClass('checked-all');\n                checkboxRow.removeClass('checked-some');\n                // check all checkboxes\n                tbodyCheckboxes.addClass('checked');\n                \n                // show propper action buttons \n                placeholder.addClass('show-delete');\n                if($('tbody tr.checked.read').length > 0 && $('tbody tr.checked.unread').length > 0) {\n                    placeholder.addClass('show-mark-read show-mark-unread');\n                } else if($('tbody tr.checked.read').length > 0 && $('tbody tr.checked.unread').length == 0) {\n                    placeholder.addClass('show-mark-unread');\n                    placeholder.removeClass('show-mark-read');\n                } else if($('tbody tr.checked.read').length == 0 && $('tbody tr.checked.unread').length > 0) {\n                    placeholder.addClass('show-mark-read');\n                    placeholder.removeClass('show-mark-unread');\n                }\n            }\n            \n            // if some of the checkboxes are checked\n            if(tbodyCheckboxesCheckedLength > 0) {\n                checkboxRow.removeClass('checked-some checked-all');\n                \n                // uncheck all checkboxes\n                tbodyCheckboxes.each(function() {\n                    $(this).removeClass('checked');\n                });\n                \n                // hide action buttons \n                placeholder.removeClass('show-delete show-mark-read show-mark-unread');\n            }\n            \n            \n        });\n        \n        placeholder.find( 'thead > tr > th.column0' ).prepend( $headerCheckboxDiv );\n    }\n    \n    // add responsive behaviour to table\n    placeholder.find('table').wrap( \"<div class='table-responsive'></div>\" );\n    \n    // check if actions container exists\n    var actionsContainerAdded = placeholder.find('.actions-container').length > 0;\n    \n    if(!actionsContainerAdded) {\n        // add actions div\n        placeholder.find('.dataTables_wrapper').prepend('<div class=\"actions-container pull-right\"></div>');\n        \n        // add delete button\n        var $deleteButton = $( '<button class=\"delete-button\">Delete</button>' ),\n            $markReadButton = $('<button id=\"markRead\" class=\"markRead\">Mark as read</button>'),\n            $markUnreadButton = $('<button id=\"markUnread\" class=\"markUnread\">Mark as unread</button>');\n        \n         $deleteButton.on('click', function() {\n            \n            var commaSeparatedIds = '';\n            \n            placeholder.find( 'table > tbody > tr.checked' ).each( function() {\n            \n                var checkboxColumn = $( this ).find( 'td.checkboxColumn' );\n                commaSeparatedIds += ( checkboxColumn.attr( 'notification' ) + ',' );\n            });\n            \n            if( commaSeparatedIds.length > 0 ){\n            \n                // remove the last char ( a rogue comma )\n                commaSeparatedIds = commaSeparatedIds.slice(0 , -1 ); \n                \n                $.ajax({\n                type: 'GET',\n                url: '/pentaho/plugin/cns/api/deletenotifications?paramnotifications=' + commaSeparatedIds,\n                success: function ( xhr ) {\n                  render_notifications.update();\n                }\n              });\n            }\n        });\n        \n        placeholder.find('.dataTables_wrapper').prepend('<div class=\"action-buttons-container pull-left\"></div>');\n        placeholder.find('.action-buttons-container').append( $deleteButton )\n                                                     .append( $markReadButton )\n                                                     .append( $markUnreadButton );\n        \n        // add actions selector\n        var actionsSelector = '<div class=\"pull-left actions-selector\">'\n                            + '<div class=\"selector-button\"><span class=\"selected-text\">All</span></div>'\n                            + '<div class=\"selector-dropdown\">'\n                            + '<button id=\"filterAll\" data-value=\"all\">All</button>'\n                            + '<button id=\"filterRead\" data-value=\"read\">Read</button>'\n                            + '<button id=\"filterUnread\" data-value=\"unread\">Unread</button>'\n                            + '</div>'\n                            + '</div>';\n        placeholder.find('.actions-container').append(actionsSelector);\n        placeholder.find('.selected-text').text(Dashboards.getParameterValue(\"showFilter\"));\n        placeholder.find('.selector-dropdown button[data-value=\"' + Dashboards.getParameterValue(\"showFilter\") + '\"]').addClass('selected');\n        \n        // add actions selector interaction\n        placeholder.find('.actions-container .selector-button').click(function() {\n            $(this).closest('.actions-selector').toggleClass('open');       \n        });\n        \n        // add interaction to mark as read button\n        placeholder.find('#markRead').click(function() {\n            $(this).closest('.actions-selector').toggleClass('open');   \n            \n            var commaSeparatedIds = '';\n            \n            placeholder.find( 'table > tbody > tr.checked' ).each( function() {\n            \n                var checkboxColumn = $( this ).find( 'td.checkboxColumn' );\n                commaSeparatedIds += ( checkboxColumn.attr( 'notification' ) + ',' );\n            });\n            \n            if( commaSeparatedIds.length > 0 ){\n            \n                // remove the last char ( a rogue comma )\n                commaSeparatedIds = commaSeparatedIds.slice(0 , -1 ); \n                \n                $.ajax({\n                type: 'GET',\n                url: '/pentaho/plugin/cns/api/updatenotificationsunreadflag?paramunread=false&paramnotifications=' + commaSeparatedIds,\n                success: function ( xhr ) {\n                  render_notifications.update();\n                }\n              });\n            }\n        });\n        \n        // add interaction to mark as unread button\n        placeholder.find('#markUnread').click(function() {\n            $(this).closest('.actions-selector').toggleClass('open');   \n            \n            var commaSeparatedIds = '';\n            \n            placeholder.find( 'table > tbody > tr.checked' ).each( function() {\n            \n                var checkboxColumn = $( this ).find( 'td.checkboxColumn' );\n                commaSeparatedIds += ( checkboxColumn.attr( 'notification' ) + ',' );\n            });\n            \n            if( commaSeparatedIds.length > 0 ){\n            \n                // remove the last char ( a rogue comma )\n                commaSeparatedIds = commaSeparatedIds.slice(0 , -1 ); \n                \n                $.ajax({\n                type: 'GET',\n                url: '/pentaho/plugin/cns/api/updatenotificationsunreadflag?paramunread=true&paramnotifications=' + commaSeparatedIds,\n                success: function ( xhr ) {\n                  render_notifications.update();\n                }\n              });\n            }\n        });\n        \n        // add interaction to filter buttons\n        placeholder.find('.actions-selector .selector-dropdown button').click(function(e) {\n            var buttonText = $(this).text(),\n                filterParam;\n            $(this).closest('.actions-selector').toggleClass('open');\n            $(this).closest('.actions-selector').find(\".selected-text\")\n                                                .text(buttonText);\n            \n            // update showFilter parameter\n            if(buttonText == \"Unread\") Dashboards.fireChange( \"showFilter\",  \"unread\" );\n            if(buttonText == \"Read\") Dashboards.fireChange( \"showFilter\",  \"read\" );\n            if(buttonText == \"All\") Dashboards.fireChange( \"showFilter\",  \"all\" );\n            \n        });\n        \n        $(document).mouseup(function (e) {\n            var container = $('.actions-selector');\n                    \n            if (!container.is(e.target) // if the target of the click isn't the container...\n                && container.has(e.target).length === 0 ) // ... nor a descendant of the container\n            {\n                container.removeClass('open');\n            }\n        });\n    }\n    \n    // check if paginate container exists\n    var paginateContainerAdded = placeholder.find('.paginate-container').length > 0;\n    \n    if(!actionsContainerAdded) {// add actions div\n        placeholder.find('.dataTables_wrapper').append('<div class=\"paginate-container pull-right clearfix\"></div>');\n        var paginateContainer = placeholder.find('.paginate-container');\n        \n        // move pagination info and pagination into paginate-container\n        placeholder.find(\".dataTables_paginate\").detach().appendTo(paginateContainer);\n        placeholder.find(\".dataTables_info\").detach().appendTo(paginateContainer);\n        \n    }\n    \n    // remove unnecessary 'Search:' text from search label\n    var $filterSearchBox = $( placeholder.find('div#tableObjTable_filter > label') );\n    if( $filterSearchBox && $filterSearchBox[0] && $filterSearchBox[0].firstChild.nodeType == 3 /* Node.TEXT_NODE */ ){\n        $filterSearchBox[0].removeChild( $filterSearchBox[0].firstChild );\n    }    \n    \n    // if no rows are checked, clear action buttons\n    if((placeholder).find('tr.checked').length === 0) {\n        placeholder.removeClass('show-mark-read show-mark-unread show-delete');\n    }\n    \n    // on page change, update:\n        // action buttons,\n        // thead checkbox.\n    placeholder.on( 'draw.dt', function () {\n        placeholder.removeClass('show-delete show-mark-read show-mark-unread');\n        \n        if(placeholder.find('tbody tr.checked').length > 0) {\n            placeholder.addClass('show-delete');\n            if($('tbody tr.checked.read').length > 0 && $('tbody tr.checked.unread').length > 0) {\n                placeholder.addClass('show-mark-read show-mark-unread');\n            } else if($('tbody tr.checked.read').length > 0 && $('tbody tr.checked.unread').length == 0) {\n                placeholder.addClass('show-mark-unread');\n                placeholder.removeClass('show-mark-read');\n            } else if($('tbody tr.checked.read').length == 0 && $('tbody tr.checked.unread').length > 0) {\n                placeholder.addClass('show-mark-read');\n                placeholder.removeClass('show-mark-unread');\n            }\n            \n            if(placeholder.find('tbody tr.checked').length == placeholder.find('tbody tr').length) {\n                placeholder.find('thead tr').removeClass('checked-some').addClass('checked-all');\n            } else {\n                placeholder.find('thead tr').removeClass('checked-all').addClass('checked-some');\n            }\n        } else {\n            placeholder.removeClass('show-delete show-mark-read show-mark-unread');\n            placeholder.find('thead tr').removeClass('checked-all checked-some');\n        }\n    } );\n} ",
+      "value": "function f(){\n    \n    var placeholder = this.ph;\n    \n    if( !placeholder.find( 'thead > tr > th.column0' ).hasClass( \"checkboxColumn\" ) ){\n        \n        // clear th's text\n        placeholder.find( 'thead > tr > th.column0' ).text('');\n        \n        // add checkboxColumn class\n        placeholder.find( 'thead > tr > th.column0' ).addClass( \"checkboxColumn\" );\n        \n        // add child checkbox div\n        var $headerCheckboxDiv = $( '<div class=\"checkbox\"></div>' );\n        \n        $headerCheckboxDiv.on('click', function() {\n        \n            var checkbox = $(this),\n                checkboxRow = checkbox.closest('tr'),\n                tbodyCheckboxes = $('tbody tr'),\n                tbodyCheckboxesLength = tbodyCheckboxes.length,\n                tbodyCheckboxesChecked = $('tbody tr.checked');\n                tbodyCheckboxesCheckedLength = tbodyCheckboxesChecked.length;\n            \n            // if none of the checkboxes are checked\n            if(tbodyCheckboxesCheckedLength === 0) {\n                checkboxRow.addClass('checked-all');\n                checkboxRow.removeClass('checked-some');\n                // check all checkboxes\n                tbodyCheckboxes.addClass('checked');\n                \n                // show propper action buttons \n                placeholder.addClass('show-delete');\n                if($('tbody tr.checked.read').length > 0 && $('tbody tr.checked.unread').length > 0) {\n                    placeholder.addClass('show-mark-read show-mark-unread');\n                } else if($('tbody tr.checked.read').length > 0 && $('tbody tr.checked.unread').length == 0) {\n                    placeholder.addClass('show-mark-unread');\n                    placeholder.removeClass('show-mark-read');\n                } else if($('tbody tr.checked.read').length == 0 && $('tbody tr.checked.unread').length > 0) {\n                    placeholder.addClass('show-mark-read');\n                    placeholder.removeClass('show-mark-unread');\n                }\n            }\n            \n            // if some of the checkboxes are checked\n            if(tbodyCheckboxesCheckedLength > 0) {\n                checkboxRow.removeClass('checked-some checked-all');\n                \n                // uncheck all checkboxes\n                tbodyCheckboxes.each(function() {\n                    $(this).removeClass('checked');\n                });\n                \n                // hide action buttons \n                placeholder.removeClass('show-delete show-mark-read show-mark-unread');\n            }\n            \n            \n        });\n        \n        placeholder.find( 'thead > tr > th.column0' ).prepend( $headerCheckboxDiv );\n    }\n    \n    // add responsive behaviour to table\n    placeholder.find('table').wrap( \"<div class='table-responsive'></div>\" );\n    \n    // check if actions container exists\n    var actionsContainerAdded = placeholder.find('.actions-container').length > 0;\n    \n    if(!actionsContainerAdded) {\n        // add actions div\n        placeholder.find('.dataTables_wrapper').prepend('<div class=\"actions-container pull-right\"></div>');\n        \n        // add delete button\n        var $deleteButton = $( '<button class=\"delete-button\">Delete</button>' ),\n            $markReadButton = $('<button id=\"markRead\" class=\"markRead\">Mark as read</button>'),\n            $markUnreadButton = $('<button id=\"markUnread\" class=\"markUnread\">Mark as unread</button>');\n        \n         $deleteButton.on('click', function() {\n            \n            var commaSeparatedIds = '';\n            \n            placeholder.find( 'table > tbody > tr.checked' ).each( function() {\n            \n                var checkboxColumn = $( this ).find( 'td.checkboxColumn' );\n                commaSeparatedIds += ( checkboxColumn.attr( 'notification' ) + ',' );\n            });\n            \n            if( commaSeparatedIds.length > 0 ){\n            \n                // remove the last char ( a rogue comma )\n                commaSeparatedIds = commaSeparatedIds.slice(0 , -1 ); \n                \n                $.ajax({\n                type: 'GET',\n                url: '/pentaho/plugin/cns/api/deletenotifications?paramnotifications=' + commaSeparatedIds,\n                success: function ( xhr ) {\n                  render_notifications.update();\n                }\n              });\n            }\n        });\n        \n        placeholder.find('.dataTables_wrapper').prepend('<div class=\"action-buttons-container pull-left\"></div>');\n        placeholder.find('.action-buttons-container').append( $deleteButton )\n                                                     .append( $markReadButton )\n                                                     .append( $markUnreadButton );\n        \n        // add actions selector\n        var actionsSelector = '<div class=\"pull-left actions-selector\">'\n                            + '<div class=\"selector-button\">View <span class=\"selected-text\">All</span></div>'\n                            + '<div class=\"selector-dropdown\">'\n                            + '<button id=\"filterAll\" data-value=\"all\">All</button>'\n                            + '<button id=\"filterRead\" data-value=\"read\">Read</button>'\n                            + '<button id=\"filterUnread\" data-value=\"unread\">Unread</button>'\n                            + '</div>'\n                            + '</div>';\n        placeholder.find('.actions-container').append(actionsSelector);\n        placeholder.find('.selected-text').text(Dashboards.getParameterValue(\"showFilter\"));\n        placeholder.find('.selector-dropdown button[data-value=\"' + Dashboards.getParameterValue(\"showFilter\") + '\"]').addClass('selected');\n        \n        // add actions selector interaction\n        placeholder.find('.actions-container .selector-button').click(function() {\n            $(this).closest('.actions-selector').toggleClass('open');       \n        });\n        \n        // add interaction to mark as read button\n        placeholder.find('#markRead').click(function() {\n            $(this).closest('.actions-selector').toggleClass('open');   \n            \n            var commaSeparatedIds = '';\n            \n            placeholder.find( 'table > tbody > tr.checked' ).each( function() {\n            \n                var checkboxColumn = $( this ).find( 'td.checkboxColumn' );\n                commaSeparatedIds += ( checkboxColumn.attr( 'notification' ) + ',' );\n            });\n            \n            if( commaSeparatedIds.length > 0 ){\n            \n                // remove the last char ( a rogue comma )\n                commaSeparatedIds = commaSeparatedIds.slice(0 , -1 ); \n                \n                $.ajax({\n                type: 'GET',\n                url: '/pentaho/plugin/cns/api/updatenotificationsunreadflag?paramunread=false&paramnotifications=' + commaSeparatedIds,\n                success: function ( xhr ) {\n                  render_notifications.update();\n                }\n              });\n            }\n        });\n        \n        // add interaction to mark as unread button\n        placeholder.find('#markUnread').click(function() {\n            $(this).closest('.actions-selector').toggleClass('open');   \n            \n            var commaSeparatedIds = '';\n            \n            placeholder.find( 'table > tbody > tr.checked' ).each( function() {\n            \n                var checkboxColumn = $( this ).find( 'td.checkboxColumn' );\n                commaSeparatedIds += ( checkboxColumn.attr( 'notification' ) + ',' );\n            });\n            \n            if( commaSeparatedIds.length > 0 ){\n            \n                // remove the last char ( a rogue comma )\n                commaSeparatedIds = commaSeparatedIds.slice(0 , -1 ); \n                \n                $.ajax({\n                type: 'GET',\n                url: '/pentaho/plugin/cns/api/updatenotificationsunreadflag?paramunread=true&paramnotifications=' + commaSeparatedIds,\n                success: function ( xhr ) {\n                  render_notifications.update();\n                }\n              });\n            }\n        });\n        \n        // add interaction to filter buttons\n        placeholder.find('.actions-selector .selector-dropdown button').click(function(e) {\n            var buttonText = $(this).text(),\n                filterParam;\n            $(this).closest('.actions-selector').toggleClass('open');\n            $(this).closest('.actions-selector').find(\".selected-text\")\n                                                .text(buttonText);\n            \n            // update showFilter parameter\n            if(buttonText == \"Unread\") Dashboards.fireChange( \"showFilter\",  \"unread\" );\n            if(buttonText == \"Read\") Dashboards.fireChange( \"showFilter\",  \"read\" );\n            if(buttonText == \"All\") Dashboards.fireChange( \"showFilter\",  \"all\" );\n            \n        });\n        \n        $(document).mouseup(function (e) {\n            var container = $('.actions-selector');\n                    \n            if (!container.is(e.target) // if the target of the click isn't the container...\n                && container.has(e.target).length === 0 ) // ... nor a descendant of the container\n            {\n                container.removeClass('open');\n            }\n        });\n    }\n    \n    // check if paginate container exists\n    var paginateContainerAdded = placeholder.find('.paginate-container').length > 0;\n    \n    if(!actionsContainerAdded) {// add actions div\n        placeholder.find('.dataTables_wrapper').append('<div class=\"paginate-container pull-right clearfix\"></div>');\n        var paginateContainer = placeholder.find('.paginate-container');\n        \n        // move pagination info and pagination into paginate-container\n        placeholder.find(\".dataTables_paginate\").detach().appendTo(paginateContainer);\n        placeholder.find(\".dataTables_info\").detach().appendTo(paginateContainer);\n        \n    }\n    \n    // remove unnecessary 'Search:' text from search label\n    var $filterSearchBox = $( placeholder.find('div#tableObjTable_filter > label') );\n    if( $filterSearchBox && $filterSearchBox[0] && $filterSearchBox[0].firstChild.nodeType == 3 /* Node.TEXT_NODE */ ){\n        $filterSearchBox[0].removeChild( $filterSearchBox[0].firstChild );\n    }    \n    \n    // if no rows are checked, clear action buttons\n    if((placeholder).find('tr.checked').length === 0) {\n        placeholder.removeClass('show-mark-read show-mark-unread show-delete');\n    }\n    \n    // on page change, update:\n        // action buttons,\n        // thead checkbox.\n    placeholder.on( 'draw.dt', function () {\n        placeholder.removeClass('show-delete show-mark-read show-mark-unread');\n        \n        if(placeholder.find('tbody tr.checked').length > 0) {\n            placeholder.addClass('show-delete');\n            if($('tbody tr.checked.read').length > 0 && $('tbody tr.checked.unread').length > 0) {\n                placeholder.addClass('show-mark-read show-mark-unread');\n            } else if($('tbody tr.checked.read').length > 0 && $('tbody tr.checked.unread').length == 0) {\n                placeholder.addClass('show-mark-unread');\n                placeholder.removeClass('show-mark-read');\n            } else if($('tbody tr.checked.read').length == 0 && $('tbody tr.checked.unread').length > 0) {\n                placeholder.addClass('show-mark-read');\n                placeholder.removeClass('show-mark-unread');\n            }\n            \n            if(placeholder.find('tbody tr.checked').length == placeholder.find('tbody tr').length) {\n                placeholder.find('thead tr').removeClass('checked-some').addClass('checked-all');\n            } else {\n                placeholder.find('thead tr').removeClass('checked-all').addClass('checked-some');\n            }\n        } else {\n            placeholder.removeClass('show-delete show-mark-read show-mark-unread');\n            placeholder.find('thead tr').removeClass('checked-all checked-some');\n        }\n    } );\n} ",
       "type": "JavaScript"
      },
      {
@@ -365,6 +1496,348 @@
       "name": "clickAction",
       "value": "",
       "type": "JavaScript"
+     }
+    ]
+   },
+   {
+    "id": "54e4f95d-ab50-c0fa-768d-b3ada2f3a7d8",
+    "type": "ComponentsbuttonComponent",
+    "typeDesc": "Button Component",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "createNotificationBtn",
+      "type": "Id"
+     },
+     {
+      "name": "label",
+      "value": "New notification",
+      "type": "String"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "expression",
+      "value": "function f(e){   \r\n    render_createNotificationPopup.popup($(e.target));\r\n} ",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
+     },
+     {
+      "name": "priority",
+      "value": 5,
+      "type": "Integer"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "buttonStyle",
+      "value": "themeroller",
+      "type": "TableStyle"
+     },
+     {
+      "name": "htmlObject",
+      "value": "${p:createNotificationBtnObj}",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "e627d22c-9639-5c50-b3b4-88bda0a690f2",
+    "type": "Componentspopup",
+    "typeDesc": "Popup Component",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "createNotificationPopup",
+      "type": "Id"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "gravity",
+      "value": "",
+      "type": "Gravity"
+     },
+     {
+      "name": "parameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "priority",
+      "value": 5,
+      "type": "Integer"
+     },
+     {
+      "name": "draggable",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "horizontalScroll",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "verticalScroll",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "closeOnClickOutside",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "htmlObject",
+      "value": "createNotificationPopupObj",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "99ce7f23-5d5a-dba6-df02-9b49ecb831c8",
+    "type": "ComponentsbuttonComponent",
+    "typeDesc": "Button Component",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "createNotificationSendBtn",
+      "type": "Id"
+     },
+     {
+      "name": "label",
+      "value": "Send",
+      "type": "String"
+     },
+     {
+      "name": "listeners",
+      "value": "['${p:subjectText}','${p:messageText}','${p:linkText}','${p:recipientType}','${p:recipientNameText}']",
+      "type": "Listeners"
+     },
+     {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "expression",
+      "value": "function f() {\n    var subject = Dashboards.getParameterValue('subjectText'),\n        message = Dashboards.getParameterValue('messageText'),\n        link = Dashboards.getParameterValue('linkText'),\n        recipientType = Dashboards.getParameterValue('recipientType'),\n        recipientName = Dashboards.getParameterValue('recipientNameText'),\n        isFormValid = false;\n        \n    if((subject != '') && (message != '')) {\n        if (recipientType != 'All') {\n            if (recipientName != '') {\n                isFormValid = true;\n            }\n        } else {\n            isFormValid = true;\n        }\n    }\n    \n    console.log('isFormValid? ' + isFormValid);\n        \n} ",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
+     },
+     {
+      "name": "priority",
+      "value": 5,
+      "type": "Integer"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "buttonStyle",
+      "value": "themeroller",
+      "type": "TableStyle"
+     },
+     {
+      "name": "htmlObject",
+      "value": "${p:popupSendBtnObj}",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "968bd5c5-e210-bdaf-9963-2eb9d3b168e8",
+    "type": "ComponentsbuttonComponent",
+    "typeDesc": "Button Component",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "createNotificationCancelBtn",
+      "type": "Id"
+     },
+     {
+      "name": "label",
+      "value": "Cancel",
+      "type": "String"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "expression",
+      "value": "function f() {\n    // $('.popupComponent input, .popupComponent textarea').val('');\n    render_createNotificationPopup.hide();\n} ",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
+     },
+     {
+      "name": "priority",
+      "value": 5,
+      "type": "Integer"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "buttonStyle",
+      "value": "themeroller",
+      "type": "TableStyle"
+     },
+     {
+      "name": "htmlObject",
+      "value": "${p:popupCancelBtnObj}",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
      }
     ]
    },
@@ -407,6 +1880,575 @@
       "name": "bookmarkable",
       "value": "false",
       "type": "Boolean"
+     }
+    ]
+   },
+   {
+    "id": "52745964-d7a7-6c59-1f92-9a8b726909a2",
+    "type": "ComponentsParameter",
+    "typeDesc": "Simple parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "subjectText",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "parameterViewRole",
+      "value": "unused",
+      "type": "parameterViewRoleCustom"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
+     }
+    ]
+   },
+   {
+    "id": "6e40f610-3934-100a-b009-1e479cf01774",
+    "type": "ComponentsParameter",
+    "typeDesc": "Simple parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "messageText",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "parameterViewRole",
+      "value": "unused",
+      "type": "parameterViewRoleCustom"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
+     }
+    ]
+   },
+   {
+    "id": "6db62b9f-5681-7d6e-1110-d7625ccd2957",
+    "type": "ComponentsParameter",
+    "typeDesc": "Simple parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "linkText",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "parameterViewRole",
+      "value": "unused",
+      "type": "parameterViewRoleCustom"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
+     }
+    ]
+   },
+   {
+    "id": "2589d291-2aa1-911c-0dc2-1d4848b9dd8c",
+    "type": "ComponentsParameter",
+    "typeDesc": "Simple parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "recipientType",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "parameterViewRole",
+      "value": "unused",
+      "type": "parameterViewRoleCustom"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
+     }
+    ]
+   },
+   {
+    "id": "ac50f21b-9901-4709-25f6-a73f2183664d",
+    "type": "ComponentsParameter",
+    "typeDesc": "Simple parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "recipientNameText",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "parameterViewRole",
+      "value": "unused",
+      "type": "parameterViewRoleCustom"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
+     }
+    ]
+   },
+   {
+    "id": "SELECTORS",
+    "name": "Selects",
+    "type": "Label",
+    "typeDesc": "<i>Group</i>",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "Group",
+      "value": "Selects",
+      "type": "Label"
+     }
+    ]
+   },
+   {
+    "id": "b4788f79-eda4-1bf0-e281-a11d66c67967",
+    "type": "ComponentstextInput",
+    "typeDesc": "Text input Component",
+    "parent": "SELECTORS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "createNotificationSubject",
+      "type": "Id"
+     },
+     {
+      "name": "parameter",
+      "value": "${p:subjectText}",
+      "type": "Parameter"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "maxLength",
+      "value": "0",
+      "type": "Integer"
+     },
+     {
+      "name": "size",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "priority",
+      "value": 5,
+      "type": "Integer"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "htmlObject",
+      "value": "${p:subjectInputObj}",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "function f() {\r\n    var placeholder = this.placeholder();\r\n    placeholder.prepend('<div class=\"formLabel\">Subject (required)</div>');\r\n} ",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "fee69633-c20a-459e-5346-ff3be4426693",
+    "type": "ComponentstextareaInput",
+    "typeDesc": "Textarea input Component",
+    "parent": "SELECTORS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "createNotificationMessage",
+      "type": "Id"
+     },
+     {
+      "name": "parameter",
+      "value": "${p:messageText}",
+      "type": "Parameter"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "numRows",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "numColumns",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "priority",
+      "value": 5,
+      "type": "Integer"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "htmlObject",
+      "value": "${p:messageInputObj}",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "function f() {\r\n    var placeholder = this.placeholder();\r\n    placeholder.prepend('<div class=\"formLabel\">Message (required)</div>');\r\n} ",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "d5288813-e4ce-c9f3-775c-a91712b88995",
+    "type": "ComponentstextInput",
+    "typeDesc": "Text input Component",
+    "parent": "SELECTORS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "createNotificationLink",
+      "type": "Id"
+     },
+     {
+      "name": "parameter",
+      "value": "${p:linkText}",
+      "type": "Parameter"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "maxLength",
+      "value": "0",
+      "type": "Integer"
+     },
+     {
+      "name": "size",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "priority",
+      "value": 5,
+      "type": "Integer"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "htmlObject",
+      "value": "${p:linkInputObj}",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "function f() {\r\n    var placeholder = this.placeholder();\r\n    placeholder.prepend('<div class=\"formLabel\">Link</div>');\r\n} ",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "5e718505-a021-f8c6-3521-1e9fb0f0af8c",
+    "type": "ComponentsSelect",
+    "typeDesc": "Select Component",
+    "parent": "SELECTORS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "createNotificationRecipientType",
+      "type": "Id"
+     },
+     {
+      "name": "parameter",
+      "value": "${p:recipientType}",
+      "type": "Parameter"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "parameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "valueAsId",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "externalPlugin",
+      "value": "select2",
+      "type": "externalPluginCustom"
+     },
+     {
+      "name": "dataSource",
+      "value": "",
+      "type": "Datasource"
+     },
+     {
+      "name": "valuesArray",
+      "value": "[[\"All\",\"All\"],[\"Role\",\"Role\"],[\"User\",\"User\"]]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "priority",
+      "value": 5,
+      "type": "Integer"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "htmlObject",
+      "value": "${p:recipientTypeInputObj}",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "function f() {\r\n    var placeholder = this.placeholder();\r\n    placeholder.prepend('<div class=\"formLabel\">Recipient Type (required)</div>');\r\n} ",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postFetch",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     },
+     {
+      "name": "extraOptions",
+      "value": "[]",
+      "type": "OptionArray"
+     }
+    ]
+   },
+   {
+    "id": "f9d1adff-c24c-7486-eb08-4d7e00cd7b68",
+    "type": "ComponentstextInput",
+    "typeDesc": "Text input Component",
+    "parent": "SELECTORS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "createNotificationRecipientName",
+      "type": "Id"
+     },
+     {
+      "name": "parameter",
+      "value": "${p:recipientNameText}",
+      "type": "Parameter"
+     },
+     {
+      "name": "listeners",
+      "value": "['${p:recipientType}']",
+      "type": "Listeners"
+     },
+     {
+      "name": "maxLength",
+      "value": "0",
+      "type": "Integer"
+     },
+     {
+      "name": "size",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "priority",
+      "value": 5,
+      "type": "Integer"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "htmlObject",
+      "value": "${p:recipientNameInputObj}",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "function f() {\r\n    var placeholder = this.placeholder(),\r\n        recipientType = Dashboards.getParameterValue('recipientType'),\r\n        labelExists = placeholder.find('.formLabel').length > 0 ? true : false;\r\n    \r\n    if(recipientType == \"All\") {\r\n        placeholder.hide();\r\n    }\r\n    \r\n    if(recipientType == \"Role\") {\r\n        placeholder.show();\r\n        if(!labelExists) {\r\n            placeholder.prepend('<div class=\"formLabel\">Role Name (required)</div>');            \r\n        }\r\n    }  \r\n    \r\n    if(recipientType == \"User\") {\r\n        placeholder.show();\r\n        if(!labelExists) {\r\n            placeholder.prepend('<div class=\"formLabel\">User Name (required)</div>');            \r\n        }\r\n    }        \r\n} ",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
      }
     ]
    }
