@@ -1328,16 +1328,6 @@
       "type": "JavaScript"
      },
      {
-      "name": "colSortable",
-      "value": "[\"false\",\"true\",\"true\",\"true\"]",
-      "type": "Array"
-     },
-     {
-      "name": "colFormats",
-      "value": "[]",
-      "type": "Array"
-     },
-     {
       "name": "colWidths",
       "value": "[]",
       "type": "Array"
@@ -1356,6 +1346,16 @@
       "name": "expandParameters",
       "value": "[]",
       "type": "ValuesArray"
+     },
+     {
+      "name": "colSortable",
+      "value": "[\"false\",\"true\",\"true\",\"true\"]",
+      "type": "Array"
+     },
+     {
+      "name": "colFormats",
+      "value": "[]",
+      "type": "Array"
      },
      {
       "name": "colTypes",
@@ -1693,7 +1693,7 @@
      },
      {
       "name": "expression",
-      "value": "function f() {\n    var subject = Dashboards.getParameterValue('subjectText'),\n        message = Dashboards.getParameterValue('messageText'),\n        link = Dashboards.getParameterValue('linkText'),\n        recipientType = Dashboards.getParameterValue('recipientType'),\n        recipientName = Dashboards.getParameterValue('recipientNameText'),\n        isFormValid = false;\n        \n    if((subject != '') && (message != '')) {\n        if (recipientType != 'All') {\n            if (recipientName != '') {\n                isFormValid = true;\n            }\n        } else {\n            isFormValid = true;\n        }\n    }\n    \n    console.log('isFormValid? ' + isFormValid);\n        \n} ",
+      "value": "function f() {\n    var subject = Dashboards.getParameterValue('subjectText'),\n        message = Dashboards.getParameterValue('messageText'),\n        link = Dashboards.getParameterValue('linkText'),\n        recipientType = Dashboards.getParameterValue('recipientType'),\n        recipient = Dashboards.getParameterValue('recipientNameText'),\n        isFormValid = false;\n        \n    if( recipientType != '' && subject != '' && message != '' ) {\n        if (recipientType != 'All') {\n            if (recipient != '') {\n                isFormValid = true;\n            }\n        } else {\n            isFormValid = true;\n        }\n    }\n    \n    var type = recipientType.toLowerCase();\n    isFormValid = ( 'user' == type || 'role' == type || 'all' == type );\n    \n    console.log('isFormValid? ' + isFormValid);\n    \n    if( isFormValid ){\n    \n        $.ajax({\n            type: \"POST\",\n            url: Dashboards.getWebAppPath() + '/plugin/cns/api/do/notify/' + type,\n            data: {\n                recipient: recipient,\n                notificationType: 'mail', // TODO should this be configurable? \n                subject: subject,\n                message: message,\n                link: link\n            },\n            success: function f(){ \n                alert('Notification sent'); // TODO i18n this\n                render_createNotificationPopup.hide();\n            }\n        }); \n    }\n} ",
       "type": "JavaScript"
      },
      {
