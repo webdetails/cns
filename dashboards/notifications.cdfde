@@ -1277,6 +1277,208 @@
       "type": "String"
      }
     ]
+   },
+   {
+    "id": "7be5feb4-cb6d-7ce8-53a7-be1f4255f2d4",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "hiddenElements",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "WDhidden",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "0cfaf87c-b0d9-979a-70d3-565f35dc644b",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "7be5feb4-cb6d-7ce8-53a7-be1f4255f2d4",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "5b82ee1f-e47e-e3a6-7430-4b413be56f1a",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "0cfaf87c-b0d9-979a-70d3-565f35dc644b",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "bdbc0222-6acf-7f88-19d2-a7525856a6fc",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "5b82ee1f-e47e-e3a6-7430-4b413be56f1a",
+    "properties": [
+     {
+      "name": "name",
+      "value": "notificationDetailsHtmlObj",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "tableObj",
+      "type": "String"
+     }
+    ]
    }
   ]
  },
@@ -1297,6 +1499,209 @@
     ]
    },
    {
+    "id": "d5447323-45b6-d7e1-5bdb-957ec9696a3e",
+    "type": "ComponentsTable",
+    "typeDesc": "table Component",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "notificationDetailsTable",
+      "type": "Id"
+     },
+     {
+      "name": "expandContainerObject",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "listeners",
+      "value": "['${p:selectedNotificationId}']",
+      "type": "Listeners"
+     },
+     {
+      "name": "oLanguage",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "language",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "colSortable",
+      "value": "[]",
+      "type": "Array"
+     },
+     {
+      "name": "colFormats",
+      "value": "[]",
+      "type": "Array"
+     },
+     {
+      "name": "colWidths",
+      "value": "[]",
+      "type": "Array"
+     },
+     {
+      "name": "colHeaders",
+      "value": "[\"ID\",\"Date\",\"From\",\"To\",\"Subject\",\"Message\",\"Link\",\"Unread\"]",
+      "type": "Array"
+     },
+     {
+      "name": "parameters",
+      "value": "[[\"id\",\"selectedNotificationId\"]]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "expandParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "colTypes",
+      "value": "[\"string\",\"string\",\"string\",\"string\",\"string\",\"string\",\"string\",\"string\"]",
+      "type": "colTypesCustom"
+     },
+     {
+      "name": "paginate",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "lengthChange",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "filter",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "info",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "sort",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "expandOnClick",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "displayLength",
+      "value": "1",
+      "type": "Integer"
+     },
+     {
+      "name": "colSearchable",
+      "value": "[]",
+      "type": "Array"
+     },
+     {
+      "name": "drawCallback",
+      "value": "function f(){\n    \n    var $tableObjParentTr = $('#notificationDetailsHtmlObj').parents().closest('tr');\n    \n    if( $tableObjParentTr && $tableObjParentTr.hasClass( 'expandingClass' ) ){\n      $tableObjParentTr.attr('class' , 'read' ); // remove 'expandingClass', add only 'read'\n    }\n    \n    // from the notification object, we only want 'Message' and 'Link'\n    \n    // remove id\n    $('#notificationDetailsHtmlObjTable th:first-child').remove();\n    $('#notificationDetailsHtmlObjTable td:first-child').remove();\n    \n    // remove date\n    $('#notificationDetailsHtmlObjTable th:first-child').remove();\n    $('#notificationDetailsHtmlObjTable td:first-child').remove();\n    \n    // remove author\n    $('#notificationDetailsHtmlObjTable th:first-child').remove();\n    $('#notificationDetailsHtmlObjTable td:first-child').remove();\n    \n    // remove rcpt\n    $('#notificationDetailsHtmlObjTable th:first-child').remove();\n    $('#notificationDetailsHtmlObjTable td:first-child').remove();\n    \n     // remove title\n    $('#notificationDetailsHtmlObjTable th:first-child').remove();\n    $('#notificationDetailsHtmlObjTable td:first-child').remove();\n    \n     // remove unread\n    $('#notificationDetailsHtmlObjTable th:last-child').remove();\n    $('#notificationDetailsHtmlObjTable td:last-child').remove();\n    \n    // only 2 left ( the 2 that matter : message and link )\n    \n    // message : do a colspan of 3\n    $('#notificationDetailsHtmlObjTable th:first-child').attr( 'colspan' , '3' );\n    $('#notificationDetailsHtmlObjTable td:first-child').attr( 'colspan' , '3' );\n    \n    // link : do a colspan of 1\n    $('#notificationDetailsHtmlObjTable th:last-child').attr( 'colspan' , '1' );\n    $('#notificationDetailsHtmlObjTable td:last-child').attr( 'colspan' , '1' );\n    \n} ",
+      "type": "JavaScript"
+     },
+     {
+      "name": "dataSource",
+      "value": "notificationById",
+      "type": "Datasource"
+     },
+     {
+      "name": "sortBy",
+      "value": "[]",
+      "type": "SortByArray"
+     },
+     {
+      "name": "sDom",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "priority",
+      "value": "5",
+      "type": "Integer"
+     },
+     {
+      "name": "tableStyle",
+      "value": "bootstrap",
+      "type": "TableStyle"
+     },
+     {
+      "name": "paginationType",
+      "value": "simple",
+      "type": "PaginationType"
+     },
+     {
+      "name": "htmlObject",
+      "value": "${p:notificationDetailsHtmlObj}",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "paginateServerside",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postFetch",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     },
+     {
+      "name": "extraOptions",
+      "value": "[]",
+      "type": "OptionArray"
+     },
+     {
+      "name": "clickAction",
+      "value": "",
+      "type": "JavaScript"
+     }
+    ]
+   },
+   {
     "id": "2e300183-f484-426f-393c-66421cf7971a",
     "type": "ComponentsTable",
     "typeDesc": "table Component",
@@ -1309,7 +1714,7 @@
      },
      {
       "name": "expandContainerObject",
-      "value": "",
+      "value": "notificationDetailsHtmlObj",
       "type": "String"
      },
      {
@@ -1328,21 +1733,6 @@
       "type": "JavaScript"
      },
      {
-      "name": "colWidths",
-      "value": "[]",
-      "type": "Array"
-     },
-     {
-      "name": "colHeaders",
-      "value": "[\"ID\",\"Date\",\"Author\",\"Message\"]",
-      "type": "Array"
-     },
-     {
-      "name": "parameters",
-      "value": "[[\"filter\",\"showFilter\"]]",
-      "type": "ValuesArray"
-     },
-     {
       "name": "expandParameters",
       "value": "[]",
       "type": "ValuesArray"
@@ -1356,6 +1746,21 @@
       "name": "colFormats",
       "value": "[]",
       "type": "Array"
+     },
+     {
+      "name": "colWidths",
+      "value": "[]",
+      "type": "Array"
+     },
+     {
+      "name": "colHeaders",
+      "value": "[\"ID\",\"Date\",\"From\",\"Subject\"]",
+      "type": "Array"
+     },
+     {
+      "name": "parameters",
+      "value": "[[\"filter\",\"showFilter\"]]",
+      "type": "ValuesArray"
      },
      {
       "name": "colTypes",
@@ -1413,14 +1818,14 @@
       "type": "Datasource"
      },
      {
-      "name": "sortBy",
-      "value": "[[\"1\",\"desc\"]]",
-      "type": "SortByArray"
-     },
-     {
       "name": "sDom",
       "value": "",
       "type": "JavaScript"
+     },
+     {
+      "name": "sortBy",
+      "value": "[[\"1\",\"desc\"]]",
+      "type": "SortByArray"
      },
      {
       "name": "refreshPeriod",
@@ -1494,7 +1899,7 @@
      },
      {
       "name": "clickAction",
-      "value": "",
+      "value": "function f( selectedNotificationsRow ){\n    \n    Dashboards.setParameter('selectedNotificationId', '-1'); // reset\n    \n    if( selectedNotificationsRow && selectedNotificationsRow.series ){\n    \n        var notificationId = selectedNotificationsRow.series.split(':')[0];\n        \n        if( notificationId ){\n            \n            Dashboards.setParameter('selectedNotificationId', notificationId );\n            \n            // mark as read\n            $.get( Dashboards.getWebAppPath() + '/plugin/cns/api/updatenotificationsunreadflag?paramunread=false&paramnotifications=' + notificationId );\n            \n            Dashboards.fireChange( 'selectedNotificationId', notificationId );\n        }\n    }\n} ",
       "type": "JavaScript"
      }
     ]
@@ -2009,6 +2414,34 @@
      {
       "name": "propertyValue",
       "value": "",
+      "type": "String"
+     },
+     {
+      "name": "parameterViewRole",
+      "value": "unused",
+      "type": "parameterViewRoleCustom"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
+     }
+    ]
+   },
+   {
+    "id": "538ec849-1c5a-01c6-eee1-2b2a49c45618",
+    "type": "ComponentsParameter",
+    "typeDesc": "Simple parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "selectedNotificationId",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "-1",
       "type": "String"
      },
      {
@@ -2575,6 +3008,46 @@
     "meta": "CPK",
     "meta_pluginId": "cns",
     "meta_endpoint": "getNotifications"
+   },
+   {
+    "id": "CNS_CPKENDPOINTS",
+    "name": "CNS Endpoints",
+    "type": "Label",
+    "typeDesc": "<i>Group</i>",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "Group",
+      "value": "CNS Endpoints",
+      "type": "Label"
+     }
+    ]
+   },
+   {
+    "id": "6d78d9ed-8ff3-885e-73fe-70a878198fbc",
+    "type": "Componentscns_getNotificationById_CPKENDPOINT",
+    "typeDesc": "getNotificationById Endpoint",
+    "parent": "CNS_CPKENDPOINTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "notificationById",
+      "type": "Id"
+     },
+     {
+      "name": "stepName",
+      "value": "OUTPUT",
+      "type": "String"
+     },
+     {
+      "name": "kettleOutput",
+      "value": "Inferred",
+      "type": "kettleOutputCustom"
+     }
+    ],
+    "meta": "CPK",
+    "meta_pluginId": "cns",
+    "meta_endpoint": "getNotificationById"
    }
   ]
  },
