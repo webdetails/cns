@@ -926,3 +926,13 @@ div#popupComponentOverlay {
 .select2-results .select2-highlighted {
     background: #005CA7;
 }
+
+a.notification_link {
+    border-style: solid;
+    border-width: 1px;
+    padding: 4px;
+    border-color: #a3a3a3;
+    background-color: #a3a3a3;
+    color: #1c1c1c;
+    text-decoration: none;
+}

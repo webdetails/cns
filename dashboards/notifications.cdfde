@@ -1530,11 +1530,6 @@
       "type": "JavaScript"
      },
      {
-      "name": "colSortable",
-      "value": "[]",
-      "type": "Array"
-     },
-     {
       "name": "colFormats",
       "value": "[]",
       "type": "Array"
@@ -1558,6 +1553,11 @@
       "name": "expandParameters",
       "value": "[]",
       "type": "ValuesArray"
+     },
+     {
+      "name": "colSortable",
+      "value": "[]",
+      "type": "Array"
      },
      {
       "name": "colTypes",
@@ -1606,7 +1606,7 @@
      },
      {
       "name": "drawCallback",
-      "value": "function f(){\n    \n    var $tableObjParentTr = $('#notificationDetailsHtmlObj').parents().closest('tr');\n    \n    if( $tableObjParentTr && $tableObjParentTr.hasClass( 'expandingClass' ) ){\n      $tableObjParentTr.attr('class' , 'read' ); // remove 'expandingClass', add only 'read'\n    }\n    \n    // from the notification object, we only want 'Message' and 'Link'\n    \n    // remove id\n    $('#notificationDetailsHtmlObjTable th:first-child').remove();\n    $('#notificationDetailsHtmlObjTable td:first-child').remove();\n    \n    // remove date\n    $('#notificationDetailsHtmlObjTable th:first-child').remove();\n    $('#notificationDetailsHtmlObjTable td:first-child').remove();\n    \n    // remove author\n    $('#notificationDetailsHtmlObjTable th:first-child').remove();\n    $('#notificationDetailsHtmlObjTable td:first-child').remove();\n    \n    // remove rcpt\n    $('#notificationDetailsHtmlObjTable th:first-child').remove();\n    $('#notificationDetailsHtmlObjTable td:first-child').remove();\n    \n     // remove title\n    $('#notificationDetailsHtmlObjTable th:first-child').remove();\n    $('#notificationDetailsHtmlObjTable td:first-child').remove();\n    \n     // remove unread\n    $('#notificationDetailsHtmlObjTable th:last-child').remove();\n    $('#notificationDetailsHtmlObjTable td:last-child').remove();\n    \n    // only 2 left ( the 2 that matter : message and link )\n    \n    // message : do a colspan of 3\n    $('#notificationDetailsHtmlObjTable th:first-child').attr( 'colspan' , '3' );\n    $('#notificationDetailsHtmlObjTable td:first-child').attr( 'colspan' , '3' );\n    \n    // link : do a colspan of 1\n    $('#notificationDetailsHtmlObjTable th:last-child').attr( 'colspan' , '1' );\n    $('#notificationDetailsHtmlObjTable td:last-child').attr( 'colspan' , '1' );\n    \n} ",
+      "value": "function f(){\n    \n    var $tableObjParentTr = $('#notificationDetailsHtmlObj').parents().closest('tr');\n    \n    if( $tableObjParentTr && $tableObjParentTr.hasClass( 'expandingClass' ) ){\n      $tableObjParentTr.attr('class' , 'read' ); // remove 'expandingClass', add only 'read'\n    }\n    \n    // from the notification object, we only want 'Message' and 'Link'\n    \n    // remove id\n    $('#notificationDetailsHtmlObjTable th:first-child').remove();\n    $('#notificationDetailsHtmlObjTable td:first-child').remove();\n    \n    // remove date\n    $('#notificationDetailsHtmlObjTable th:first-child').remove();\n    $('#notificationDetailsHtmlObjTable td:first-child').remove();\n    \n    // remove author\n    $('#notificationDetailsHtmlObjTable th:first-child').remove();\n    $('#notificationDetailsHtmlObjTable td:first-child').remove();\n    \n    // remove rcpt\n    $('#notificationDetailsHtmlObjTable th:first-child').remove();\n    $('#notificationDetailsHtmlObjTable td:first-child').remove();\n    \n     // remove title\n    $('#notificationDetailsHtmlObjTable th:first-child').remove();\n    $('#notificationDetailsHtmlObjTable td:first-child').remove();\n    \n     // remove unread\n    $('#notificationDetailsHtmlObjTable th:last-child').remove();\n    $('#notificationDetailsHtmlObjTable td:last-child').remove();\n    \n    // only 2 left ( the 2 that matter : message and link )\n    \n    // message : do a colspan of 3\n    $('#notificationDetailsHtmlObjTable th:first-child').attr( 'colspan' , '3' );\n    $('#notificationDetailsHtmlObjTable td:first-child').attr( 'colspan' , '3' );\n    \n    // link : do a colspan of 1\n    $('#notificationDetailsHtmlObjTable th:last-child').attr( 'colspan' , '1' );\n    $('#notificationDetailsHtmlObjTable td:last-child').attr( 'colspan' , '1' );\n    \n    // one last thing: if a link has been provided, turn it into href\n    var notification_url = $('#notificationDetailsHtmlObjTable td:last-child').html();\n    \n    if( notification_url ){\n        \n        $('#notificationDetailsHtmlObjTable td:last-child').html(''); // clean inner content\n        $('#notificationDetailsHtmlObjTable td:last-child').append( \"<a class='notification_link' href='\" + notification_url + \"'>click here</a>\" );\n    }\n    \n} ",
       "type": "JavaScript"
      },
      {
@@ -1615,14 +1615,14 @@
       "type": "Datasource"
      },
      {
-      "name": "sortBy",
-      "value": "[]",
-      "type": "SortByArray"
-     },
-     {
       "name": "sDom",
       "value": "",
       "type": "JavaScript"
+     },
+     {
+      "name": "sortBy",
+      "value": "[]",
+      "type": "SortByArray"
      },
      {
       "name": "refreshPeriod",
@@ -1733,11 +1733,6 @@
       "type": "JavaScript"
      },
      {
-      "name": "expandParameters",
-      "value": "[]",
-      "type": "ValuesArray"
-     },
-     {
       "name": "colSortable",
       "value": "[\"false\",\"true\",\"true\",\"true\"]",
       "type": "Array"
@@ -1760,6 +1755,11 @@
      {
       "name": "parameters",
       "value": "[[\"filter\",\"showFilter\"]]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "expandParameters",
+      "value": "[]",
       "type": "ValuesArray"
      },
      {
@@ -1818,14 +1818,14 @@
       "type": "Datasource"
      },
      {
-      "name": "sDom",
-      "value": "",
-      "type": "JavaScript"
-     },
-     {
       "name": "sortBy",
       "value": "[[\"1\",\"desc\"]]",
       "type": "SortByArray"
+     },
+     {
+      "name": "sDom",
+      "value": "",
+      "type": "JavaScript"
      },
      {
       "name": "refreshPeriod",
@@ -2044,6 +2044,16 @@
       "type": "Boolean"
      },
      {
+      "name": "popupClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "popupOverlayClass",
+      "value": "",
+      "type": "String"
+     },
+     {
       "name": "htmlObject",
       "value": "createNotificationPopupObj",
       "type": "HtmlObject"
@@ -2088,7 +2098,7 @@
      },
      {
       "name": "listeners",
-      "value": "['${p:subjectText}','${p:messageText}','${p:linkText}','${p:recipientType}','${p:recipientNameText}']",
+      "value": "[]",
       "type": "Listeners"
      },
      {
@@ -2098,7 +2108,7 @@
      },
      {
       "name": "expression",
-      "value": "function f() {\n    var subject = Dashboards.getParameterValue('subjectText'),\n        message = Dashboards.getParameterValue('messageText'),\n        link = Dashboards.getParameterValue('linkText'),\n        recipientType = Dashboards.getParameterValue('recipientType'),\n        recipient = Dashboards.getParameterValue('recipientNameText'),\n        isFormValid = false;\n        \n    if( recipientType != '' && subject != '' && message != '' ) {\n        if (recipientType != 'All') {\n            if (recipient != '') {\n                isFormValid = true;\n            }\n        } else {\n            isFormValid = true;\n        }\n    }\n    \n    var type = recipientType.toLowerCase();\n    isFormValid = ( 'user' == type || 'role' == type || 'all' == type );\n    \n    console.log('isFormValid? ' + isFormValid);\n    \n    if( isFormValid ){\n    \n        $.ajax({\n            type: \"POST\",\n            url: Dashboards.getWebAppPath() + '/plugin/cns/api/do/notify/' + type,\n            data: {\n                recipient: recipient,\n                notificationType: 'mail', // TODO should this be configurable? \n                subject: subject,\n                message: message,\n                link: link\n            },\n            success: function f(){ \n                alert('Notification sent'); // TODO i18n this\n                render_createNotificationPopup.hide();\n            }\n        }); \n    }\n} ",
+      "value": "function f() {\n    var subject = Dashboards.getParameterValue('subjectText'),\n        message = Dashboards.getParameterValue('messageText'),\n        link = Dashboards.getParameterValue('linkText'),\n        recipientType = Dashboards.getParameterValue('recipientType'),\n        recipient = Dashboards.getParameterValue('recipientNameText'),\n        isFormValid = false;\n        \n    if( recipientType != '' && subject != '' && message != '' ) {\n        if (recipientType != 'All') {\n            if (recipient != '') {\n                isFormValid = true;\n            }\n        } else {\n            isFormValid = true;\n        }\n    }\n    \n    var type = recipientType.toLowerCase();\n    isFormValid = ( 'user' == type || 'role' == type || 'all' == type );\n    \n    console.log('isFormValid? ' + isFormValid);\n    \n    if( isFormValid ){\n    \n        $.ajax({\n            type: \"POST\",\n            url: Dashboards.getWebAppPath() + '/plugin/cns/api/do/notify/' + type,\n            data: {\n                recipient: recipient,\n                notificationType: 'mail', // TODO should this be configurable? \n                title: subject,\n                message: message,\n                link: link\n            },\n            success: function f(){ \n                alert('Notification sent'); // TODO i18n this\n                render_createNotificationPopup.hide();\n                //render_notifications.update();\n            }\n        }); \n    }\n} ",
       "type": "JavaScript"
      },
      {
