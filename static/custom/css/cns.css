@@ -936,3 +936,14 @@ a.notification_link {
     color: #1c1c1c;
     text-decoration: none;
 }
+
+button.refresh-notifications { 
+    width: 23px;
+    height: 23px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #3E6480;
+    background: url('http://infocenter.pentaho.com/help/topic/puc_user_guide/images/sspucRefreshIcon.png') no-repeat;
+    margin-left: 5px;
+    margin-top: 0px;
+}
