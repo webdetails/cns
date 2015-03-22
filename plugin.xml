@@ -31,9 +31,12 @@
 	</menu-items>
 
     <external-resources>
+    		<file context="mantle">api/repos/cns/static/custom/css/cns.css</file>
     		<file context="mantle">api/repos/cns/static/custom/css/notifications.css</file>
 			<file context="mantle">api/repos/cns/static/custom/js/notify/notify-modified.js</file>
 			<file context="mantle">api/repos/cns/static/custom/js/notifications.js</file>
+			<file context="mantle">api/repos/cns/static/custom/js/notifications-count.js</file>
 			<file context="mantle">api/repos/cns/static/custom/js/notifications-startup.js</file>
+			<file context="mantle">api/repos/cns/static/custom/js/notifications-count-startup.js</file>
   	</external-resources>
 </plugin>
