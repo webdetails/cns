@@ -2,10 +2,12 @@ $(window).load(function(){
 
   //callback to open each tab after the PerspectivesLoadedEvent gets fired
   var callback = function(args) {
-    setTimeout(function(){
-      new NotificationsCount().check();
 
-    }, 1000);
+    var notificationsCount = new NotificationsCount( '/pentaho/plugin/cns/api/countnotifications?paramfilter=unread' )
+
+    setInterval(function(){
+      notificationsCount.check();
+    }, 15000);
   };
 
   var getPUCMethod = function( methodName, frame ) {

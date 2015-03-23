@@ -1,19 +1,13 @@
-function NotificationsCount() {
+function NotificationsCount( url ) {
 
-  function reschedule() {
-    setTimeout(function(){
-      new NotificationsCount().check();
-    }, 15000);
-  };
+  var _url = url;
 
   function enableUnreadMarker( unreadCount ) { 
 
-      if( unreadMarker() ){
-        $('div#pucUserDropDown > div#notificationUnreadCount').css( 'display' , 'inherit' );
-        $('div#pucUserDropDown > div#notificationUnreadCount').html( unreadCount < 100 ? unreadCount : '99+' );
-      }
-
-      reschedule();
+    if( unreadMarker() ){
+      $('div#pucUserDropDown > div#notificationUnreadCount').css( 'display' , 'inherit' );
+      $('div#pucUserDropDown > div#notificationUnreadCount').html( unreadCount < 100 ? unreadCount : '99+' );
+    }
   };
 
   function disableUnreadMarker() { 
@@ -21,8 +15,6 @@ function NotificationsCount() {
     if( unreadMarker() ){
       $('div#pucUserDropDown > div#notificationUnreadCount').css( 'display' , 'none' );
     }
-
-    reschedule();
   }; 
 
   function unreadMarker() {
@@ -33,6 +25,9 @@ function NotificationsCount() {
     var $notificationUnreadCount = $( "<div id='notificationUnreadCount' class='notification-unread-count' />" );
     $('div#pucUserDropDown').prepend( $notificationUnreadCount ); 
     disableUnreadMarker();
+    $notificationUnreadCount.on( 'click' , function(){ 
+      window.open('/pentaho/plugin/cns/api/notifications' , '_blank' );
+    });
   };
 
   this.check = function() {
@@ -40,8 +35,8 @@ function NotificationsCount() {
     if( !unreadMarker() ){ buildUnreadMarker(); }
     
     // fire off the request to MatchUpdateController
-    var request = $.ajax({
-      url : '/pentaho/plugin/cns/api/countnotifications?paramfilter=unread',
+    $.ajax({
+      url : _url,
       type : 'get',
       success: function( unreadCount ){
 
@@ -57,3 +52,5 @@ function NotificationsCount() {
     });
   };
 };
+
+
